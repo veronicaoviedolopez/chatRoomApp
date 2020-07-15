@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, FormControl, FormLabel, Container, FormText, Row, Col } from "react-bootstrap";
 import './auth.css';
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 export default class Register extends Component {
   constructor(props) {
@@ -37,31 +37,31 @@ export default class Register extends Component {
      <Container className="justify-content-md-center">     
       <Row>
         <Col>
-          <form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
           <FormGroup controlId="user" >
-            <FormLabel>Username</FormLabel>
-            <FormControl
+            <Label for="email">Username</Label>
+            <Input
               autoFocus
               type="text"
               value={this.state.user}
               onChange={this.handleChange}
-              required/>
+              required
+              id="email"
+              name="email" 
+              placeholder="email"/>
           </FormGroup>
           <FormGroup controlId="password" >
-            <FormLabel>Password</FormLabel>
-            <FormControl
+            <Label for="password">Password</Label>
+            <Input
               value={this.state.password}
               onChange={this.handleChange}
               type="password"
               required
-              aria-describedby="passwordHelpBlock"/>
-              <FormText id="passwordHelpBlock" muted>
-                Your password must be 8-20 characters long, contain letters and numbers, and
-                must not contain spaces, special characters, or emoji.
-              </FormText>
+              name="password"
+              id="examplePassword" />
           </FormGroup>
-          <Button block ml="10px" type="submit"> Create Account </Button>          
-        </form>
+          <Button block ml="10px" type="submit"> Signup </Button>          
+        </Form>
        </Col>
       </Row>
       

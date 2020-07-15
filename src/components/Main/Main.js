@@ -3,10 +3,10 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 // Components
-import NavBar from './Landingpage/NavBar/NavBar';
+import Header from './Landingpage/Header/Header';
 import Login from "./auth/Login";
 import Register from "./auth/Register";
-import { Container } from "react-bootstrap";
+import { Container } from "reactstrap";
 
 export default class Main extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ export default class Main extends Component {
     this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
     this.handleRegisterUser = this.handleRegisterUser.bind(this);
     this.state = {
-      user: "",
+      username: "",
       newUser: false
     };
 
@@ -22,7 +22,7 @@ export default class Main extends Component {
 
   handleSuccessfulAuth(data) {
     this.setState({
-      user: data,
+      username: data,
       newUser: false
     });
   }
@@ -34,19 +34,21 @@ export default class Main extends Component {
   }
   
   render() {
-    const user = this.state.user;
+    const username = this.state.username;
     const newUser = this.state.newUser;
     return (
         <Container className="MainContainer">
-          <NavBar></NavBar>
-          { user === ""  && !newUser &&
+          { username === ""  && !newUser &&
               <Login handleRegisterUser={this.handleRegisterUser} handleSuccessfulAuth={this.handleSuccessfulAuth}></Login>
           }
-          { user === ""  && newUser &&
+          { username === ""  && newUser &&
               <Register handleSuccessfulAuth={this.handleSuccessfulAuth}></Register> 
           }
-          { user !== "" &&
-            <div> Aqui va la pagina principal</div>
+          { username !== "" &&
+          
+            <div>
+              <Header></Header>
+               Aqui va la pagina principal</div>
           }
         </Container>
     );

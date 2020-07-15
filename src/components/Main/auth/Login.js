@@ -1,14 +1,23 @@
-import React, { Component } from 'react';
-import { Button, FormGroup, FormControl, FormLabel, Container, FormText, Row, Col } from "react-bootstrap";
-import './auth.css';
+import React, { Component } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+} from "reactstrap";
+import "./auth.css";
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      user: "",
-      password: ""
+      username: "veronica@gmail.com",
+      password: "123",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -16,61 +25,78 @@ export default class Login extends Component {
   }
 
   validateForm() {
-    return this.state.user.length > 0 && this.state.password.length > 0;
+    return this.state.username.length > 0 && this.state.password.length > 0;
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
-      [event.target.id]: event.target.value
+      [event.target.id]: event.target.value,
     });
-  }
+  };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
-    const {user} = this.state;
-    this.props.handleSuccessfulAuth(user);
-  }
+    const { username} = this.state.username;
+    this.props.handleSuccessfulAuth(username);
+  };
 
-  handleRegisterUser = event => {
+  handleRegisterUser = (event) => {
     this.props.handleRegisterUser();
-  }
+  };
 
   render() {
-   return (
-    <div className= "Login">
-          <b> Sign In</b>
-     <Container className="justify-content-md-center">     
-      <Row>
-        <Col>
-          <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="user" >
-            <FormLabel>Username</FormLabel>
-            <FormControl
-              autoFocus
-              type="text"
-              value={this.state.user}
-              onChange={this.handleChange}
-              required/>
-          </FormGroup>
-          <FormGroup controlId="password" >
-            <FormLabel>Password</FormLabel>
-            <FormControl
-              value={this.state.password}
-              onChange={this.handleChange}
-              type="password"
-              required />
-          </FormGroup>
-          <Button block ml="10px" type="submit"> Login </Button>          
-        </form>
-       </Col>
-      </Row>
-    </Container>
+    return (
+      <div className="Login">
+        <b> Sign In</b>
+        <Container className="justify-content-md-center">
+          <Row>
+            <Col>
+              <Form onSubmit={this.handleSubmit}>
+                <FormGroup>
+                  <Label for="username">Username</Label>
+                  <Input
+                    autoFocus
+                    type="email"
+                    value={this.state.username}
+                    onChange={this.handleChange}
+                    required
+                    id="username"
+                    name="username"
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="password">Password</Label>
+                  <Input
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                    type="password"
+                    required
+                    name="password"
+                    id="password"
+                  />
+                </FormGroup>
+                <Button block ml="10px" type="submit">
+                  {" "}
+                  Login{" "}
+                </Button>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
 
-    <div  className="mt-3 text-center">
-               <span className="mb-0">No tienes una cuenta?    </span>
-               <Button ml="10px" variant="link" type="reset" onClick={this.handleRegisterUser}> Registrate </Button>   
-          </div>
-    </div>
-   );
+        <div className="mt-3 text-center">
+          <span className="mb-0">No tienes una cuenta? </span>
+          <Button
+            ml="10px"
+            variant="link"
+            type="reset"
+            onClick={this.handleRegisterUser}
+          >
+            {" "}
+            Registrate{" "}
+          </Button>
+        </div>
+      </div>
+    );
   }
 }
