@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './auth.css';
+import './Register.css';
 import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 export default class Register extends Component {
@@ -10,8 +10,6 @@ export default class Register extends Component {
       user: "",
       password: ""
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
   validateForm() {
@@ -32,7 +30,7 @@ export default class Register extends Component {
 
   render() {
    return (
-    <div className= "Login">
+    <div className= "Register">
           <b> Sign Up</b>
      <Container className="justify-content-md-center">     
       <Row>

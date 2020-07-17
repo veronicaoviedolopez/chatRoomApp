@@ -6,7 +6,7 @@ import {
   Link
 } from "react-router-dom";
 
-const Menu = (props) => {
+const LeftMenu = (props) => {
   return (
 <Router>
       <div>
@@ -34,7 +34,7 @@ const Menu = (props) => {
   );
 }
 
-export default Menu;
+export default LeftMenu;
 function User() { 
   return <div>USER PROFILE PAGE THIS</div>;
 }  

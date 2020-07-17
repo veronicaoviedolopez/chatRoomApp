@@ -9,7 +9,7 @@ import {
   Label,
   Input,
 } from "reactstrap";
-import "./auth.css";
+import "./login.css";
 
 export default class Login extends Component {
   constructor(props) {
@@ -19,9 +19,6 @@ export default class Login extends Component {
       username: "veronica@gmail.com",
       password: "123",
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleRegisterUser = this.handleRegisterUser.bind(this);
   }
 
   validateForm() {
@@ -37,11 +34,11 @@ export default class Login extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { username} = this.state.username;
-    this.props.handleSuccessfulAuth(username);
+    this.props.history.push("/");
   };
 
   handleRegisterUser = (event) => {
-    this.props.handleRegisterUser();
+    this.props.history.push("/register");
   };
 
   render() {
