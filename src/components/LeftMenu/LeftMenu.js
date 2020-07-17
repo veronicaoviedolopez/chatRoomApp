@@ -1,16 +1,11 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-const LeftMenu = (props) => {
+const LeftMenu = () => {
   return (
-<Router>
+    <Router>
       <div>
-      <p class="font-weight-bold text-center">MENU</p>
+        <p className="font-weight-bold text-center">MENU</p>
         <nav>
           <ul>
             <li>
@@ -32,9 +27,10 @@ const LeftMenu = (props) => {
       </div>
     </Router>
   );
-}
+};
 
 export default LeftMenu;
-function User() { 
+
+function User() {
   return <div>USER PROFILE PAGE THIS</div>;
-}  
+}

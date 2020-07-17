@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-// Components
 import Header from "../Header/Header";
-import Photo from '../User/Photo';
-import LeftMenu from '../LeftMenu/LeftMenu';
-import { Container, Row, Col } from "reactstrap";
+import Photo from "../User/Photo";
+import LeftMenu from "../LeftMenu/LeftMenu";
 
 const salas = [
   { name: "Sala de chat 1" },
@@ -15,8 +13,7 @@ const salas = [
 function RoomList(props) {
   const salas = props.salas;
   const listItems = salas.map((sala, index) => (
-    //<li>{sala.name}</li>
-    <li>
+    <li key={index} >
       <a href="/room/{{index}}">{sala.name}</a>
     </li>
   ));
@@ -26,33 +23,16 @@ function RoomList(props) {
 export default class Main extends Component {
   render() {
     return (
-      <Container>
-        {/* <Main></Main> */}
-        <Row>
-          <Col>
-            {" "}
-            <Header></Header>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs="4" className="p-2">
-            <Photo></Photo>
-            <LeftMenu></LeftMenu>
-            <div>
-              <nav>
-                <RoomList salas={salas} />
-              </nav>
-            </div>
-          </Col>
-          <Col xs="6" className="p-2">
-            .col-6
-          </Col>
-        </Row>
-      </Container>
+      <div>
+        <Header/>
+        <div>
+          <Photo/>
+          <LeftMenu/>
+          <nav>
+            <RoomList salas={salas} />
+          </nav>
+        </div>
+      </div>
     );
   }
-}
-
-function Users() {
-  return <h2>Users</h2>;
 }

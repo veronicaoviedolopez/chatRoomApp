@@ -1,11 +1,8 @@
 import React from 'react';
 
-const Profile = props => {
-    return (
+const Profile = () =>
         <>
             <p> Profile Here!</p>
         </>
-    )
-}
 
 export default Profile;
