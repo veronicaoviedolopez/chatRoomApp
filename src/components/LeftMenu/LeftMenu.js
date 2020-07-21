@@ -48,8 +48,8 @@ const LeftMenu = () => {
   );
 };
 
-export default LeftMenu;
-
 function User() {
   return <div>USER PROFILE PAGE THIS</div>;
 }
+
+export default LeftMenu;

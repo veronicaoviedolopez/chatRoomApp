@@ -26,4 +26,5 @@ const rError = (error) => ({
   type: _Error,
   error,
 });
+
 export { SetUser as setUser, GetUser as getUser };
