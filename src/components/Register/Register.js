@@ -32,7 +32,7 @@ export default class Register extends Component {
       <div className="Register">
         <b> Sign Up</b>
               <form onSubmit={this.handleSubmit}>
-                  <label for="email">Username </label>
+                  <label htmlFor="email">Username </label>
                   <input
                     autoFocus
                     type="text"
@@ -43,7 +43,7 @@ export default class Register extends Component {
                     name="email"
                     placeholder="email"
                   />
-                  <label for="password">Password</label>
+                  <label htmlFor="password">Password</label>
                   <input
                     value={this.state.password}
                     onChange={this.handleChange}
@@ -52,10 +52,8 @@ export default class Register extends Component {
                     name="password"
                     id="examplePassword"
                   />
-                <button block ml="10px" type="submit">
-                  {" "}
-                  Signup{" "}
-                </button>
+                <input type="submit" value="Signup">
+                </input>
               </form>
       </div>
     );

@@ -1,6 +1,10 @@
 import React from 'react';
+import  './User.css';
 
 const Photo = () => 
-    <img src="/img/avatar.png" alt="..."  className="rounded-circle" width="80" height="80"></img>
+    <div className="media">
+        <img src="/img/avatar.png" alt="..." width="100px" height="100px" className="media-object"></img>
+    </div>
+    
 
 export default Photo;

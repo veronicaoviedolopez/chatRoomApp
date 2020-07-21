@@ -1,13 +1,16 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import "./login.css";
+import { getUser} from "../../state/actions/usersAction";
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: "veronica@gmail.com",
-      password: "123",
+      username: "",
+      password: "",
     };
   }
 
@@ -23,8 +26,9 @@ export default class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const username= this.state;
-    this.props.history.push("/");
+    const user = this.state;
+    this.props.getUser(user);
+    //this.props.history.push("/");
   };
 
   handleRegisterUser = (event) => {
@@ -33,48 +37,59 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="Login">
-        <b> Sign In</b>
-        <div className="justify-content-md-center">
-              <form onSubmit={this.handleSubmit}>
-                  <label for="username">Username</label>
-                  <input
-                    autoFocus
-                    type="email"
-                    value={this.state.username}
-                    onChange={this.handleChange}
-                    required
-                    id="username"
-                    name="username" />
-                  <label for="password">Password</label>
-                  <input
-                    value={this.state.password}
-                    onChange={this.handleChange}
-                    type="password"
-                    required
-                    name="password"
-                    id="password"/>
-                <br/>
-                <button block ml="10px" type="submit">
-                  {" "}
-                  Login{" "}
-                </button>
-              </form>
-        </div>
-
-        <div className="mt-3 text-center">
-          <span className="mb-0">No tienes una cuenta? </span>
-          <button
-            ml="10px"
-            variant="link"
-            type="reset"
-            onClick={this.handleRegisterUser}
-          >
+      <div className="wrapper">
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-tittle"> Log In </div>
+          <div className="form-row">
+            <label htmlFor="username">Username</label>
+            <input
+              autoFocus
+              type="email"
+              value={this.state.username}
+              onChange={this.handleChange}
+              required
+              id="username"
+              name="username"
+            />
+          </div>
+          <div className="form-row">
+            <label htmlFor="password">Password</label>
+            <input
+              value={this.state.password}
+              onChange={this.handleChange}
+              type="password"
+              required
+              name="password"
+              id="password"
+            />
+          </div>
+          <div className="form-row">
+            <button type="submit">Login</button>
+          </div>
+        </form>
+        <div className="divRegister">
+          <label>No tienes una cuenta? </label>
+          <Link to="/register" style={{ textDecoration: "none" }}>
             {" "}
-            Registrate{" "}
-          </button>
+            Register{" "}
+          </Link>
+          {/* TENGO DUDAS DE BORRAR ESTA PARTE O CARGAR COMPONENTE REGISTER CON EL LINK DE REACT ROUTER
+             <button onClick={this.handleRegisterUser} className="lnkRegister">
+              {" "}
+              Registrate{" "}
+            </button> */}
         </div>
       </div>
     );
   }
 }
+
+const mapDispatchToProps = {
+  getUser
+};
+
+const mapStateToProps = ({ usersReducer }) => {
+  return usersReducer;
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

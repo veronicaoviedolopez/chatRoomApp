@@ -1,7 +1,46 @@
-.MainContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  margin: 0;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  background-color: blueviolet;
+  flex: 1;
+}
+
+#main > article {
+  flex: 1;
+}
+
+header,
+footer,
+article,
+nav {
+  padding: 0.3em;
+}
+
+#main > nav,
+#main > aside {
+  flex: 0 0 20vw;
+  background: beige;
+}
+#main > nav {
+  order: -1;
+}
+
+@media screen and (min-width: 576px) {
+  #main {
+    flex-direction: row;
   }
+  #main > nav {
+    flex: 0 0 20vw;
+  }  
+}
