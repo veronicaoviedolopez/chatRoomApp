@@ -1,33 +1,16 @@
-import {
-  Set_User,
-  _Success,
-  _Error,
-} from "../actions/usersAction.js";
+import { types as userTypes } from "../actions/usersAction";
 
 const initialState = {
-  user: {
-    username: "",
-    password: ""
-  },
+  user: null
 };
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case Set_User:
+export default (state = initialState, { type, payload }) => {
+  switch (type) {
+    case userTypes.set:
       return {
-        ...state,
-        user: action.user,
-      };
-    case _Success:
-      return {
-        ...state,
-        user: action.user,
-      };
-    case _Error:
-      return {
-        ...state,
-        errorMessage: action.error,
-      };
+        user: payload
+      }
+
     default:
       return state;
   }

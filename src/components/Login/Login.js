@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./login.css";
-import { getUser} from "../../state/actions/usersAction";
+import { setCurrentUser } from "../../state/actions/usersAction";
 
 class Login extends Component {
   constructor(props) {
@@ -14,25 +14,19 @@ class Login extends Component {
     };
   }
 
-  validateForm() {
-    return this.state.username.length > 0 && this.state.password.length > 0;
-  }
-
+  // Bindea los inputs con el estado
   handleChange = (event) => {
     this.setState({
       [event.target.id]: event.target.value,
     });
   };
 
+  //
   handleSubmit = (event) => {
     event.preventDefault();
-    const user = this.state;
-    this.props.getUser(user);
-    //this.props.history.push("/");
-  };
-
-  handleRegisterUser = (event) => {
-    this.props.history.push("/register");
+    
+    const user = this.state.username;
+    this.props.setCurrentUser(user);
   };
 
   render() {
@@ -69,15 +63,7 @@ class Login extends Component {
         </form>
         <div className="divRegister">
           <label>No tienes una cuenta? </label>
-          <Link to="/register" style={{ textDecoration: "none" }}>
-            {" "}
-            Register{" "}
-          </Link>
-          {/* TENGO DUDAS DE BORRAR ESTA PARTE O CARGAR COMPONENTE REGISTER CON EL LINK DE REACT ROUTER
-             <button onClick={this.handleRegisterUser} className="lnkRegister">
-              {" "}
-              Registrate{" "}
-            </button> */}
+          <Link to="/register" style={{ textDecoration: "none" }}>Register</Link>
         </div>
       </div>
     );
@@ -85,11 +71,7 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = {
-  getUser
+  setCurrentUser
 };
 
-const mapStateToProps = ({ usersReducer }) => {
-  return usersReducer;
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);

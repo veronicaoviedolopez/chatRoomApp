@@ -1,35 +1,11 @@
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  margin: 0;
-}
-
 #main {
   display: flex;
-  flex-direction: column;
   background-color: blueviolet;
-  flex: 1;
+  height: calc(100vh - 50.67px);
 }
 
-#main > article {
-  flex: 1;
-}
-
-header,
-footer,
-article,
-nav {
-  padding: 0.3em;
-}
-
-#main > nav,
-#main > aside {
-  flex: 0 0 20vw;
-  background: beige;
-}
 #main > nav {
-  order: -1;
+  background: beige;
 }
 
 @media screen and (min-width: 576px) {

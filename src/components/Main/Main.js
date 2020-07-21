@@ -9,10 +9,10 @@ export default class Main extends Component {
       <>
         <Header/>
         <div id="main">
-          <article>Article</article>
           <nav>
-          <LeftMenu/>
+            <LeftMenu/>
           </nav>
+          <article>Article</article>
         </div>
       </>
     );

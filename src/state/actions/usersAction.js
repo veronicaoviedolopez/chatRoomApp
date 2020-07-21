@@ -1,30 +1,9 @@
-export const Set_User = "SET_USER";
-export const _Success = "_SUCCESS";
-export const _Error = "_ERROR";
+export const types = {
+  set: "SET_CURRENT_USER"
+}
 
-const GetUser = (x) => {
-  return (dispatch) => {
-    //Aqui iran las llamadas APIs
-
-    dispatch(rSuccess({ x }));
-
-    //dispatch(rError("Error"));
-  };
-};
-
-const SetUser = (user) => ({
-  type: Set_User,
-  user,
+// 
+export const setCurrentUser = (user) => ({
+  type: types.set,
+  payload: user
 });
-
-const rSuccess = (user) => ({
-  type: _Success,
-  user,
-});
-
-const rError = (error) => ({
-  type: _Error,
-  error,
-});
-
-export { SetUser as setUser, GetUser as getUser };
