@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import "./login.css";
+import "./LoginRegister.css";
 import { setCurrentUser } from "../../state/actions/usersAction";
 
 class Login extends Component {
@@ -21,21 +21,23 @@ class Login extends Component {
     });
   };
 
-  //
+  // Hace el Submit del Form
   handleSubmit = (event) => {
     event.preventDefault();
     
     const user = this.state.username;
     this.props.setCurrentUser(user);
-  };
+    this.props.history.push("/");  };
 
   render() {
     return (
       <div className="wrapper">
         <form onSubmit={this.handleSubmit}>
-          <div className="form-tittle"> Log In </div>
+          <div className="form-tittle"> 
+            Log In 
+          </div>
           <div className="form-row">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username"> Username </label>
             <input
               autoFocus
               type="email"
@@ -44,10 +46,11 @@ class Login extends Component {
               required
               id="username"
               name="username"
+              placeholder="email"
             />
           </div>
           <div className="form-row">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password"> Password </label>
             <input
               value={this.state.password}
               onChange={this.handleChange}
@@ -61,9 +64,9 @@ class Login extends Component {
             <button type="submit">Login</button>
           </div>
         </form>
-        <div className="divRegister">
-          <label>No tienes una cuenta? </label>
-          <Link to="/register" style={{ textDecoration: "none" }}>Register</Link>
+        <div className="center">
+          <label> Do you don't have an account? </label>
+          <Link className="link" to="/register"> Sign Up </Link>
         </div>
       </div>
     );

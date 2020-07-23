@@ -23,19 +23,21 @@ function RoomList(props) {
 const LeftMenu = () => {
   return (
     <Router>
-      <Photo/>
-      <strong>MENU</strong>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/user">Editar Perfil</Link>
-          </li>
-          <li>
-            <Link to="/user">Change Password</Link>
-          </li>
-        </ul>
-        <RoomList salas={salas} />
-      </nav>
+      <div>
+        <Photo />
+        <span className="tittle"> MENU </span>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/user">Editar Perfil</Link>
+            </li>
+            <li>
+              <Link to="/user">Change Password</Link>
+            </li>
+          </ul>
+          <RoomList salas={salas} />
+        </nav>
+      </div>
 
       {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}

@@ -1,13 +1,15 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import Header from "../Header/Header";
 import LeftMenu from "../LeftMenu/LeftMenu";
 import './main.css'
+import {getCurrentUser} from '../../state/actions/usersAction';
 
-export default class Main extends Component {
+ class Main extends Component {
   render() {
     return (
       <>
-        <Header/>
+        <Header user={this.props.user} />
         <div id="main">
           <nav>
             <LeftMenu/>
@@ -18,3 +20,12 @@ export default class Main extends Component {
     );
   }
 }
+
+const mapDispatchToProps = {
+  getCurrentUser
+};
+
+const mapStateToProps = ({usersReducer})=>{
+  return usersReducer;
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

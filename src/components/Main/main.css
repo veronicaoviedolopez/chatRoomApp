@@ -1,11 +1,22 @@
 #main {
   display: flex;
-  background-color: blueviolet;
-  height: calc(100vh - 50.67px);
+  height: calc(100vh - 60px);
 }
 
 #main > nav {
-  background: beige;
+  background-image: url("/img/abstractBlackground.jpg");
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#main > nav :hover {
+  filter: blur(9px);
+}
+
+#main > article {
+  background: #eeeeee;
+  width: 100%;
 }
 
 @media screen and (min-width: 576px) {

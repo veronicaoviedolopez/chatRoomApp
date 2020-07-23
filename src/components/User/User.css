@@ -1,7 +1,6 @@
 .media {
   display: flex;
-  align-items: flex-start;
-  background: #F6F3EB;
+  justify-content: center;
 }
 
 .media-object {
