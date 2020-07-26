@@ -2,16 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./LeftMenu.css";
 
-const salas = [
-  { name: "Tecnología" },
-  { name: "React JS Español" },
-  { name: "The storlight archive" },
-  { name: "Sala de chat X Tecnología" },
-];
-
 function RoomList(props) {
-  const salas = props.salas;
-  const listItems = salas.map((sala, index) => (
+  console.log(props.chatRooms);
+  const listItems = props.chatRooms.map((sala, index) => (
     <li key={index}>
       <Link to="#">{sala.name}</Link>
     </li>
@@ -19,15 +12,15 @@ function RoomList(props) {
   return <ul className="navSalas">{listItems}</ul>;
 }
 
-const LeftMenu = props => {
+const LeftMenu = (props) => {
   return (
     <div className="container">
       <div className="navMenu">
         <div className="datosUser">
-        <img src="/img/user-avatar.jpg" alt="" className="photo" />
-        <span> {props.user} </span>
+          <img src="/img/user-avatar.jpg" alt="" className="photo" />
+          <span> {props.user} </span>
         </div>
-        <br/>
+        <br />
         <div className="tittle">
           <span> MENU </span>
         </div>
@@ -55,33 +48,28 @@ const LeftMenu = props => {
           </Link>
         </div>
         <nav>
-          <RoomList salas={salas} />
+          <RoomList chatRooms={props.chatRooms} />
         </nav>
       </div>
 
       <div className="padding-bottom">
-      <div className="tittle">
-      <span> USUARIOS </span>
-      <div className = "add">
-          <Link className="link" to="/">
-                {" "}
-                +{" "}
-          </Link>
-      </div>
-     
-      </div>
+        <div className="tittle">
+          <span> USUARIOS </span>
+          <div className="add">
+            <Link className="link" to="/">
+              {" "}
+              +{" "}
+            </Link>
+          </div>
+        </div>
 
         <nav>
           <ul className="navUsers">
-            <li>
-              <Link to="/">Editar Perfil</Link>
-            </li>
-            <li>
-              <Link to="/">Cambiar Contraseña</Link>
-            </li>
-            <li>
-              <Link to="/">Cerrar Sesión</Link>
-            </li>
+            {props.users.map((u, index) => (
+              <li key={index}>
+                <Link to="/">{u.username}</Link>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>

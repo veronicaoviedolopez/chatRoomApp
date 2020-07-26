@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import LeftMenu from "../LeftMenu/LeftMenu";
 import "./main.css";
 import { getCurrentUser } from "../../state/actions/usersAction";
+import { getChatRooms } from "../../state/actions/chatRoomAction";
 
 class Main extends Component {
   render() {
@@ -11,7 +12,11 @@ class Main extends Component {
       <>
         <div id="main">
           <div className="leftSide">
-            <LeftMenu user={this.props.currentUser.username} />
+            <LeftMenu
+              user={this.props.usersReducer.currentUser.username}
+              chatRooms={this.props.chatRoomReducer.chatRooms}
+              users={this.props.usersReducer.users}
+            />
           </div>
           <div className="rightSide">
             <Header />
@@ -25,9 +30,10 @@ class Main extends Component {
 
 const mapDispatchToProps = {
   getCurrentUser,
+  getChatRooms,
 };
 
-const mapStateToProps = ({ usersReducer }) => {
-  return usersReducer;
+const mapStateToProps = ({ usersReducer, chatRoomReducer }) => {
+  return { usersReducer: usersReducer, chatRoomReducer: chatRoomReducer };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
