@@ -1,10 +1,10 @@
 import React from "react";
 import "./Header.css";
 
-const Header = props => 
+const Header = () => 
     <nav className="main-nav">
       <ul>
-        <li>{props.user}</li>
+        <li></li>
       </ul>
       <div>
         <button>LogOut</button>

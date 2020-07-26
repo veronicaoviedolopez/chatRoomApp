@@ -1,57 +1,92 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./LeftMenu.css";
-import Photo from "../User/Photo";
 
 const salas = [
-  { name: "Sala de chat 1" },
-  { name: "Sala de chat  2" },
-  { name: "Sala de chat  3" },
-  { name: "Sala de chat  4" },
+  { name: "Tecnología" },
+  { name: "React JS Español" },
+  { name: "The storlight archive" },
+  { name: "Sala de chat X Tecnología" },
 ];
 
 function RoomList(props) {
   const salas = props.salas;
   const listItems = salas.map((sala, index) => (
     <li key={index}>
-      <Link to="/room/">{sala.name}</Link>
+      <Link to="#">{sala.name}</Link>
     </li>
   ));
-  return <ul>{listItems}</ul>;
+  return <ul className="navSalas">{listItems}</ul>;
 }
 
-const LeftMenu = () => {
+const LeftMenu = props => {
   return (
-    <Router>
-      <div>
-        <Photo />
-        <span className="tittle"> MENU </span>
+    <div className="container">
+      <div className="navMenu">
+        <div className="datosUser">
+        <img src="/img/user-avatar.jpg" alt="" className="photo" />
+        <span> {props.user} </span>
+        </div>
+        <br/>
+        <div className="tittle">
+          <span> MENU </span>
+        </div>
         <nav>
-          <ul>
+          <ul className="navMenu">
             <li>
-              <Link to="/user">Editar Perfil</Link>
+              <Link className="link" to="/">
+                Editar Usuario
+              </Link>
             </li>
             <li>
-              <Link to="/user">Change Password</Link>
+              <Link className="link" to="/">
+                Cambiar Contraseña
+              </Link>
             </li>
           </ul>
+        </nav>
+      </div>
+      <div>
+        <div className="tittle">
+          <span> SALAS DE CHAT </span>
+          <Link className="link" to="/">
+            {" "}
+            +{" "}
+          </Link>
+        </div>
+        <nav>
           <RoomList salas={salas} />
         </nav>
       </div>
 
-      {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-      <Switch>
-        <Route path="/user">
-          <User />
-        </Route>
-      </Switch>
-    </Router>
+      <div className="padding-bottom">
+      <div className="tittle">
+      <span> USUARIOS </span>
+      <div className = "add">
+          <Link className="link" to="/">
+                {" "}
+                +{" "}
+          </Link>
+      </div>
+     
+      </div>
+
+        <nav>
+          <ul className="navUsers">
+            <li>
+              <Link to="/">Editar Perfil</Link>
+            </li>
+            <li>
+              <Link to="/">Cambiar Contraseña</Link>
+            </li>
+            <li>
+              <Link to="/">Cerrar Sesión</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   );
 };
-
-function User() {
-  return <div>USER PROFILE PAGE THIS</div>;
-}
 
 export default LeftMenu;

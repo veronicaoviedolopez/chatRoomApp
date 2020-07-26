@@ -10,6 +10,7 @@ class Register extends Component {
 
     this.state = {
       username: "",
+      email: "",
       password: "",
     };
   }
@@ -25,15 +26,19 @@ class Register extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const user = this.state.username;
+    const user = { 
+      username: this.state.username, 
+      email: this.state.email
+    }
     this.props.setCurrentUser(user);
+    this.props.history.push("/");
   };
 
   render() {
     return (
       <div className="wrapper">
         <form onSubmit={this.handleSubmit}>
-          <div className="form-tittle">Sign Up</div>
+          <div className="form-tittle">Nuevo Usuario</div>
           <div className="form-row">
             <label htmlFor="username"> Username </label>
             <input
@@ -44,9 +49,23 @@ class Register extends Component {
               required
               id="username"
               name="username"
+            />
+          </div>
+
+          <div className="form-row">
+            <label htmlFor="email"> Email </label>
+            <input
+              autoFocus
+              type="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+              required
+              id="email"
+              name="email"
               placeholder="email"
             />
           </div>
+
           <div className="form-row">
             <label htmlFor="password"> Password </label>
             <input

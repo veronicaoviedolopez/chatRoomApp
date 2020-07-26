@@ -1,7 +1,28 @@
 import { types as userTypes } from "../actions/usersAction";
 
 const initialState = {
-  user: ''
+  currentUser: {
+    username: '',
+    email: ''
+  },
+  users: [
+    {
+      username: 'VeronicaOviedo (Yo)',
+      email: 'veronica@gmail.com'
+    },
+    {
+      username: 'Sanderson',
+      email: 'Sanderson@gmail.com'
+    },
+    {
+      username: 'Weaver',
+      email: 'Weaver@gmail.com'
+    },
+    {
+      username: 'NightBlood',
+      email: 'NightBlood@gmail.com'
+    }
+  ]
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -9,12 +30,17 @@ export default (state = initialState, { type, payload }) => {
     case userTypes.set:
       return {
         ...state,
-        user: payload
+        currentUser: payload
       }
     case userTypes.get:
       return{
         ...state,
-        user: state.user
+        currentUser: state.currentUser
+      }
+      case userTypes.getUsers:
+      return{
+        ...state,
+        users: state.users
       }
     default:
       return state

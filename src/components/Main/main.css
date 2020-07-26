@@ -1,29 +1,19 @@
 #main {
   display: flex;
-  height: calc(100vh - 60px);
+  flex-direction: row;
 }
 
-#main > nav {
-  background-image: url("/img/abstractBlackground.jpg");
-  width: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
+.rightSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
 }
 
-#main > nav :hover {
-  filter: blur(9px);
+.rightSideContent {
+  background-color: yellow;
+  height: calc(100vh - 28.667px);
 }
-
-#main > article {
-  background: #eeeeee;
-  width: 100%;
-}
-
-@media screen and (min-width: 576px) {
-  #main {
-    flex-direction: row;
-  }
-  #main > nav {
-    flex: 0 0 20vw;
-  }  
+.leftSide {
+  row-gap: 2;
 }

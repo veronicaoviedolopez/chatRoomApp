@@ -1,20 +1,22 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import Header from "../Header/Header";
 import LeftMenu from "../LeftMenu/LeftMenu";
-import './main.css'
-import {getCurrentUser} from '../../state/actions/usersAction';
+import "./main.css";
+import { getCurrentUser } from "../../state/actions/usersAction";
 
- class Main extends Component {
+class Main extends Component {
   render() {
     return (
       <>
-        <Header user={this.props.user} />
         <div id="main">
-          <nav>
-            <LeftMenu/>
-          </nav>
-          <article>Article</article>
+          <div className="leftSide">
+            <LeftMenu user={this.props.currentUser.username} />
+          </div>
+          <div className="rightSide">
+            <Header />
+            <div className="rightSideContent" />
+          </div>
         </div>
       </>
     );
@@ -22,10 +24,10 @@ import {getCurrentUser} from '../../state/actions/usersAction';
 }
 
 const mapDispatchToProps = {
-  getCurrentUser
+  getCurrentUser,
 };
 
-const mapStateToProps = ({usersReducer})=>{
+const mapStateToProps = ({ usersReducer }) => {
   return usersReducer;
-}
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

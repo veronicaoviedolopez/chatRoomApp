@@ -1,6 +1,5 @@
 .main-nav {
   display: flex;
-  padding: 1em;
 }
 .main-nav > ul {
   list-style-type: none;

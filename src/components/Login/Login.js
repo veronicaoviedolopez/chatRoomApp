@@ -25,9 +25,14 @@ class Login extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     
-    const user = this.state.username;
-    this.props.setCurrentUser(user);
-    this.props.history.push("/");  };
+    const currentUser =  {
+      username: "veronicao",
+      email: this.state.username,
+    };
+    
+    this.props.setCurrentUser(currentUser);
+    this.props.history.push("/");
+  };
 
   render() {
     return (
