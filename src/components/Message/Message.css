@@ -1,19 +1,30 @@
-.MessagesContainer {
+.FlexCont {
   display: flex;
   flex-direction: column;
+
 }
 
-.MessagesSubcontainer {
+.FlexRow {
   display: flex;
   flex-direction: row;
-}
-
-.MessageBody {
-
+  margin-bottom: 1em;
+  color: #37474f;
 }
 
 .photoMsg {
   width: 1.8em;
   height: 1.8em;
   border-radius: 50px;
+}
+
+.width100 {
+  width: 100%;
+}
+
+.date {
+  color: grey;
+}
+
+.inp {
+  align-items: flex-end;
 }

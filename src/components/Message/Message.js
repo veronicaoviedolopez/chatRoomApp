@@ -11,14 +11,14 @@ class Message extends Component {
           id: "1-2-15452732",
           from: "VeronicaO",
           to: "2",
-          date: "15452732",
+          date: "Hace 5 mininutos",
           body: "Hi Sanderson!",
         },
         {
           id: "2-1-15452732",
           from: "Sander",
           to: "1",
-          date: "15452768",
+          date: "HAec algunos segundos",
           body: "Hi Veronica",
         },
       ],
@@ -27,21 +27,31 @@ class Message extends Component {
 
   render() {
     return (
-      <>
+      <div className="FlexCont">
         {this.state.messages.map((msg, index) => (
-          <div className="MessagesContainer">
-            <div>
-            <img src="/img/user-avatar.jpg" alt="" className="photoMsg" />
-              <span> {msg.from} </span>
-              <span> {msg.date} </span>
+            <div className="FlexRow">
+              <img src="/img/user-avatar.jpg" alt="" className="photoMsg" />
+              <div className="row width100">
+                <div className="col-xs">
+                  <b> 
+                    {msg.from} 
+                  </b>
+                  <i className="date"> 
+                    <small> 
+                      {msg.date}
+                    </small> 
+                  </i>
+                </div>
+                  <span className="col-xs-12 col-sm-12 col-md-12 col-lg-12"> {msg.body} </span>
+              </div>
             </div>
-            <div className="MessageBody">
-              <span> {msg.body} </span>
-            </div>
-
-          </div>
         ))}
-      </>
+         <div className="inp">
+         <input type="text" placeholder="Escribe un mensaje">
+        </input>
+         </div>
+       
+      </div>
     );
   }
 }

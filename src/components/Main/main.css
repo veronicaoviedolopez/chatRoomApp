@@ -1,4 +1,10 @@
-#main {
+.rightSideContent {
+  background-color: yellow;
+  height: calc(100vh - 3.5em);
+}
+
+
+/*#main {
   display: flex;
   flex-direction: row;
 }
@@ -17,3 +23,6 @@
 .leftSide {
   row-gap: 2;
 }
+*/
+
+

@@ -58,9 +58,10 @@ li {
 
 .datosUser {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
   height: 3em;
+  margin-top: .5em;
 }
 
 .photo {

@@ -10,23 +10,23 @@ import Message from "../Message/Message";
 class Main extends Component {
   render() {
     return (
-      <>
-        <div id="main">
-          <div className="leftSide">
+      <div>
+        <div className="row">
+          <div className="col-xs-12 col-sm-4 col-md-3 col-lg-2" >
             <LeftMenu
               user={this.props.usersReducer.currentUser.username}
               chatRooms={this.props.chatRoomReducer.chatRooms}
               users={this.props.usersReducer.users}
             />
           </div>
-          <div className="rightSide">
+          <div className="col-xs-12 col-sm-8 col-md-9 col-lg-10">
             <Header />
             <div className="rightSideContent">
               <Message />
             </div>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }
