@@ -5,6 +5,7 @@ import LeftMenu from "../LeftMenu/LeftMenu";
 import "./main.css";
 import { getCurrentUser } from "../../state/actions/usersAction";
 import { getChatRooms } from "../../state/actions/chatRoomAction";
+import Message from "../Message/Message";
 
 class Main extends Component {
   render() {
@@ -20,7 +21,9 @@ class Main extends Component {
           </div>
           <div className="rightSide">
             <Header />
-            <div className="rightSideContent" />
+            <div className="rightSideContent">
+              <Message />
+            </div>
           </div>
         </div>
       </>

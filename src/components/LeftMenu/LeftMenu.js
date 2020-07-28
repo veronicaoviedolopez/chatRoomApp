@@ -15,11 +15,11 @@ function RoomList(props) {
 const LeftMenu = (props) => {
   return (
     <div className="container">
+      <div className="datosUser">
+        <img src="/img/user-avatar.jpg" alt="" className="photo" />
+        <span> {props.user} </span>
+      </div>
       <div className="navMenu">
-        <div className="datosUser">
-          <img src="/img/user-avatar.jpg" alt="" className="photo" />
-          <span> {props.user} </span>
-        </div>
         <br />
         <div className="tittle">
           <span> MENU </span>
@@ -52,7 +52,7 @@ const LeftMenu = (props) => {
         </nav>
       </div>
 
-      <div className="padding-bottom">
+      <div>
         <div className="tittle">
           <span> USUARIOS </span>
           <div className="add">

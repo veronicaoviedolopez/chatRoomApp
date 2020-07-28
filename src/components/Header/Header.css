@@ -1,5 +1,7 @@
 .main-nav {
   display: flex;
+  background-color:#cfd8dc;
+  height: 3em;
 }
 .main-nav > ul {
   list-style-type: none;
@@ -17,12 +19,12 @@
   flex: 1;
 }
 .main-nav button {
+  background-color:#cfd8dc;
   border: 0;
   text-decoration: none;
   cursor: pointer;
   opacity: 0.7;
   padding: .5em .5em;
-  background-color: white;
 }
 .main-nav button:hover {
   opacity: 1;

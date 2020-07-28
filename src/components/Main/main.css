@@ -6,13 +6,13 @@
 .rightSide {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-
+  width: 100%;
 }
 
 .rightSideContent {
   background-color: yellow;
-  height: calc(100vh - 28.667px);
+  height: calc(100vh - 3em);
+  width: 100%;
 }
 .leftSide {
   row-gap: 2;
