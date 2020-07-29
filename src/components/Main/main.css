@@ -1,28 +1,14 @@
-.rightSideContent {
-  background-color: yellow;
-  height: calc(100vh - 3.5em);
+.dashboard {
+  width: 100%;
+  height: 100vh;
+  display: flex;
 }
 
-
-/*#main {
-  display: flex;
-  flex-direction: row;
-}
-
-.rightSide {
-  display: flex;
-  flex-direction: column;
+.messages-area {
+  display: block;
   width: 100%;
 }
 
-.rightSideContent {
-  background-color: yellow;
-  height: calc(100vh - 3em);
-  width: 100%;
+body {
+  overflow: hidden;
 }
-.leftSide {
-  row-gap: 2;
-}
-*/
-
-

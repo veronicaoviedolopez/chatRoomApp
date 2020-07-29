@@ -27,6 +27,21 @@ const initialState = {
       username: "NightBlood",
       email: "NightBlood@gmail.com",
     },
+    {
+      id: 5,
+      username: "Sanderson",
+      email: "Sanderson@gmail.com",
+    },
+    {
+      id: 6,
+      username: "Weaver",
+      email: "Weaver@gmail.com",
+    },
+    {
+      id: 7,
+      username: "NightBlood",
+      email: "NightBlood@gmail.com",
+    },
   ],
 };
 

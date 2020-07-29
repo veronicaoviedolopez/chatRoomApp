@@ -1,7 +1,7 @@
-.FlexCont {
+.messages-container {
   display: flex;
   flex-direction: column;
-
+  padding: 1em .8em;
 }
 
 .FlexRow {
@@ -15,6 +15,7 @@
   width: 1.8em;
   height: 1.8em;
   border-radius: 50px;
+  margin-right: 10px;
 }
 
 .width100 {
@@ -27,4 +28,9 @@
 
 .inp {
   align-items: flex-end;
+}
+
+.rightSideContent {
+  background-color: yellow;
+  height: calc(100vh - 3.5em);
 }

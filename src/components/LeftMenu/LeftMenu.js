@@ -14,7 +14,7 @@ function RoomList(props) {
 
 const LeftMenu = (props) => {
   return (
-    <div className="container">
+    <div className="left-menu-container">
       <div className="datosUser">
         <img src="/img/user-avatar.jpg" alt="" className="photo" />
         <span> {props.user} </span>
@@ -42,10 +42,6 @@ const LeftMenu = (props) => {
       <div>
         <div className="tittle">
           <span> SALAS DE CHAT </span>
-          <Link className="link" to="/">
-            {" "}
-            +{" "}
-          </Link>
         </div>
         <nav>
           <RoomList chatRooms={props.chatRooms} />
@@ -56,10 +52,6 @@ const LeftMenu = (props) => {
         <div className="tittle">
           <span> USUARIOS </span>
           <div className="add">
-            <Link className="link" to="/">
-              {" "}
-              +{" "}
-            </Link>
           </div>
         </div>
 
