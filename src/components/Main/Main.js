@@ -1,36 +1,126 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import Header from "../Header/Header";
-import LeftMenu from "../LeftMenu/LeftMenu";
 import "./main.css";
-import { getCurrentUser } from "../../state/actions/usersAction";
-import { getChatRooms } from "../../state/actions/chatRoomAction";
-import Message from "../Message/Message";
 
-class Main extends Component {
+import Header from "../Header/Header";
+import MessageArea from "../MessageArea/MessageArea";
+import LeftSide from "../LeftSide/LeftSide"
+
+export default class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: [
+        {
+          id: "1-2-15452732",
+          from: "VeronicaO",
+          to: "2",
+          date: "Hace 5 mininutos",
+          body: "Hi Sanderson!",
+        },
+        {
+          id: "2-1-15452732",
+          from: "Sander",
+          to: "1",
+          date: "HAec algunos segundos",
+          body: "Hi Veronica",
+        },
+        {
+          id: "1-2-15452732",
+          from: "VeronicaO",
+          to: "2",
+          date: "Hace 5 mininutos",
+          body: "Hi Sanderson!",
+        },
+        {
+          id: "2-1-15452732",
+          from: "Sander",
+          to: "1",
+          date: "HAec algunos segundos",
+          body: "Hi Veronica",
+        },
+        {
+          id: "1-2-15452732",
+          from: "VeronicaO",
+          to: "2",
+          date: "Hace 5 mininutos",
+          body: "Hi Sanderson!",
+        },
+        {
+          id: "2-1-15452732",
+          from: "Sander",
+          to: "1",
+          date: "HAec algunos segundos",
+          body: "Hi Veronica",
+        },
+        {
+          id: "1-2-15452732",
+          from: "VeronicaO",
+          to: "2",
+          date: "Hace 5 mininutos",
+          body: "Hi Sanderson!",
+        },
+        {
+          id: "2-1-15452732",
+          from: "Sander",
+          to: "1",
+          date: "HAec algunos segundos",
+          body: "Hi Veronica",
+        },
+        {
+          id: "1-2-15452732",
+          from: "VeronicaO",
+          to: "2",
+          date: "Hace 5 mininutos",
+          body: "Hi Sanderson!",
+        },
+        {
+          id: "2-1-15452732",
+          from: "Sander",
+          to: "1",
+          date: "HAec algunos segundos",
+          body: "Hi Veronica",
+        },
+        {
+          id: "1-2-15452732",
+          from: "VeronicaO",
+          to: "2",
+          date: "Hace 5 mininutos",
+          body: "Hi Sanderson!",
+        },
+        {
+          id: "2-1-15452732",
+          from: "Sander",
+          to: "1",
+          date: "HAec algunos segundos",
+          body: "Hi Veronica",
+        },
+        {
+          id: "1-2-15452732",
+          from: "VeronicaO",
+          to: "2",
+          date: "Hace 5 mininutos",
+          body: "Hi Sanderson!",
+        },
+        {
+          id: "2-1-15452732",
+          from: "Sander",
+          to: "1",
+          date: "HAec algunos segundos",
+          body: "Hi Veronica",
+        },
+      ],
+    };
+  }
+
   render() {
     return (
       <div className="dashboard">
-        <LeftMenu
-            user={this.props.usersReducer.currentUser.username}
-            chatRooms={this.props.chatRoomReducer.chatRooms}
-            users={this.props.usersReducer.users}
-          />
+        <LeftSide />
         <div className="messages-area">
           <Header />
-          <Message />
+          <MessageArea messages={this.state.messages} />
         </div>
       </div>
     );
   }
 }
-
-const mapDispatchToProps = {
-  getCurrentUser,
-  getChatRooms,
-};
-
-const mapStateToProps = ({ usersReducer, chatRoomReducer }) => {
-  return { usersReducer: usersReducer, chatRoomReducer: chatRoomReducer };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Main);

@@ -1,0 +1,52 @@
+.messagesArea-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1em .8em .8em .8em;
+  height: 80vh;
+  overflow-y: auto;
+}
+
+.newMessage-container {
+  background-color:#cfd8dc;
+  border: none;
+  margin: 0;
+  padding: 0;
+  height: 10vh;
+}
+
+/*
+.messagesArea- {
+  flex-direction: column;
+  padding: 1em .8em;
+  display: block;
+  width: 100%;
+}
+*/
+
+.FlexRow {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1em;
+  color: #37474f;
+  width: 100%;
+}
+
+.FlexRow .photoMsg {
+  width: 1.8em;
+  height: 1.8em;
+  border-radius: 50px;
+  margin-right: 10px;
+}
+
+.FlexRow .date {
+  color: grey;
+}
+
+.FlexRow  .width100 {
+  width: 100%;
+}

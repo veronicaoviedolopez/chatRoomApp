@@ -1,0 +1,25 @@
+.left-menu-container {
+  color: #ffffff;
+  background-color: #37474f;
+  display: flex;
+  flex-direction: column;
+  padding: 0 .7em;
+  width: 250;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.left-menu-container a {
+  padding-left: .3em;
+  color: #bdbdbd;
+}
+
+.left-menu-container li {
+  padding-left: 0;
+  padding-bottom: .2em;
+}
+
+.left-menu-container .tittle {
+  display: flex;
+  justify-content: space-between;
+}

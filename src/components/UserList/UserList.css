@@ -1,0 +1,10 @@
+.navUsers {
+  margin: 0;
+  padding: 0;
+  padding-inline-start: 0.5em;
+  list-style-type: none;
+}
+
+.navUsers li:before {
+  content: "@";
+}
