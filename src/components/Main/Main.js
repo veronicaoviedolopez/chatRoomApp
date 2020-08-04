@@ -4,6 +4,8 @@ import "./main.css";
 import Header from "../Header/Header";
 import MessageArea from "../MessageArea/MessageArea";
 import LeftSide from "../LeftSide/LeftSide"
+import { getJwt } from '../../helpers/jwt';
+
 
 export default class Main extends Component {
   constructor(props) {
@@ -110,6 +112,14 @@ export default class Main extends Component {
         },
       ],
     };
+  }
+
+  componentDidMount() {
+    const jwt = getJwt();
+    this.setState({ jwt });
+    if (!jwt) {
+      this.props.history.push('/login');
+    }
   }
 
   render() {

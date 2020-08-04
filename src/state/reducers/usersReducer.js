@@ -2,9 +2,9 @@ import { types as userTypes } from "../actions/usersAction";
 
 const initialState = {
   currentUser: {
-    id: 1,
-    username: "VeronicaOviedo",
-    email: "veronica@gmail.com",
+    id: null,
+    name: null,
+    email: null,
   },
   users: [
     {
@@ -48,6 +48,7 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case userTypes.set:
+      console.log('entro al reducer');
       return {
         ...state,
         currentUser: payload,

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "../Login/LoginRegister.css";
-import { setCurrentUser } from "../../state/actions/usersAction";
+import { registerUser } from "../../state/actions/usersAction";
 
 class Register extends Component {
   constructor(props) {
@@ -26,11 +26,12 @@ class Register extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const user = { 
-      username: this.state.username, 
-      email: this.state.email
-    }
-    this.props.setCurrentUser(user);
+    const currentUser =  {
+      name: this.state.username,
+      email: this.state.email,
+      password: this.state.password
+    };
+    this.props.registerUser(currentUser);
     this.props.history.push("/");
   };
 
@@ -94,7 +95,7 @@ class Register extends Component {
 }
 
 const mapDispatchToProps = {
-  setCurrentUser
+  registerUser
 };
 
 

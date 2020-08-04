@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./LoginRegister.css";
-import { setCurrentUser } from "../../state/actions/usersAction";
+import { loginUser } from "../../state/actions/usersAction";
 
 class Login extends Component {
   constructor(props) {
@@ -26,11 +26,11 @@ class Login extends Component {
     event.preventDefault();
     
     const currentUser =  {
-      username: "veronicao",
-      email: this.state.username,
+      name: this.state.username,
+      password: this.state.password
     };
     
-    this.props.setCurrentUser(currentUser);
+    this.props.loginUser(currentUser);
     this.props.history.push("/");
   };
 
@@ -45,13 +45,13 @@ class Login extends Component {
             <label htmlFor="username"> Username </label>
             <input
               autoFocus
-              type="email"
+              type="text"
               value={this.state.username}
               onChange={this.handleChange}
               required
               id="username"
               name="username"
-              placeholder="email"
+              placeholder="username"
             />
           </div>
           <div className="form-row">
@@ -79,7 +79,7 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = {
-  setCurrentUser
+  loginUser
 };
 
 export default connect(null, mapDispatchToProps)(Login);
