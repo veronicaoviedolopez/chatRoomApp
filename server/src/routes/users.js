@@ -1,18 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../model/User');
-const verify = require('../verifyToken');
-
-// Get All Users
-router.get('/', verify, async (req, res) => {
-    try {
-        console.log(req.user);
-        const users = await User.find();
-        res.json(users);
-    } catch(err) {
-        res.json({ message: err});
-    }
-});
+const verify = require('../../verifyToken');
 
 //Get Specific User
 router.get('/:userId', async (req, res) => {

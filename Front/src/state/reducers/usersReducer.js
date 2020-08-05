@@ -1,57 +1,23 @@
 import { types as userTypes } from "../actions/usersAction";
 
 const initialState = {
-  currentUser: {
-    id: null,
-    name: null,
-    email: null,
-  },
-  users: [
-    {
-      id: 1,
-      username: "VeronicaOviedo (Yo)",
-      email: "veronica@gmail.com",
-    },
-    {
-      id: 2,
-      username: "Sanderson",
-      email: "Sanderson@gmail.com",
-    },
-    {
-      id: 3,
-      username: "Weaver",
-      email: "Weaver@gmail.com",
-    },
-    {
-      id: 4,
-      username: "NightBlood",
-      email: "NightBlood@gmail.com",
-    },
-    {
-      id: 5,
-      username: "Sanderson",
-      email: "Sanderson@gmail.com",
-    },
-    {
-      id: 6,
-      username: "Weaver",
-      email: "Weaver@gmail.com",
-    },
-    {
-      id: 7,
-      username: "NightBlood",
-      email: "NightBlood@gmail.com",
-    },
-  ],
+  isAuth: false,
+  user: null
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case userTypes.set:
-      console.log('entro al reducer');
+
+      // descargar paquete jsonwebtoken
+      // decodear token
+
+      const user = jwt.decode(payload)
+
+      localStorage.setItem('chatRoomJWT', payload);
       return {
-        ...state,
-        currentUser: payload,
+        isAuth: true,
+        user,
       };
     case userTypes.get:
       return {
@@ -63,6 +29,9 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         users: state.users,
       };
+    case userTypes.remove:
+      localStorage.removeItem('chatRoomJWT');
+      return initialState
     default:
       return state;
   }

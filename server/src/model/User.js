@@ -5,13 +5,15 @@ const userSchema = ({
         type: String,
         required: true,
         min: 6,
-        max: 50
+        max: 50,
+        unique: [true, 'Name field is required']
     },
     email: {
         type: String,
         required: true,
         min: 6,
-        max: 100
+        max: 100,
+        unique: [true, 'Email field is required']
     },
     password: {
         type: String,

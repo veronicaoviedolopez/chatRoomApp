@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export const types = {
   set: "SET_CURRENT_USER",
   get: "GET_CURRENT_USER",
@@ -23,28 +21,10 @@ export const registerUser = (user) => {
   };
 };
 
-// Login User
-export const loginUser = (user) => {
-  return async (dispatch) => {
-    try {
-      const res = await axios.post(
-        "http://localhost:3000/api/user/login",
-        user
-      );
-      localStorage.setItem('chatRoomJWT', res.data.token);
-      delete user.password;
-      dispatch(setCurrentUser(res.data.user));
-    } catch (err) {
-      // manejar errores
-    }
-  };
-};
-
-
 // Asigna el User
-export const setCurrentUser = (user) => ({
+export const setCurrentUser = (token) => ({
   type: types.set,
-  payload: user,
+  payload: token,
 });
 
 // trae el User logueado

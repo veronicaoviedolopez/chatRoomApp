@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./LoginRegister.css";
-import { loginUser } from "../../state/actions/usersAction";
+import axios from "axios";
+import { setCurrentUser } from '../../state/actions/usersAction';
 
 class Login extends Component {
   constructor(props) {
@@ -25,13 +26,12 @@ class Login extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     
-    const currentUser =  {
-      name: this.state.username,
-      password: this.state.password
-    };
-    
-    this.props.loginUser(currentUser);
-    this.props.history.push("/");
+    axios.post("http://localhost:3000/api/user/register", this.state)
+      .then(response => {
+        this.props.setCurrentUser(response.data)
+        this.props.history.push("/");
+      })
+      .catch(err => console.log(err))
   };
 
   render() {
@@ -79,7 +79,7 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = {
-  loginUser
+  setCurrentUser
 };
 
 export default connect(null, mapDispatchToProps)(Login);
