@@ -1,8 +1,10 @@
-const bodyParser = require('body-parser');
-const cors = require('cors');
+import bodyParser from 'body-parser';
+import cors from'cors';
 //Import Routes
-const authRoutes =  require('./src/routes/auth');
-const usersRoutes = require('./src/routes/users')
+// import authRoutes from './src/routes/auth';
+import usersRoutes from './routes/usersRoutes';
+import express from 'express';
+const app = express();
 
 // importar y llamar mongo
 
@@ -12,7 +14,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //Routes Middleware
-app.use('/auth', authRoutes);
-app.use('/user', [verify, usersRoutes]);
+// app.use('/auth', authRoutes);
+app.use('/user', usersRoutes);
 
-module.exports = app;
+export default app;
