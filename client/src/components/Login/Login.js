@@ -25,21 +25,14 @@ class Login extends Component {
   };
 
   // Hace el Submit del Form
-  handleSubmit = (event) => {
-    event.preventDefault();
-    bcrypt.genSalt(constants.numeroSalt)
-      .then(salt => {
-        bcrypt.hash(this.state.password, salt)
-        .then(hashedPassword => {
-          this.setState({password: hashedPassword});
-          axios.post(`${constants.api}auth/login`, this.state)
-          .then(response => {
-            this.props.setCurrentUser(response.data);
-            this.props.history.push("/"); })
-          .catch(err => console.log(err)); })
-        .catch(error => console.log(error));
+  handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post(`${constants.api}auth/login`, this.state)
+      .then(response => {
+        this.props.setCurrentUser(response.data);
+        this.props.history.push("/");
       })
-      .catch(error => console.log(error));
+      .catch(err => console.log(err));
   };
 
   render() {

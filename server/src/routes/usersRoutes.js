@@ -8,10 +8,10 @@ import  editUser  from '../controllers/user/editUser';
 import  deleteUser  from '../controllers/user/deleteUser';
 import findUser  from '../controllers/user/findUser';
 
-import  registerValidation  from '../middlewares/RegisterValidation';
+import registerValidation from '../middlewares/RegisterValidation';
 
 router.get('/list', [verify, listUsers]);
-router.post('/create', [ registerValidation, createUser]);
+router.post('/create', [registerValidation, createUser]);
 router.patch('/edit/:id', [verify, editUser]);
 router.delete('/delete/:id', [verify, deleteUser]);
 router.get('/find/:id', [verify, findUser]);
