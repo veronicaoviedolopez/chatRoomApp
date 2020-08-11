@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import "../Login/LoginRegister.css";
-import { registerUser } from "../../state/actions/usersAction";
+import "./LoginRegister.css";
+import axios from "axios";
+import { setCurrentUser } from "../../redux/actions/usersAction";
+import { constants } from "../../config/constants";
+import bcrypt from 'bcryptjs';
 
-class Register extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: "",
-      email: "",
+      name: "",
       password: "",
     };
   }
@@ -25,48 +27,39 @@ class Register extends Component {
   // Hace el Submit del Form
   handleSubmit = (event) => {
     event.preventDefault();
-
-    const currentUser =  {
-      name: this.state.username,
-      email: this.state.email,
-      password: this.state.password
-    };
-    this.props.registerUser(currentUser);
-    this.props.history.push("/");
+    bcrypt.genSalt(constants.numeroSalt)
+      .then(salt => {
+        bcrypt.hash(this.state.password, salt)
+        .then(hashedPassword => {
+          this.setState({password: hashedPassword});
+          axios.post(`${constants.api}auth/login`, this.state)
+          .then(response => {
+            this.props.setCurrentUser(response.data);
+            this.props.history.push("/"); })
+          .catch(err => console.log(err)); })
+        .catch(error => console.log(error));
+      })
+      .catch(error => console.log(error));
   };
 
   render() {
     return (
       <div className="wrapper">
         <form onSubmit={this.handleSubmit}>
-          <div className="form-tittle">Nuevo Usuario</div>
+          <div className="form-tittle">Log In</div>
           <div className="form-row">
-            <label htmlFor="username"> Username </label>
+            <label htmlFor="name"> Name </label>
             <input
               autoFocus
               type="text"
-              value={this.state.username}
+              value={this.state.name}
               onChange={this.handleChange}
               required
-              id="username"
-              name="username"
+              id="name"
+              name="name"
+              placeholder="name"
             />
           </div>
-
-          <div className="form-row">
-            <label htmlFor="email"> Email </label>
-            <input
-              autoFocus
-              type="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-              required
-              id="email"
-              name="email"
-              placeholder="email"
-            />
-          </div>
-
           <div className="form-row">
             <label htmlFor="password"> Password </label>
             <input
@@ -79,14 +72,14 @@ class Register extends Component {
             />
           </div>
           <div className="form-row">
-            <button type="submit"> Sign Up </button>
+            <button type="submit">Login</button>
           </div>
         </form>
         <div className="center">
-          <label> Do you already have an account? </label>
-          <Link className="link" to="/login">
+          <label> Do you don't have an account? </label>
+          <Link className="link" to="/register">
             {" "}
-            Log In{" "}
+            Sign Up{" "}
           </Link>
         </div>
       </div>
@@ -95,8 +88,7 @@ class Register extends Component {
 }
 
 const mapDispatchToProps = {
-  registerUser
+  setCurrentUser,
 };
 
-
-export default connect(null,mapDispatchToProps)(Register);
+export default connect(null, mapDispatchToProps)(Login);

@@ -1,10 +1,7 @@
 import { User } from '../../model/User'
 
 export default (req, res) => {
-  try {
-      const updatedUser = await User.findByIdAndUpdate(req.params.userId, req.body) 
-      res.json(updatedUser);
-  } catch(err) {
-      res.json({ message: err});
-  }
+  User.findByIdAndUpdate(req.params.id, req.body)
+      .then(updatedUser => res.status(200).json(updatedUser))
+      .catch(err => res.status(304).json({ message: err.message}))
 }

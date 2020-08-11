@@ -5,7 +5,7 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux'
-import store from './state/store/store';
+import store from './redux/store';
 
 function App() {
   return (

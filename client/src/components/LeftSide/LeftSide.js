@@ -10,7 +10,7 @@ class LeftSide extends Component {
   render() {
     return (
         <div className="left-menu-container">
-        <UserMenu user = { this.props.usersReducer.currentUser.name } />
+        <UserMenu user = { this.props.usersReducer.user.name } />
         <RoomList chatRooms = { this.props.chatRoomReducer.chatRooms } />
         <UserList users = { this.props.usersReducer.users} />
       </div>

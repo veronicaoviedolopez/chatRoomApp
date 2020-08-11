@@ -1,4 +1,5 @@
 import { types as userTypes } from "../actions/usersAction";
+import jwt from 'jsonwebtoken';
 
 const initialState = {
   isAuth: false,
@@ -8,21 +9,17 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case userTypes.set:
-
-      // descargar paquete jsonwebtoken
-      // decodear token
-
       const user = jwt.decode(payload)
-
       localStorage.setItem('chatRoomJWT', payload);
       return {
+        ...state,
         isAuth: true,
         user,
       };
     case userTypes.get:
       return {
         ...state,
-        currentUser: state.currentUser,
+        user: state.user,
       };
     case userTypes.getUsers:
       return {

@@ -1,10 +1,7 @@
 import { User } from '../../model/User'
 
 export default (req, res) => {
-  try {
-      const removedUser = await User.findByIdAndRemove(req.params.userId);
-      res.json(removedUser);
-  } catch(err) {
-      res.json({ message: err});
-  }
+  User.findByIdAndRemove(req.params.id)
+  .then(removedUser => res.status(200).json(removedUser) )
+  .catch(err => res.status(304).json({ message: err.message}) )
 }

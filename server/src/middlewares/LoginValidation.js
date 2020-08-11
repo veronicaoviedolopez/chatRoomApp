@@ -1,10 +1,10 @@
-import { loginValidationModel } from "../model/LoginModel";
+import { loginValidation } from "../model/LoginModel";
 
-export const loginValidation = (req, res, next) => {
+export default (req, res, next) => {
   const user = req.body;
-  const validation = loginValidationModel.validate(user);
+  const validation = loginValidation.validate(user);
   if (validation.error) {
-    return res.status(400).json(validation.error.details);
+    return res.status(400).json({ message: validation.error.details });
   }
 
   next();

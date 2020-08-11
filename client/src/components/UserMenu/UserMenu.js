@@ -6,7 +6,7 @@ const UserMenu = (props) => (
     
     <div className="datosUser">
       <img src="/img/user-avatar.jpg" alt="" className="photo" />
-      <span> {props.user} </span>
+      <span> {props.user.name} </span>
     </div>
 
     <div className="userMenu">

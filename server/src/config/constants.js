@@ -1,3 +1,4 @@
 export const constants = {
-  JWTSecret: 'jsonsecret'
+  JWTSecret : 'asdfghjkl',
+  numeroSalt: 10
 }
