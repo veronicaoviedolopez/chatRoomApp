@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 const MessageList = (props) => (
   <div>
@@ -23,5 +24,9 @@ const MessageList = (props) => (
     }
   </div>
 );
+
+MessageList.propTypes = {
+  optionalArrayOf: PropTypes.arrayOf(PropTypes.object)
+}
 
 export default MessageList;

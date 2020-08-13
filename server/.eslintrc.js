@@ -1,5 +1,3 @@
-/*
-
 module.exports = {
   'env': {
     'es6': true,
@@ -19,8 +17,6 @@ module.exports = {
   'rules': {
     'linebreak-style': 0,
     'object-curly-spacing': ['error', 'always'],
-    'new-cap': 0
+    'new-cap': 0,
   },
 };
-
-*/

@@ -1,7 +1,7 @@
 export const types = {
   set: "SET_CURRENT_USER",
   get: "GET_CURRENT_USER",
-  getUsers: "GET_USERS",
+  setUsers: "SET_USERS",
 };
 
 // Asigna el User
@@ -16,6 +16,7 @@ export const getCurrentUser = () => ({
 });
 
 // trae la lista de usuarios
-export const getUsers = () => ({
-  type: types.getUsers,
+export const setUsers = users => ({
+  type: types.setUsers,
+  payload: users,
 });

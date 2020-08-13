@@ -3,7 +3,8 @@ import jwt from 'jsonwebtoken';
 
 const initialState = {
   isAuth: false,
-  user: null
+  user: null,
+  users: null
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -21,10 +22,10 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         user: state.user,
       };
-    case userTypes.getUsers:
+    case userTypes.setUsers:
       return {
         ...state,
-        users: state.users,
+        users: payload,
       };
     case userTypes.remove:
       localStorage.removeItem('chatRoomJWT');

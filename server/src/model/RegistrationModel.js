@@ -1,4 +1,4 @@
-import Joi from "@hapi/joi";
+import Joi from '@hapi/joi';
 
 // Register Validation
 export const registerValidation = Joi.object().keys({

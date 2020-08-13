@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser';
-import cors from'cors';
+import cors from 'cors';
 
-//Import Routes
+// Import Routes
 import authRoutes from './routes/authRoutes';
 import usersRoutes from './routes/usersRoutes';
 import express from 'express';

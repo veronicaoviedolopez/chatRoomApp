@@ -1,4 +1,4 @@
-import Joi from "@hapi/joi";
+import Joi from '@hapi/joi';
 
 // Login Validation
 export const loginValidation = Joi.object().keys({

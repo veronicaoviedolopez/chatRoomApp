@@ -1,5 +1,6 @@
 import React from "react";
 import "./UserList.css";
+import PropTypes from 'prop-types';
 
 const UserList = (props) => (
   <div>
@@ -17,5 +18,10 @@ const UserList = (props) => (
     </nav>
   </div>
 );
-
+/*
+UserList.PropTypes = {
+  chatRooms: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropType.number, PropType.string ]))
+}
+*/
 export default UserList;

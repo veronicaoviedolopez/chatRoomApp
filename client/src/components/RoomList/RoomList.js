@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import "./RoomList.css";
 
 const RoomList = (props) => (
@@ -16,5 +17,10 @@ const RoomList = (props) => (
     </nav>
   </div>
 );
-
+/*
+RoomList.PropTypes = {
+  chatRooms: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropType.number, PropType.string ]))
+}
+*/
 export default RoomList;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import "./MessageArea.css";
 
 import MessageList from "./MessageList/MessageList";
@@ -13,4 +14,7 @@ const MessageArea = (props) => (
   </div>
 );
 
+MessageArea.propTypes = {
+  optionalArrayOf: PropTypes.arrayOf(PropTypes.object)
+}
 export default MessageArea;

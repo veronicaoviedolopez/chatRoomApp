@@ -5,7 +5,6 @@ import "./LoginRegister.css";
 import axios from "axios";
 import { setCurrentUser } from "../../redux/actions/usersAction";
 import { constants } from "../../config/constants";
-import bcrypt from 'bcryptjs';
 
 class Login extends Component {
   constructor(props) {

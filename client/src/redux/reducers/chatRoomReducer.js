@@ -2,13 +2,22 @@ import { types as chatRoomTypes } from "../actions/chatRoomAction";
 
 const initialState = {
   currentChatRoom: {
-    name: "",
+    _id: null,
+    name: null,
   },
   chatRooms: [
-    { name: "Tecnología" },
-    { name: "React JS Español" },
-    { name: "The storlight archive" },
-    { name: "Sala de chat X Tecnología" },
+    { _id: 1,
+      name: "Tecnología" 
+    },
+    {  _id: 2,
+      name: "React JS Español" 
+    },
+    {  _id: 3,
+      name: "The storlight archive" 
+    },
+    {  _id: 4,
+      name: "Sala de chat X Tecnología" 
+    },
   ],
 };
 
