@@ -5,6 +5,21 @@ import { constants } from "../../config/constants";
 const Reloj = () => {
   const [response, setResponse] = useState("");
 
+  this.state = {
+    messages: [1, 2]
+  }
+
+  const sendMessage = () => {
+    const socket = socketIOClient(constants.IP_Server);
+    socket.emmit('new_message', { message: 'adasdasdasdasdasd' });
+
+    socket.on('incomming_message', (3) => {
+      this.state({
+        message: [1, 2, 3]
+      })
+    });
+  }
+
   useEffect(() => {
     const socket = socketIOClient(constants.IP_Server);
     socket.on("FromAPI", (data) => {

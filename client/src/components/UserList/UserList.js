@@ -18,10 +18,9 @@ const UserList = (props) => (
     </nav>
   </div>
 );
-/*
-UserList.PropTypes = {
-  chatRooms: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropType.number, PropType.string ]))
+
+UserList.propTypes = {
+  chatRooms: PropTypes.array.isRequired
 }
-*/
+
 export default UserList;

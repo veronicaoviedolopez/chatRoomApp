@@ -28,7 +28,7 @@ const UserMenu = (props) => (
 );
 
 UserMenu.propTypes = {
-  name: PropTypes.string
+  user: PropTypes.string.isRequired
 }
 
 export default UserMenu;

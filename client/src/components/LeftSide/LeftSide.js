@@ -12,7 +12,6 @@ import Reloj from '../Reloj/reloj';
 
 class LeftSide extends Component {
   componentDidMount() {
-    console.log(getJwt());
     axios
       .get(`${constants.api}user/list`, {
         headers: { "auth-token": `${getJwt()}` },
@@ -24,10 +23,13 @@ class LeftSide extends Component {
   }
 
   render() {
+
+    const { usersReducer, chatRoomReducer } = this.props;
+
     return (
       <div className="left-menu-container">
-        <UserMenu user={this.props.usersReducer.user.name} />
-        <RoomList chatRooms={this.props.chatRoomReducer.chatRooms} />
+        <UserMenu user={usersReducer.user.name} />
+        <RoomList chatRooms={chatRoomReducer.chatRooms} />
         {/* <UserList users = { this.props.usersReducer.users} /> */}
         <Reloj/>
       </div>
