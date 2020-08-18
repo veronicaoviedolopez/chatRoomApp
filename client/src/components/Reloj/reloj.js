@@ -13,7 +13,7 @@ const Reloj = () => {
     const socket = socketIOClient(constants.IP_Server);
     socket.emmit('new_message', { message: 'adasdasdasdasdasd' });
 
-    socket.on('incomming_message', (3) => {
+    socket.on('incomming_message', () => {
       this.state({
         message: [1, 2, 3]
       })

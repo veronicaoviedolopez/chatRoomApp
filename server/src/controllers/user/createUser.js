@@ -14,5 +14,5 @@ export default (req, res) => {
         return new User(req.body).save();
       })
       .then(() => res.sendStatus(201))
-      .catch((err) => res.status(400).json(err));
+      .catch((err) => res.status(400).send(err.message));
 };

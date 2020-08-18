@@ -9,7 +9,7 @@ const UserMenu = (props) => (
       <span> {props.user} </span>
     </div>
 
-    <div className="userMenu">
+    <div>
       <div className="tittle">
         <span> MENU </span>
       </div>

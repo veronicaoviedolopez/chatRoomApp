@@ -4,6 +4,7 @@ import cors from 'cors';
 // Import Routes
 import authRoutes from './routes/authRoutes';
 import usersRoutes from './routes/usersRoutes';
+import chatRoomsRoutes from './routes/chatRoomsRoutes';
 import express from 'express';
 
 const app = express();
@@ -16,5 +17,6 @@ app.use(cors());
 // Routes Middleware
 app.use('/auth', authRoutes);
 app.use('/user', usersRoutes);
+app.use('/chatroom', chatRoomsRoutes);
 
 export default app;

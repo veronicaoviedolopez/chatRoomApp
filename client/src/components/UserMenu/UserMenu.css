@@ -1,13 +1,15 @@
   .userMenu {
-    margin: 0;
+    margin: .5em 0;
     margin-bottom: 1em;
     padding: 0;
     padding-inline-start: .5em;
     list-style-type: none;  
+    cursor: pointer;
   }
   
   .userMenu li:before {
     content: ""; 
+    cursor: pointer;
   }
 
   .tittle {

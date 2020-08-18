@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import "../Login/LoginRegister.css";
 import { constants } from "../../config/constants";
 import axios from 'axios';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 
 class Register extends Component {
@@ -26,13 +29,12 @@ class Register extends Component {
   // Hace el Submit del Form
   handleSubmit = (event) => {
     event.preventDefault();
-
-
     axios.post(`${constants.api}user/create`, this.state)
     .then(() => {
-      this.props.history.push("/");
+      toast.success("User Created Succesfuly");
+      this.props.history.push("/login");
     })
-    .catch(err => console.log(err))
+    .catch(err => toast.error(err.response.data));
 };
 
   render() {
@@ -89,10 +91,14 @@ class Register extends Component {
             Log In{" "}
           </Link>
         </div>
+        <ToastContainer autoClose={2000} />
       </div>
     );
   }
 }
 
 
-export default connect(Register);
+export default Register;
+
+
+

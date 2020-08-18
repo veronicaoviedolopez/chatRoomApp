@@ -7,6 +7,7 @@ import createUser from '../controllers/user/createUser';
 import editUser from '../controllers/user/editUser';
 import deleteUser from '../controllers/user/deleteUser';
 import findUser from '../controllers/user/findUser';
+import addChatRoom from '../controllers/user/addChatRoom'
 
 import registerValidation from '../middlewares/RegisterValidation';
 
@@ -15,5 +16,6 @@ router.post('/create', [registerValidation, createUser]);
 router.patch('/edit/:id', [verify, editUser]);
 router.delete('/delete/:id', [verify, deleteUser]);
 router.get('/find/:id', [verify, findUser]);
+router.patch('/addChatRoom/:id', [verify, addChatRoom]);
 
 export default router;

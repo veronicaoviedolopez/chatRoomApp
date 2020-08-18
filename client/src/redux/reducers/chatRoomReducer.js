@@ -1,24 +1,8 @@
 import { types as chatRoomTypes } from "../actions/chatRoomAction";
 
 const initialState = {
-  currentChatRoom: {
-    _id: null,
-    name: null,
-  },
-  chatRooms: [
-    { _id: 1,
-      name: "Tecnología" 
-    },
-    {  _id: 2,
-      name: "React JS Español" 
-    },
-    {  _id: 3,
-      name: "The storlight archive" 
-    },
-    {  _id: 4,
-      name: "Sala de chat X Tecnología" 
-    },
-  ],
+  currentChatRoom: null,
+  chatRooms: null
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -27,6 +11,11 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         chatRooms: state.chatRooms,
+      };
+      case chatRoomTypes.setChatRooms:
+      return {
+        ...state,
+        chatRooms: payload,
       };
     default:
       return state;

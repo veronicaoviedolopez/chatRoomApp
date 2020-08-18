@@ -5,6 +5,9 @@ import "./LoginRegister.css";
 import axios from "axios";
 import { setCurrentUser } from "../../redux/actions/usersAction";
 import { constants } from "../../config/constants";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 class Login extends Component {
   constructor(props) {
@@ -28,10 +31,15 @@ class Login extends Component {
     e.preventDefault();
     axios.post(`${constants.api}auth/login`, this.state)
       .then(response => {
+        console.log('entro al response')
         this.props.setCurrentUser(response.data);
+        toast.success("User Logged Succesfuly");
         this.props.history.push("/");
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        toast.error(err.response.data);}
+        );
   };
 
   render() {
@@ -74,6 +82,7 @@ class Login extends Component {
             Sign Up{" "}
           </Link>
         </div>
+        <ToastContainer autoClose={2000} />
       </div>
     );
   }
@@ -82,5 +91,6 @@ class Login extends Component {
 const mapDispatchToProps = {
   setCurrentUser,
 };
+
 
 export default connect(null, mapDispatchToProps)(Login);

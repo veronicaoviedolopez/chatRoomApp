@@ -1,11 +1,12 @@
 .navSalas {
-    margin: 0;
-    padding: 0;
-    margin-bottom: 2em;
-    padding-inline-start: .5em;
+    margin: .5em 0;
+    padding-inline-start: 0em;
     list-style-type: none;
+    cursor: pointer;
   }
   
   .navSalas li:before {
-    content: "#"; 
+    content: "#";
+    padding: .3em;
+    margin: 0, 2em;
   }

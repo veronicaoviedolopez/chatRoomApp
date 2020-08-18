@@ -6,7 +6,7 @@ const RoomList = (props) => (
   <div>
     <div className="tittle">
       <span> SALAS DE CHAT </span>
-      <span> + </span>
+      <button onClick={props.setChatRoom}> + </button>
     </div>
     <nav>
       <ul className="navSalas">

@@ -25,6 +25,11 @@ const userSchema = ({
     type: Date,
     default: Date.now,
   },
+  chatRooms: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+    },
+  ],
 });
 
 export const User = mongoose.model('User', userSchema);
