@@ -2,15 +2,14 @@ import { types as chatRoomTypes } from "../actions/chatRoomAction";
 
 const initialState = {
   currentChatRoom: null,
-  chatRooms: null
+  chatRooms: [1, 2, 4, 5, 6]
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case chatRoomTypes.getChatRooms:
+    case chatRoomTypes.addNewRoom:
       return {
-        ...state,
-        chatRooms: state.chatRooms,
+        chatRooms: [...state.chatRooms, payload],
       };
       case chatRoomTypes.setChatRooms:
       return {

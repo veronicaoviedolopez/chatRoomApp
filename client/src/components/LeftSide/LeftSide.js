@@ -5,17 +5,26 @@ import "./LeftSide.css";
 import RoomList from "../RoomList/RoomList";
 import UserMenu from "../UserMenu/UserMenu";
 import { setUsers } from "../../redux/actions/usersAction";
-import { setChatRooms } from '../../redux/actions/chatRoomAction';
 import alertify from 'alertifyjs';
 import { constants } from '../../config/constants';
 import { getJwt } from '../../helpers/jwt';
  
 class LeftSide extends Component {
- componentDidMount() {
-    this.getChatRooms();
+
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       roomsList: []
+    }
+  }
+  
+  componentDidMount() {
+    console.log(this.props.chatRooms);
   }
   
   newChatRoom = () => {
+    const that = this;
     alertify.prompt('New RoomChat', 'Name:','',
     function(evt, name) {
       console.log(name)
@@ -29,7 +38,7 @@ class LeftSide extends Component {
       })
       .then((res) => {
         console.log('si lo izo');
-        //this.getChatRooms();
+        that.getChatRooms();
         alertify.success('You entered: ' + name)
       })
       .catch((err) => console.log(err));
@@ -53,12 +62,14 @@ class LeftSide extends Component {
   }
 
   render() {
-    const { usersReducer, chatRoomReducer } = this.props;
+    const { users, chatRooms } = this.props;
     return (
       <div className="left-menu-container">
-        <UserMenu user={usersReducer.user.name} />
-        { this.state != null &&
+        <UserMenu user={users.user.name} />
+        {
+          this.state ?
           <RoomList setChatRoom={this.newChatRoom} chatRooms={this.state.chatrooms} />
+          : null
         }
          {/*
          <UserList users = { this.props.usersReducer.users} /> */}
@@ -67,11 +78,10 @@ class LeftSide extends Component {
   }
 }
 
-const mapStateToProps = ({ usersReducer, chatRoomReducer }) => {
-  return { usersReducer, chatRoomReducer };
+const mapStateToProps = (state) => {
+  return { 
+    users: state.usersReducer,
+    chatRooms: state.chatRoomReducer
+   };
 };
-
-const mapDispatchToProps = {
-  setUsers, setChatRooms
-};
-export default connect(mapStateToProps, mapDispatchToProps)(LeftSide);
+export default connect(mapStateToProps)(LeftSide);

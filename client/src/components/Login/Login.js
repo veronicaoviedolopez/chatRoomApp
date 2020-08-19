@@ -8,6 +8,8 @@ import { constants } from "../../config/constants";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { setChatRooms } from "../../redux/actions/chatRoomAction";
+import jwt from "jsonwebtoken";
 
 class Login extends Component {
   constructor(props) {
@@ -32,14 +34,18 @@ class Login extends Component {
     axios.post(`${constants.api}auth/login`, this.state)
       .then(response => {
         console.log('entro al response')
-        this.props.setCurrentUser(response.data);
+        // decodear el jwt
+        const user = jwt.decode(response.data);
+        this.props.setCurrentUser(user);
+        this.props.setChatRooms("arreglo de las salas");
+        // set auth token
         toast.success("User Logged Succesfuly");
-        this.props.history.push("/");
+        return this.props.history.push("/");
       })
       .catch(err => {
         console.log(err);
-        toast.error(err.response.data);}
-        );
+        return toast.error(err.response.data);}
+      );
   };
 
   render() {
@@ -90,6 +96,7 @@ class Login extends Component {
 
 const mapDispatchToProps = {
   setCurrentUser,
+  setChatRooms
 };
 
 
