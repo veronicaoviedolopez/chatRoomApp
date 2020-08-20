@@ -34,7 +34,7 @@ class Register extends Component {
       toast.success("User Created Succesfuly");
       this.props.history.push("/login");
     })
-    .catch(err => toast.error(err.response.data));
+    .catch(err => toast.error(err.response?.data));
 };
 
   render() {

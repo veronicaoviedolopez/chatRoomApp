@@ -9,15 +9,15 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { setChatRooms } from "../../redux/actions/chatRoomAction";
-import jwt from "jsonwebtoken";
+import { setAuthToken } from "../../helpers/setAuthToken";
 
 class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: "",
-      password: "",
+      name: "veronica",
+      password: "1234567",
     };
   }
 
@@ -33,19 +33,21 @@ class Login extends Component {
     e.preventDefault();
     axios.post(`${constants.api}auth/login`, this.state)
       .then(response => {
-        console.log('entro al response')
-        // decodear el jwt
-        const user = jwt.decode(response.data);
-        this.props.setCurrentUser(user);
-        this.props.setChatRooms("arreglo de las salas");
-        // set auth token
+        this.props.setCurrentUser({
+          user: {
+            _id: response.data.user._id,
+            name: response.data.user.name,
+            email: response.data.user.email 
+          },
+          token: response.data.token
+        });
+       
+        this.props.setChatRooms(response.data.user.chatRooms);
         toast.success("User Logged Succesfuly");
+        setAuthToken(response.data.token);
         return this.props.history.push("/");
       })
-      .catch(err => {
-        console.log(err);
-        return toast.error(err.response.data);}
-      );
+      .catch(err => toast.error(err.response?.data));
   };
 
   render() {

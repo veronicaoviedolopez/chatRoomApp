@@ -4,75 +4,51 @@ import axios from "axios";
 import "./LeftSide.css";
 import RoomList from "../RoomList/RoomList";
 import UserMenu from "../UserMenu/UserMenu";
+import UserList from '../UserList/UserList';
+import { addNewRoom } from "../../redux/actions/chatRoomAction";
 import { setUsers } from "../../redux/actions/usersAction";
 import alertify from 'alertifyjs';
 import { constants } from '../../config/constants';
-import { getJwt } from '../../helpers/jwt';
+import { toast } from "react-toastify";
  
 class LeftSide extends Component {
+  currentChatRoom = e => {
+    const that = this;
+    axios.get(`${constants.api}chatroom/list/users/${e.target.id}`)
+      .then(res =>  that.props.setUsers(res.data.users))
+      .catch(err => toast.error(err.response?.data))
+  }
 
-  constructor(props) {
-    super(props)
-  
-    this.state = {
-       roomsList: []
-    }
-  }
-  
-  componentDidMount() {
-    console.log(this.props.chatRooms);
-  }
-  
   newChatRoom = () => {
     const that = this;
     alertify.prompt('New RoomChat', 'Name:','',
     function(evt, name) {
-      console.log(name)
       const newChatRoom = {
         name,
-        users: ["5f3c11f7df01420444b7a3df"]
+        users: [that.props.users.user._id]
       }
-      console.log(newChatRoom);
-      axios.post(`${constants.api}chatroom/create`,newChatRoom, {
-        headers: { "auth-token": `${getJwt()}` },
-      })
+      axios.post(`${constants.api}chatroom/create`,newChatRoom)
       .then((res) => {
-        console.log('si lo izo');
-        that.getChatRooms();
-        alertify.success('You entered: ' + name)
+        that.props.addNewRoom(...res.data);
+        alertify.success('Ok: ' + name)
       })
-      .catch((err) => console.log(err));
-      
+      .catch((err) => alertify.error(err.response?.data))
      },
-    function() { alertify.error('Cancel') });
+    () => {});
   }
 
-  getChatRooms() {
-    axios
-      .get(`${constants.api}chatroom/list`, {
-        headers: { "auth-token": `${getJwt()}` },
-      })
-      .then((res) => {
-        const chatrooms = res.data;
-        this.setState({ chatrooms });
-        console.log(this.state);
-        this.props.setChatRooms(res.data);
-      })
-      .catch((err) => console.log(err));
-  }
+  redireccionar = () => this.props.history.push("/login");
 
   render() {
     const { users, chatRooms } = this.props;
     return (
       <div className="left-menu-container">
         <UserMenu user={users.user.name} />
-        {
-          this.state ?
-          <RoomList setChatRoom={this.newChatRoom} chatRooms={this.state.chatrooms} />
-          : null
-        }
-         {/*
-         <UserList users = { this.props.usersReducer.users} /> */}
+          <RoomList setChatRoom={this.newChatRoom} chatRooms={chatRooms.chatRooms} setCurrentChatRoom = {this.currentChatRoom}/>
+          { !users.user ?
+            null
+          : <UserList users = { users.users} /> }
+         {/*<UserList users = { this.props.usersReducer.users} /> */}
       </div>
     );
   }
@@ -84,4 +60,9 @@ const mapStateToProps = (state) => {
     chatRooms: state.chatRoomReducer
    };
 };
-export default connect(mapStateToProps)(LeftSide);
+
+const mapDispatchToProps = {
+  addNewRoom,
+  setUsers
+}
+export default connect(mapStateToProps,mapDispatchToProps)(LeftSide);

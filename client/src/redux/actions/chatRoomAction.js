@@ -1,11 +1,12 @@
 export const types = {
-  getChatRooms: "GET_CHATROOMS",
+  addNewRoom: "ADD_CHATROOM",
   setChatRooms: "SET_CHATROOMS"
 }
 
-// trae la lista de chat rooms
-export const getChatRooms = () => ({
-  type: types.getChatRooms
+// agrega nuevo chat room
+export const addNewRoom = payload => ({
+  type: types.addNewRoom,
+  payload,
 });
 
 // establece la lista de chat rooms

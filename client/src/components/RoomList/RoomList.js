@@ -11,7 +11,7 @@ const RoomList = (props) => (
     <nav>
       <ul className="navSalas">
         {props.chatRooms.map((sala, index) => (
-          <li key={index}>{sala.name}</li>
+          <li key={index} onClick={props.setCurrentChatRoom} id={sala._id}>{sala.name}</li>
         ))}
       </ul> 
     </nav>

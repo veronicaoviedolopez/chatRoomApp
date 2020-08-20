@@ -1,18 +1,12 @@
 export const types = {
   set: "SET_CURRENT_USER",
-  get: "GET_CURRENT_USER",
   setUsers: "SET_USERS",
 };
 
 // Asigna el User
-export const setCurrentUser = token => ({
+export const setCurrentUser = userLogged => ({
   type: types.set,
-  payload: token,
-});
-
-// trae el User logueado
-export const getCurrentUser = () => ({
-  type: types.get,
+  payload: userLogged,
 });
 
 // trae la lista de usuarios

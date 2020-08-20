@@ -12,7 +12,7 @@ const UserList = (props) => (
     <nav>
       <ul className="navUsers">
         {props.users.map((u, index) => (
-          <li key={index}>{u.username}</li>
+          <li key={index}>{u.name}</li>
         ))}
       </ul>
     </nav>

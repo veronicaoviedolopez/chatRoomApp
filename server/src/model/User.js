@@ -27,7 +27,7 @@ const userSchema = ({
   },
   chatRooms: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId, ref: 'ChatRoom',
     },
   ],
 });

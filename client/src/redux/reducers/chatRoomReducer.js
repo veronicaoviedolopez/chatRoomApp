@@ -2,7 +2,7 @@ import { types as chatRoomTypes } from "../actions/chatRoomAction";
 
 const initialState = {
   currentChatRoom: null,
-  chatRooms: [1, 2, 4, 5, 6]
+  chatRooms: null,
 };
 
 export default (state = initialState, { type, payload }) => {

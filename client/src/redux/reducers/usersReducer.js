@@ -3,25 +3,18 @@ import jwt from 'jsonwebtoken';
 
 const initialState = {
   isAuth: false,
-  user: {name: 'test'},
-  users: null
+  user: null,
+  users: []
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case userTypes.set:
-      console.log('entro al reducer');
-      const user = jwt.decode(payload)
-      localStorage.setItem('chatRoomJWT', payload);
+      localStorage.setItem('chatRoomJWT', payload.token);
       return {
         ...state,
         isAuth: true,
-        user,
-      };
-    case userTypes.get:
-      return {
-        ...state,
-        user: state.user,
+        user: payload.user,
       };
     case userTypes.setUsers:
       return {
