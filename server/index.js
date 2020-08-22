@@ -13,6 +13,7 @@ dotenv.config();
 
 // Start the server
 expressApp.use('/api', app);
+expressApp.use(express.static(__dirname +'/assets'));
 server.listen(process.env.port, () =>logger.info('Server up and running'));
 
 // Conect to DB

@@ -46,7 +46,7 @@ class LeftSide extends Component {
     const {user, users, chatRoom, chatRooms } = this.props;
     return (
       <div className="left-menu-container">
-        <UserMenu user={user.name} chatRoom= {chatRoom.name}/>
+        <UserMenu user={user}/>
         <RoomList setChatRoom={this.newChatRoom} chatRooms={chatRooms} setCurrentChatRoom = {this.currentChatRoom}/>
         <UserList users = { users} />
       </div>

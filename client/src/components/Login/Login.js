@@ -32,11 +32,11 @@ class Login extends Component {
     e.preventDefault();
     axios.post(`${constants.api}auth/login`, this.state)
       .then(response => {
-        const {_id, name, email, chatRooms} = response.data.user;
+        const {chatRooms, ...other} =  response.data.user
         this.props.setCurrentUser({
-          user: {_id, name, email},
-          chatRooms,
-          token: response.data.token
+          token: response.data.token,
+          chatRooms: chatRooms,
+          user: other,
         });
         addUserSession(response.data.token);
         toast.success("User Logged Succesfuly");

@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {constants} from '../../config/constants';
 import "./UserMenu.css";
 
 const UserMenu = (props) => (
   <div>
     <div className="datosUser">
-      <img src="/img/user-avatar.jpg" alt="" className="photo" />
+      <img src= {`${constants.IP_Server}/avatars/${props.user.avatar}`} alt="" className="photo" />
       {/* <img src={getImageFromServer(user.avatar)}></img> */}
-      <span> {props.user} </span>
+      <span> {props.user.name} </span>
     </div>
 
     <div>

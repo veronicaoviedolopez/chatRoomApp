@@ -1,5 +1,6 @@
 import { User } from '../../model/User';
 import bcrypt from 'bcryptjs';
+import { getRandomAvatar } from './getRandomAvatar';
 
 export default (req, res) => {
   // Hash passwords
@@ -9,6 +10,9 @@ export default (req, res) => {
       })
       .then((hashedPassword) => {
         req.body.password = hashedPassword;
+
+        // Asigna un avatar aleatorio
+        req.body.avatar = getRandomAvatar();
 
         // Create a newreq.body.password user
         return new User(req.body).save();

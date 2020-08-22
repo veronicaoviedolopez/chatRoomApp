@@ -25,6 +25,9 @@ const userSchema = ({
     type: Date,
     default: Date.now,
   },
+  avatar: {
+    type: String,
+  },
   chatRooms: [
     {
       type: mongoose.Schema.Types.ObjectId, ref: 'ChatRoom',
