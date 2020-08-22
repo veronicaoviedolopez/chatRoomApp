@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "../Login/LoginRegister.css";
 import { constants } from "../../config/constants";
@@ -7,7 +6,6 @@ import axios from 'axios';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-
 
 class Register extends Component {
   constructor(props) {
@@ -87,8 +85,7 @@ class Register extends Component {
         <div className="center">
           <label> Do you already have an account? </label>
           <Link className="link" to="/login">
-            {" "}
-            Log In{" "}
+            Log In
           </Link>
         </div>
         <ToastContainer autoClose={2000} />
@@ -97,8 +94,4 @@ class Register extends Component {
   }
 }
 
-
 export default Register;
-
-
-

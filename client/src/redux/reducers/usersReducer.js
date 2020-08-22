@@ -1,10 +1,11 @@
 import { types as userTypes } from "../actions/usersAction";
-import jwt from 'jsonwebtoken';
 
 const initialState = {
   isAuth: false,
-  user: null,
-  users: []
+  user: {},
+  users: [],
+  chatRoom: {},
+  chatRooms: [],
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -15,6 +16,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         isAuth: true,
         user: payload.user,
+        chatRooms: payload.chatRooms,
       };
     case userTypes.setUsers:
       return {
@@ -24,6 +26,16 @@ export default (state = initialState, { type, payload }) => {
     case userTypes.remove:
       localStorage.removeItem('chatRoomJWT');
       return initialState
+    case userTypes.addNewRoom:
+      return {
+        ...state,
+        chatRooms: [...state.chatRooms, payload],
+      };
+    case userTypes.setChatRoom:
+      return {
+        ...state,
+        chatRoom: payload,
+      };
     default:
       return state;
   }

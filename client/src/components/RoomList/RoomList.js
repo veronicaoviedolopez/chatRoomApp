@@ -17,10 +17,9 @@ const RoomList = (props) => (
     </nav>
   </div>
 );
-/*
-RoomList.PropTypes = {
-  chatRooms: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropType.number, PropType.string ]))
+
+RoomList.propTypes = {
+  chatRooms: PropTypes.array.isRequired
 }
-*/
+
 export default RoomList;
