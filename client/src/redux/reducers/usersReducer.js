@@ -11,7 +11,6 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case userTypes.set:
-      localStorage.setItem('chatRoomJWT', payload.token);
       return {
         ...state,
         isAuth: true,
@@ -24,7 +23,6 @@ export default (state = initialState, { type, payload }) => {
         users: payload,
       };
     case userTypes.remove:
-      localStorage.removeItem('chatRoomJWT');
       return initialState
     case userTypes.addNewRoom:
       return {

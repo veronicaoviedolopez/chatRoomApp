@@ -14,10 +14,9 @@ import { setUsers, addNewRoom, setChatRoom } from "../../redux/actions/usersActi
 
 class LeftSide extends Component { 
   currentChatRoom = e => {
-    const that = this.props;;
+    const that = this.props;
     axios.get(`${constants.api}chatroom/list/users/${e.target.id}`)
       .then(res =>  {
-        console.log(res);
         that.setUsers(res.data.users);
         that.setChatRoom({_id:res.data._id, name:res.data.name});
       })
@@ -44,10 +43,10 @@ class LeftSide extends Component {
   redireccionar = () => this.props.history.push("/login");
 
   render() {
-    const {user, users, chatRooms } = this.props;
+    const {user, users, chatRoom, chatRooms } = this.props;
     return (
       <div className="left-menu-container">
-        <UserMenu user={user.name} />
+        <UserMenu user={user.name} chatRoom= {chatRoom.name}/>
         <RoomList setChatRoom={this.newChatRoom} chatRooms={chatRooms} setCurrentChatRoom = {this.currentChatRoom}/>
         <UserList users = { users} />
       </div>
@@ -59,7 +58,8 @@ const mapStateToProps = (state) => {
   return { 
     user: state.user,
     users: state.users,
-    chatRooms: state.chatRooms
+    chatRooms: state.chatRooms,
+    chatRoom: state.chatRoom
   };
 };
 

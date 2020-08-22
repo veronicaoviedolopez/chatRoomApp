@@ -1,10 +1,10 @@
 import React from "react";
 import "./Header.css";
 
-const Header = () => (
+const Header = props => (
   <nav className="main-nav">
     <ul>
-      <li></li>
+      <li>{props.chatRoom_name}</li>
     </ul>
     <div>
       <button>LogOut</button>

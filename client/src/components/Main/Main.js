@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./main.css";
 
 import Header from "../Header/Header";
@@ -7,7 +8,7 @@ import LeftSide from "../LeftSide/LeftSide"
 
 
 
-export default class Main extends Component {
+class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -119,10 +120,17 @@ export default class Main extends Component {
       <div className="dashboard">
         <LeftSide />
         <div className="messages-area">
-          <Header />
+          <Header chatRoom_name = {this.props.chatRoom.name} />
           <MessageArea messages={this.state.messages} />
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    chatRoom: state.chatRoom
+  };
+};
+export default connect(mapStateToProps)(Main);

@@ -8,7 +8,7 @@ import { constants } from "../../config/constants";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import { setAuthToken } from "../../helpers/setAuthToken";
+import { addUserSession } from "../../helpers/userSessionInfo";
 
 class Login extends Component {
   constructor(props) {
@@ -38,8 +38,8 @@ class Login extends Component {
           chatRooms,
           token: response.data.token
         });
+        addUserSession(response.data.token);
         toast.success("User Logged Succesfuly");
-        setAuthToken(response.data.token);
         return this.props.history.push("/");
       })
       .catch(err => toast.error(err.response?.data));
