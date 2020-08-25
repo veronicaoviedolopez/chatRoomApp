@@ -41,6 +41,7 @@ export default (state = initialState, { type, payload }) => {
         messages: payload
       }
       case userTypes.addNewMessage:
+        console.log(payload);
         return {
           ...state,
           messages: [...state.messages, payload],

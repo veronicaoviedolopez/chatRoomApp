@@ -39,5 +39,5 @@ export const setMessages = payload => ({
 // Asigna nuevo mensaje
 export const addNewMessage = payload => ({
   type: types.addNewMessage,
-  payload ,
+  payload,
 });

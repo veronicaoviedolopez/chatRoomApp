@@ -8,7 +8,7 @@ export default (req, res) => {
             { $push: { messages: message._id } },
             { new: true, upsert: true, select: 'messages' });
       })
-      .then((r) => ChatRoom.find({ _id: r.messages[r.messages.length-1] }))
+      .then((r) => Message.find({ _id: r.messages[r.messages.length-1] }))
       .then((r)=> res.status(201).json(r))
       .catch((err) => res.status(400).send(err.message));
 };

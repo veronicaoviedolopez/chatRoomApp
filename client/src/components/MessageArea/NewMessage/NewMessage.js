@@ -3,7 +3,7 @@ import React from "react";
 const NewMessage = (props) => {
   const handleUserKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      props.onKeyPress(e.value);
+      props.onKeyPress(e.target.value);
     }
   };
 
