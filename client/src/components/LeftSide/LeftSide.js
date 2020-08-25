@@ -10,15 +10,16 @@ import RoomList from "../RoomList/RoomList";
 import UserMenu from "../UserMenu/UserMenu";
 import UserList from '../UserList/UserList';
 
-import { setUsers, addNewRoom, setChatRoom } from "../../redux/actions/usersAction";
+import { setUsers, addNewRoom, setChatRoom, setMessages } from "../../redux/actions/usersAction";
 
 class LeftSide extends Component { 
   currentChatRoom = e => {
     const that = this.props;
-    axios.get(`${constants.api}chatroom/list/users/${e.target.id}`)
+    axios.get(`${constants.api}chatroom/select/${e.target.id}`)
       .then(res =>  {
         that.setUsers(res.data.users);
         that.setChatRoom({_id:res.data._id, name:res.data.name});
+        that.setMessages(res.data.messages);
       })
       .catch(err => toast.error(err.response?.data))
   }
@@ -66,6 +67,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   addNewRoom,
   setUsers,
-  setChatRoom
+  setChatRoom,
+  setMessages
 }
 export default connect(mapStateToProps,mapDispatchToProps)(LeftSide);

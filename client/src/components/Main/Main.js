@@ -114,6 +114,9 @@ class Main extends Component {
       ],
     };
   }
+  sendMessage(e) {
+    console.log('envio mensaje', e);
+  }
 
   render() {
     return (
@@ -121,7 +124,7 @@ class Main extends Component {
         <LeftSide />
         <div className="messages-area">
           <Header chatRoom_name = {this.props.chatRoom.name} />
-          <MessageArea messages={this.state.messages} />
+          <MessageArea messages={this.state.messages} onKeyPress={this.sendMessage}/>
         </div>
       </div>
     );

@@ -10,11 +10,11 @@ const MessageArea = (props) => (
     <div className="messages-container">
       <MessageList messages={props.messages} />
     </div>
-      <NewMessage />
+      <NewMessage onKeyPress={props.onKeyPress} />
   </div>
 );
 
-MessageArea.propTypes = {
+/* MessageArea.propTypes = {
   optionalArrayOf: PropTypes.arrayOf(PropTypes.object)
-}
+} */
 export default MessageArea;

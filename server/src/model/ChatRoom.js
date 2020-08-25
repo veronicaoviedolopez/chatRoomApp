@@ -13,6 +13,12 @@ const chatRoomSchema = {
       required: true, ref: 'User',
     },
   ],
+  messages: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Message',
+    },
+  ],
 };
 
 export const ChatRoom = mongoose.model('ChatRoom', chatRoomSchema);
