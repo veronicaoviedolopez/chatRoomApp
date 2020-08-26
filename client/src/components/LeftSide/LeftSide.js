@@ -17,6 +17,7 @@ class LeftSide extends Component {
     const that = this.props;
     axios.get(`${constants.api}chatroom/select/${e.target.id}`)
       .then(res =>  {
+        console.log(res);
         that.setUsers(res.data.users);
         that.setChatRoom({_id:res.data._id, name:res.data.name});
         that.setMessages(res.data.messages);
