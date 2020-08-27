@@ -6,14 +6,16 @@ const NewMessage = (props) => {
       props.onKeyPress(e.target.value);
     }
   };
-
+  
   return (
     <textarea
       className="newMessage-container"
       type="text"
       rows="4"
+      maxLength = "200"
       placeholder="Escribe un mensaje"
       onKeyPress={handleUserKeyPress}
+      readOnly = {props.setReadonly}
     />
   );
 };

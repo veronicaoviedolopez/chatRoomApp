@@ -23,8 +23,8 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         users: payload,
       };
-    case userTypes.remove:
-      return initialState
+    case userTypes.reset:
+      return initialState;
     case userTypes.addNewRoom:
       return {
         ...state,
@@ -41,7 +41,6 @@ export default (state = initialState, { type, payload }) => {
         messages: payload
       }
       case userTypes.addNewMessage:
-        console.log(payload);
         return {
           ...state,
           messages: [...state.messages, payload],

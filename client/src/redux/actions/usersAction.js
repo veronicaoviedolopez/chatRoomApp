@@ -3,7 +3,9 @@ export const types = {
   setUsers: "SET_USERS",
   addNewRoom: "ADD_CHATROOM",
   setChatRoom: "SET_CURRENT_CHATROOM",
-  setMessages: "SET_MESSAGES"
+  setMessages: "SET_MESSAGES",
+  reset: "RESET_STORE",
+  addNewMessage: "ADD_NEW_MESSAGE"
 };
 
 // Asigna el User
@@ -40,4 +42,9 @@ export const setMessages = payload => ({
 export const addNewMessage = payload => ({
   type: types.addNewMessage,
   payload,
+});
+
+// LogOut and reset store
+export const logOut = () => ({
+  type: types.reset
 });

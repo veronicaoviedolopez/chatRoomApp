@@ -3,30 +3,35 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
+import moment from 'moment';
 import { constants } from "../../config/constants";
-import {addNewMessage} from '../../redux/actions/usersAction';
+import { addNewMessage, logOut } from '../../redux/actions/usersAction';
+import { removeUserSession } from '../../helpers/userSessionInfo'
 import "./main.css";
 
 import Header from "../Header/Header";
 import MessageArea from "../MessageArea/MessageArea";
+import WelcomeMessage from "../MessageArea/WelcomeMessage/WelcomeMessage";
 import LeftSide from "../LeftSide/LeftSide"
 
 class Main extends Component {
 
   sendMessage = message => {
-    const that = this;
     const msg = {
       message,
-      user_id: that.props.user._id,
-      chatroom_id: that.props.chatRoom._id
+      user_id: this.props.user._id,
+      chatroom_id: this.props.chatRoom._id
     };
+    
     axios.post(`${constants.api}chatroom/message/create`, msg)
-      .then(res => {
-        console.log('agrego mensaje')
-        console.log({...msg, date: Date.now})
-        return that.props.addNewMessage({...msg, date: Date.now});
-      })
+      .then(() => this.props.addNewMessage({...msg, date: new moment().utc()})
+      )
       .catch(err => toast.error(err.response?.data));
+  }
+
+  logOut = () => {
+    removeUserSession()
+    this.props.logOut();
   }
 
   render() {
@@ -34,8 +39,13 @@ class Main extends Component {
       <div className="dashboard">
         <LeftSide />
         <div className="messages-area">
-          <Header chatRoom_name = {this.props.chatRoom.name} />
-          <MessageArea messages= {this.props.messages} onKeyPress={this.sendMessage}/>
+          <Header chatRoom_name = {this.props.chatRoom.name} logOut={this.logOut}/>
+          { this.props.messages.length === 0 &&
+              <WelcomeMessage WithchatRooms = {this.props.chatRooms.length === 0} />
+          }
+          <MessageArea messages= {this.props.messages} 
+          onKeyPress={this.sendMessage} 
+          setReadonly = {this.props.chatRoom._id === undefined} />
           <ToastContainer autoClose={2000} />
         </div>
       </div>
@@ -47,12 +57,13 @@ const mapStateToProps = (state) => {
   return {
     chatRoom: state.chatRoom,
     user: state.user,
-    chatRoom: state.chatRoom,
+    chatRooms: state.chatRooms,
     messages: state.messages
   };
 };
 
 const mapDispatchToProps = {
-  addNewMessage
+  addNewMessage,
+  logOut
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

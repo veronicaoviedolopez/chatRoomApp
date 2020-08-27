@@ -9,7 +9,7 @@ export const addUserSession = token =>
     axios.defaults.headers.common['auth-token'] = token;
 }
 
-export const removeUserSession = token =>
+export const removeUserSession = () =>
 {
     // Remueve token al localStorage
     localStorage.removeItem('chatRoomJWT');

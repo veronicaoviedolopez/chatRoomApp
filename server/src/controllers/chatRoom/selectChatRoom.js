@@ -10,9 +10,6 @@ export default (req, res) => {
           path: 'user_id',
         },
       })
-      .then((x) => {
-        console.log(x);
-        res.json(x);
-      })
+      .then((x) => res.json(x))
       .catch((err) => res.json(err));
 };

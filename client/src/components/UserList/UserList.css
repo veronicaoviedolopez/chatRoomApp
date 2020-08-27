@@ -1,10 +1,13 @@
 .navUsers {
-  margin: 0;
-  padding: 0;
-  padding-inline-start: 0.5em;
+  margin: .5em 0;
+  padding-inline-start: 0em;
   list-style-type: none;
+  cursor: pointer;
 }
 
 .navUsers li:before {
   content: "@";
+  cursor: pointer;
+  padding: .3em;
+  margin: 0, 2em;
 }

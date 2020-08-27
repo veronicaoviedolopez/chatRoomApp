@@ -8,9 +8,9 @@ import NewMessage from "./NewMessage/NewMessage";
 const MessageArea = (props) => (
   <div className="messagesArea-container">
     <div className="messages-container">
-      <MessageList messages={props.messages} />
+      <MessageList messages={props.messages} WithchatRooms={props.WithchatRooms}/>
     </div>
-      <NewMessage onKeyPress={props.onKeyPress} />
+      <NewMessage setReadonly={props.setReadonly} onKeyPress={props.onKeyPress} />
   </div>
 );
 

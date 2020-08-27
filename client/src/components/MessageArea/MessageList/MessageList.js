@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import moment from 'moment';
+moment().format();
 
 const MessageList = (props) => (
   <div>
-    {
+      {
       props.messages.map((msg) => (
       <div key={msg._id} className="FlexRow">
         <img src="/img/user-avatar.jpg" alt="" className="photoMsg" />
@@ -11,7 +13,7 @@ const MessageList = (props) => (
           <div className="col-xs">
             <b> {msg.user_id.name} </b>
             <i className="date">
-              <small> {msg.date} </small>
+              <small> {moment(msg.date).fromNow()} </small>
             </i>
           </div>
           <span className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -19,8 +21,7 @@ const MessageList = (props) => (
           </span>
         </div>
       </div>
-     ))
-    }
+     ))}
   </div>
 );
 

@@ -12,11 +12,6 @@
     cursor: pointer;
   }
 
-  .tittle {
-    display: flex;
-    justify-content: space-between;
-  }
-
   .datosUser {
     display: flex;
     justify-content: flex-start;

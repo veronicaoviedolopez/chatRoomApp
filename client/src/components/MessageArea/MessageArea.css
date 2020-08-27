@@ -12,11 +12,11 @@
 }
 
 .newMessage-container {
-  background-color:#cfd8dc;
-  border: none;
   margin: 0;
   padding: 0;
-  height: 50px;
+  resize: none;
+  outline: none;
+  border-top: solid 2px #cfd8dc;;
 }
 
 /*
@@ -49,4 +49,10 @@
 
 .FlexRow  .width100 {
   width: 100%;
+}
+
+.welcomeMessage {
+  margin: 1em;
+  padding: 1em;
+  text-align: center;
 }

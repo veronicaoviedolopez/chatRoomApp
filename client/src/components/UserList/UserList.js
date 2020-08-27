@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
 const UserList = (props) => (
   <div>
     <div className="tittle">
-      <span> USUARIOS </span>
-      <span> + </span>
+      <span style={{width: "80%"}}> Users </span>
+      <div style={{width: "20%"}}> 
+        <span style={{cursor: "pointer"}} onClick={props.inviteUser}> + </span>
+      </div>
     </div>
 
     <nav>
@@ -20,7 +22,7 @@ const UserList = (props) => (
 );
 
 UserList.propTypes = {
-  chatRooms: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired
 }
 
 export default UserList;

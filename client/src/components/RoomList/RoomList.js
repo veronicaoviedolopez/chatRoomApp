@@ -5,8 +5,10 @@ import "./RoomList.css";
 const RoomList = (props) => (
   <div>
     <div className="tittle">
-      <span> SALAS DE CHAT </span>
-      <button onClick={props.setChatRoom}> + </button>
+     <span style={{width: "80%"}}> ChatRooms </span> 
+     <div style={{width: "20%"}}> 
+      <span style={{cursor: "pointer"}} onClick={props.setChatRoom}> + </span>
+     </div>
     </div>
     <nav>
       <ul className="navSalas">
