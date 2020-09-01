@@ -10,7 +10,7 @@ import RoomList from "../RoomList/RoomList";
 import UserMenu from "../UserMenu/UserMenu";
 import UserList from '../UserList/UserList';
 
-import { setUsers, addNewRoom, setChatRoom, setMessages } from "../../redux/actions/usersAction";
+import { setUsers, editCurrentUser, addNewRoom, setChatRoom, setMessages } from "../../redux/actions/usersAction";
 
 class LeftSide extends Component { 
   currentChatRoom = e => {
@@ -22,6 +22,41 @@ class LeftSide extends Component {
         that.setMessages(res.data.messages);
       })
       .catch(err => toast.error(err.response?.data))
+  }
+
+  editUsername = () => {
+    const that = this.props;
+    alertify.prompt('Chage Username', 'New Username:',that.user.username,
+    function(evt, username) {
+      axios.patch(`${constants.api}user/edit/${that.user._id}`, { username })
+      .then((resp) => {
+        that.editCurrentUser(resp.data);
+        alertify.success('Username Updated');
+      })
+      .catch((err) => alertify.error(err.response?.data))
+     },
+     () => {});
+  }
+
+
+  editPassword = () => {
+    const that = this.props;
+    alertify.prompt('Change Password', 'New Password:','',
+    function(evt, password) {
+      console.log(password);
+      alertify.prompt('Confirm Password', 'Confirm Password:','',
+      function(evt, passwordConfirmed) {
+        if(password != passwordConfirmed) {
+          return alertify.error('Passwords are different');
+        }
+          axios.patch(`${constants.api}user/edit/${that.user._id}`, { password })
+          .then((resp) => {
+            that.editCurrentUser(resp.data);
+            alertify.success('Password Updated');
+          })
+          .catch((err) => alertify.error(err.response?.data))
+      }, () => {}).set('type', 'password');
+    }, () => {}).set('type', 'password');
   }
 
   newChatRoom = () => {
@@ -57,7 +92,7 @@ alertify.confirm()
   .setting({
     'message': `Are you want to generate a link for invite users to chatroom <em> ${that.chatRoom.name}?</em> `,
     'onok': function(){ 
-      const link = `${constants.api}invite/user/${that.user._id}/chatroom/${that.chatRoom._id}`;
+      const link = `${constants.client}invite/user/${that.user._id}/chatroom/${that.chatRoom._id}`;
       navigator.clipboard.writeText(link)
       alertify.success('link Copied, now Paste & Share it');
   }
@@ -65,31 +100,16 @@ alertify.confirm()
   .setHeader('<strong> Invite User to ChatRoom </strong> ')
   .set('labels', {ok:'Yes, Copy link to clipboard', cancel:'No, Cancel'})
   .show();
-
-   /*  alertify.dialog('Invite User to ChatRoom',
-    function(){
-      return{
-        main:function(message){
-          this.message = "Are you want to generate a link for invite users to sala de chat XXX?";
-        },
-        setup:function(){
-            return { 
-              buttons:[{text: "Copy invite link", key:27}],
-              focus: { element:0 }
-            };
-        },
-        prepare:function(){
-          this.setContent(this.message);
-        }
-    }}); */
   }
   render() {
-    const {user, users, chatRooms } = this.props;
+    const {user, users, chatRooms, chatRoom } = this.props;
     return (
       <div className="left-menu-container">
-        <UserMenu user={user}/>
+        <UserMenu user={user} editUsername= {this.editUsername} editPassword= {this.editPassword} />
         <RoomList setChatRoom={this.newChatRoom} chatRooms={chatRooms} setCurrentChatRoom = {this.currentChatRoom}/>
-        <UserList inviteUser={this.inviteUser} users = { users} />
+        { this.props.chatRoom._id !== undefined &&
+          <UserList inviteUser={this.inviteUser} users = { users} />
+        }
       </div>
     );
   }
@@ -108,6 +128,7 @@ const mapDispatchToProps = {
   addNewRoom,
   setUsers,
   setChatRoom,
-  setMessages
+  setMessages,
+  editCurrentUser
 }
 export default connect(mapStateToProps,mapDispatchToProps)(LeftSide);

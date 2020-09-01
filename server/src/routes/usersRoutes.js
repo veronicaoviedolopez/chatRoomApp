@@ -9,12 +9,13 @@ import findUser from '../controllers/user/findUser';
 import addChatRoom from '../controllers/user/addChatRoom';
 import listChatRooms from '../controllers/user/listChatRooms';
 import registerValidation from '../middlewares/RegisterValidation';
+import infoInvite from '../controllers/user/InfoInvite';
 
 router.post('/create', [registerValidation, createUser]);
-router.patch('/edit/:id', [verify, editUser]);
+router.patch('/edit/:_id', [verify, editUser]);
 router.delete('/delete/:id', [verify, deleteUser]);
 router.get('/find/:id', [verify, findUser]);
 router.patch('/addChatRoom/:id', [verify, addChatRoom]);
 router.get('/list/chatrooms/:_id', [verify, listChatRooms]);
-
+router.get('/invite/:_id', infoInvite);
 export default router;

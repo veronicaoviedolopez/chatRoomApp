@@ -4,6 +4,7 @@ const NewMessage = (props) => {
   const handleUserKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       props.onKeyPress(e.target.value);
+      e.target.value ='';
     }
   };
   
@@ -11,7 +12,6 @@ const NewMessage = (props) => {
     <textarea
       className="newMessage-container"
       type="text"
-      rows="4"
       maxLength = "200"
       placeholder="Escribe un mensaje"
       onKeyPress={handleUserKeyPress}

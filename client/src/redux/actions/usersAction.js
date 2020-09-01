@@ -1,17 +1,24 @@
 export const types = {
   set: "SET_CURRENT_USER",
+  edit: "EDIT_CURRENT_USER",
   setUsers: "SET_USERS",
   addNewRoom: "ADD_CHATROOM",
   setChatRoom: "SET_CURRENT_CHATROOM",
   setMessages: "SET_MESSAGES",
   reset: "RESET_STORE",
-  addNewMessage: "ADD_NEW_MESSAGE"
+  addNewMessage: "ADD_NEW_MESSAGE",
 };
 
-// Asigna el User
+// Asigna el current User
 export const setCurrentUser = userLogged => ({
   type: types.set,
   payload: userLogged,
+});
+
+// Editar el current User
+export const editCurrentUser = payload => ({
+  type: types.edit,
+  payload,
 });
 
 // Asigna Usuarios de sala Seleccionada

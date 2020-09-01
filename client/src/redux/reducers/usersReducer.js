@@ -18,6 +18,11 @@ export default (state = initialState, { type, payload }) => {
         user: payload.user,
         chatRooms: payload.chatRooms,
       };
+      case userTypes.edit:
+      return {
+        ...state,
+        user: payload,
+      };
     case userTypes.setUsers:
       return {
         ...state,

@@ -13,9 +13,8 @@ import { addUserSession } from "../../helpers/userSessionInfo";
 class Login extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      name: "veronica",
+      username: "vero",
       password: "1234567",
     };
   }
@@ -51,16 +50,17 @@ class Login extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="form-tittle">Log In</div>
           <div className="form-row">
-            <label htmlFor="name"> Name </label>
+            <label htmlFor="username"> User name </label>
             <input
               autoFocus
               type="text"
               value={this.state.name}
               onChange={this.handleChange}
               required
-              id="name"
-              name="name"
-              placeholder="name"
+              id="username"
+              name="username"
+              placeholder="username"
+              maxLength="20"
             />
           </div>
           <div className="form-row">
@@ -72,17 +72,17 @@ class Login extends Component {
               required
               name="password"
               id="password"
+              maxLength="20"
             />
           </div>
           <div className="form-row">
-            <button type="submit">Login</button>
+            <button className="linkHover" type="submit">Login</button>
           </div>
         </form>
         <div className="center">
           <label> Do you don't have an account? </label>
-          <Link className="link" to="/register">
-            {" "}
-            Sign Up{" "}
+          <Link className="out_link linkHover" to="/register">
+            Sign Up
           </Link>
         </div>
         <ToastContainer autoClose={2000} />

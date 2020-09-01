@@ -7,24 +7,26 @@ const UserMenu = (props) => (
   <div>
     <div className="datosUser">
       <img src= {`${constants.IP_Server}/avatars/${props.user.avatar}`} alt="" className="photo" />
-      <span> {props.user.name} </span>
+       <span>
+        {props.user.firstname} - {props.user.lastname}   [{props.user.username}]
+      </span>  
     </div>
-
+   
     <div>
       <div className="tittle">
         <span> Menu </span>
       </div>
       <nav>
         <ul className="userMenu">
-          <li>
-              Editar Usuario
+          <li className="linkHover" onClick={props.editUsername}>
+              Edit Username
           </li>
-          <li>
-              Cambiar Contraseña
+          <li className="linkHover" onClick={props.editPassword}>
+              Change Password
           </li>
         </ul>
       </nav>
-    </div>
+    </div>  
   </div>
 );
 

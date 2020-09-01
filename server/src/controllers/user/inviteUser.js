@@ -3,18 +3,11 @@ import { User } from '../../model/User';
 
 export default async (req, res) => {
   try {
-    const c = await ChatRoom.findById(req.params.chatroom_id, 'name');
-    const u = await User.findById(req.params.user_id, 'name');
-
-  /*
-    res.write('<html>');
-    res.write('<head> <title> chat room invitation  </title> </head>');
-    res.write(`<body> Hello, You have a pending request  from  ${u.name}
-    <br/> to Chatroom: <em>${c.name}</em> <br/>  Are you agree? <br/> </body>`);
-    res.write('</html>');
-    */
-    // write end to mark it as stop for node js response.
-    return res.end();
+    await ChatRoom.findByIdAndUpdate(req.params.chatroom_id,
+        { $push: { users: req.params.user_id } });
+    await User.findByIdAndUpdate(req.params.user_id,
+        { $push: { chatRooms: req.params.chatroom_id } });
+    return res.sendStatus(201);
   } catch (err) {
     res.status(500).json(err);
   }

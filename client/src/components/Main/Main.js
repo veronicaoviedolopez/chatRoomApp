@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
-import moment from 'moment';
 import { constants } from "../../config/constants";
 import { addNewMessage, logOut } from '../../redux/actions/usersAction';
 import { removeUserSession } from '../../helpers/userSessionInfo'
@@ -21,17 +20,20 @@ class Main extends Component {
       message,
       user_id: this.props.user._id,
       chatroom_id: this.props.chatRoom._id
-    };
+    };  
     
     axios.post(`${constants.api}chatroom/message/create`, msg)
-      .then(() => this.props.addNewMessage({...msg, date: new moment().utc()})
-      )
+      .then(() => {
+        msg.user_id = this.props.user
+        this.props.addNewMessage({...msg});
+      })
       .catch(err => toast.error(err.response?.data));
   }
 
   logOut = () => {
     removeUserSession()
     this.props.logOut();
+    return this.props.history.push("/login");
   }
 
   render() {
@@ -40,7 +42,7 @@ class Main extends Component {
         <LeftSide />
         <div className="messages-area">
           <Header chatRoom_name = {this.props.chatRoom.name} logOut={this.logOut}/>
-          { this.props.messages.length === 0 &&
+          { this.props.chatRoom._id === undefined &&
               <WelcomeMessage WithchatRooms = {this.props.chatRooms.length === 0} />
           }
           <MessageArea messages= {this.props.messages} 

@@ -13,7 +13,7 @@
 
 .newMessage-container {
   margin: 0;
-  padding: 0;
+  padding: 10px;
   resize: none;
   outline: none;
   border-top: solid 2px #cfd8dc;;
@@ -45,6 +45,7 @@
 
 .FlexRow .date {
   color: grey;
+  font-size: x-small;
 }
 
 .FlexRow  .width100 {

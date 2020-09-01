@@ -3,7 +3,7 @@ import React from "react";
 export default (props) => {
     return (
     <div className="welcomeMessage"> 
-      <strong><h2>WELCOME TO CHATROOM APP</h2> </strong><br/> 
+      <strong><h2>Welcome To ChatRoom App</h2> </strong><br/> 
         { props.WithchatRooms?
         <h3> You have to add a new ChatRoom <br/><br/>
          In order to start a chat, You need to add a new chatRoom, invite people and then start to chat with them</h3>

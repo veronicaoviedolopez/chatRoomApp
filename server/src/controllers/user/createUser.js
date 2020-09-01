@@ -4,7 +4,7 @@ import { getRandomAvatar } from './getRandomAvatar';
 
 export default (req, res) => {
   // Hash passwords
-  bcrypt.genSalt(10)
+  bcrypt.genSalt(Number(process.env.numeroSalt))
       .then((salt) => {
         return bcrypt.hash(req.body.password, salt);
       })

@@ -9,15 +9,15 @@
   
   .userMenu li:before {
     content: ""; 
-    cursor: pointer;
   }
-
+  
   .datosUser {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     height: 3em;
     margin-top: .5em;
+    align-items: flex-end;
   }
   
   .photo {

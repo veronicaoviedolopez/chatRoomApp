@@ -3,9 +3,11 @@ import "./App.css";
 import Main from './components/Main/Main';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
+import InviteUser from './components/InviteUser/InviteUser';
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux'
 import store from './redux/store';
+import PrivateRoute from "./PrivateRoute";
 
 if(localStorage.token) {
   // decodear el token
@@ -20,10 +22,10 @@ function App() {
     <Provider store={ store }>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={ Main } />
+            <PrivateRoute exact path="/" component={ Main } />
             <Route exact path="/login" component={ Login } />
             <Route exact path="/register" component={ Register } />
-            <Route exact path="/invite/:id_user/room/:room_id" component={ Main } />
+            <Route path="/invite/user/:iduser/chatroom/:roomid" component={ InviteUser } />
           </Switch>
         </BrowserRouter>
       </Provider> 

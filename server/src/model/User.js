@@ -1,25 +1,30 @@
 import mongoose from 'mongoose';
 
 const userSchema = ({
-  name: {
+  firstname: {
     type: String,
-    required: true,
-    min: 6,
+    required: [true, 'Firstname field is required'],
+    min: 3,
     max: 50,
-    unique: [true, 'Name field is required'],
   },
-  email: {
+  lastname: {
     type: String,
-    required: true,
-    min: 6,
-    max: 100,
-    unique: [true, 'Email field is required'],
+    required: [true, 'Lastname field is required'],
+    min: 3,
+    max: 20,
+  },
+  username: {
+    type: String,
+    required: [true, 'Username field is required'],
+    min: 3,
+    max: 20,
+    unique: [true, 'Username field is unique'],
   },
   password: {
     type: String,
     required: true,
     min: 6,
-    max: 1024,
+    max: 20,
   },
   date: {
     type: Date,

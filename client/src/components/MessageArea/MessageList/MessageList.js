@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {constants} from '../../../config/constants';
+
 import moment from 'moment';
 moment().format();
 
@@ -8,13 +10,12 @@ const MessageList = (props) => (
       {
       props.messages.map((msg) => (
       <div key={msg._id} className="FlexRow">
-        <img src="/img/user-avatar.jpg" alt="" className="photoMsg" />
+        <img src={`${constants.IP_Server}/avatars/${msg.user_id.avatar}`} alt="" className="photoMsg" />
         <div className="row width100">
           <div className="col-xs">
-            <b> {msg.user_id.name} </b>
-            <i className="date">
-              <small> {moment(msg.date).fromNow()} </small>
-            </i>
+            <small> { `${msg.user_id.firstname} ${msg.user_id.lastname}`} </small> 
+            <i> <small> { ` [${msg.user_id.username}] `} </small> </i>
+            <span className="date"> { `  ${ moment(msg.date).fromNow()}`} </span>
           </div>
           <span className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             {msg.message}

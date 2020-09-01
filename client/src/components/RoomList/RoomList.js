@@ -5,15 +5,15 @@ import "./RoomList.css";
 const RoomList = (props) => (
   <div>
     <div className="tittle">
-     <span style={{width: "80%"}}> ChatRooms </span> 
-     <div style={{width: "20%"}}> 
-      <span style={{cursor: "pointer"}} onClick={props.setChatRoom}> + </span>
+     <span style={{width: "90%"}}> ChatRooms </span> 
+     <div style={{width: "10%"}}> 
+      <span className="linkHover" onClick={props.setChatRoom}> + </span>
      </div>
     </div>
     <nav>
       <ul className="navSalas">
         {props.chatRooms.map((sala, index) => (
-          <li key={index} onClick={props.setCurrentChatRoom} id={sala._id}>{sala.name}</li>
+          <li className="linkHover" key={index} onClick={props.setCurrentChatRoom} id={sala._id}>{sala.name}</li>
         ))}
       </ul> 
     </nav>

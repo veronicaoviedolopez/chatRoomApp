@@ -4,14 +4,14 @@ import jwt from 'jsonwebtoken';
 
 export default (req, res) => {
   // Checking if the user exists
-  User.findOne({ name: req.body.name }).populate('chatRooms')
+  User.findOne({ username: req.body.username }).populate('chatRooms')
       .then((user) => {
         if (!user) {
           return res.status(404).send('User dont exist');
         }
         // Checking if the password is correct
         bcrypt.compare(req.body.password, user.password).then((result) => {
-          if (res) {
+          if (result) {
             req.body.password = null;
             // Create and assign a token
             const token = jwt.sign(req.body, process.env.JWTSecret);

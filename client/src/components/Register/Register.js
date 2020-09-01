@@ -11,8 +11,9 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      email: "",
+      username: "",
+      firstname: "",
+      lastname: "",
       password: "",
     };
   }
@@ -38,32 +39,47 @@ class Register extends Component {
   render() {
     return (
       <div className="wrapper">
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-tittle">New User</div>
+        <form  onSubmit={this.handleSubmit}>
+          <div className="form-tittle">Sign Up</div>
           <div className="form-row">
-            <label htmlFor="name"> Name </label>
+            <label htmlFor="name"> User name </label>
             <input
               autoFocus
               type="text"
-              value={this.state.name}
+              value={this.state.username}
               onChange={this.handleChange}
               required
-              id="name"
-              name="name"
+              id="username"
+              name="username"
+              maxLength="20"
             />
           </div>
 
           <div className="form-row">
-            <label htmlFor="email"> Email </label>
+          <label htmlFor="firstname"> First name </label>
             <input
               autoFocus
-              type="email"
-              value={this.state.email}
+              type="text"
+              value={this.state.firstname}
               onChange={this.handleChange}
               required
-              id="email"
-              name="email"
-              placeholder="email"
+              id="firstname"
+              name="firstname"
+              maxLength="20"
+            />
+          </div>
+
+          <div className="form-row">
+          <label htmlFor="lastname"> Last name </label>
+            <input
+              autoFocus
+              type="text"
+              value={this.state.lastname}
+              onChange={this.handleChange}
+              required
+              id="lastname"
+              name="lastname"
+              maxLength="20"
             />
           </div>
 
@@ -76,15 +92,16 @@ class Register extends Component {
               required
               name="password"
               id="password"
+              maxLength="20"
             />
           </div>
           <div className="form-row">
-            <button type="submit"> Sign Up </button>
+            <button className="linkHover" type="submit"> Sign Up </button>
           </div>
         </form>
-        <div className="center">
+        <div>
           <label> Do you already have an account? </label>
-          <Link className="link" to="/login">
+          <Link className="out_link linkHover" to="/login">
             Log In
           </Link>
         </div>
