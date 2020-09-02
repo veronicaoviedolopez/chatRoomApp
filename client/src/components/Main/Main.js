@@ -33,7 +33,6 @@ class Main extends Component {
   logOut = () => {
     removeUserSession()
     this.props.logOut();
-    return this.props.history.push("/login");
   }
 
   render() {
