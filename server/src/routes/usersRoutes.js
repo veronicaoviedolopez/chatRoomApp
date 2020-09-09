@@ -17,5 +17,5 @@ router.delete('/delete/:id', [verify, deleteUser]);
 router.get('/find/:id', [verify, findUser]);
 router.patch('/addChatRoom/:id', [verify, addChatRoom]);
 router.get('/list/chatrooms/:_id', [verify, listChatRooms]);
-router.get('/invite/:_id', infoInvite);
+router.get('/invite/:_id/chatroom/:_idchatroom', infoInvite);
 export default router;

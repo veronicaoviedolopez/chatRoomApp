@@ -68,14 +68,15 @@ class LeftSide extends Component {
         users: [that.user._id]
       })
       .then((res) => {
-        that.addNewRoom(...res.data);
-        that.setUsers([{_id: that.user._id, name: that.user.name}]);
-        that.setChatRoom({_id: res.data[0]._id, name: name});
+        that.addNewRoom(res.data);
+        that.setUsers(res.data.users);
+        that.setChatRoom({_id: res.data._id, name: name});
+        that.setMessages(res.data.messages);
         alertify.success('Ok: ' + name)
       })
-      .catch((err) => alertify.error(err.response?.data))
+      .catch((err) => toast.error(err.response?.data))
      },
-    () => {});
+    (err) =>  toast.error(err));
   }
 
   redireccionar = () => this.props.history.push("/login");

@@ -14,8 +14,9 @@ export default (req, res) => {
           if (result) {
             req.body.password = null;
             // Create and assign a token
-            const token = jwt.sign(req.body, process.env.JWTSecret);
             user.password = null;
+            const token = jwt.sign({ ...req.body, _id: user._id },
+                process.env.JWTSecret);
             return res.status(200).json({ token, user });
           } else {
             return res.status(401).send('Username or password is wrong');

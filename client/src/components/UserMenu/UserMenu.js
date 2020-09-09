@@ -8,7 +8,7 @@ const UserMenu = (props) => (
     <div className="datosUser">
       <img src= {`${constants.IP_Server}/avatars/${props.user.avatar}`} alt="" className="photo" />
        <span>
-        {props.user.firstname} - {props.user.lastname}   [{props.user.username}]
+        {props.user.firstname} {props.user.lastname}  <i><small>{ ` [${props.user.username}]` }</small></i>
       </span>  
     </div>
    

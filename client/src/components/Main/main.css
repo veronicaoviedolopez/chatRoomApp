@@ -20,3 +20,16 @@ body {
 .linkHover:hover {
   opacity: 1;
 }
+
+.text-capitalize {
+  text-transform: capitalize;
+  text-align: center;
+  font-size: x-large;
+}
+.divOkCancel {
+  width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
