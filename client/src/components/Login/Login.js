@@ -1,22 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import "./LoginRegister.css";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { setCurrentUser } from "../../redux/actions/usersAction";
 import { constants } from "../../config/constants";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { addUserSession, getJwt } from "../../helpers/userSessionInfo";
+import { Link } from "react-router-dom";
+
+import "react-toastify/dist/ReactToastify.css";
+import "./LoginRegister.css";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "veronica",
-      password: "1234567",
+      username: "",
+      password: "",
     };
   }
 
