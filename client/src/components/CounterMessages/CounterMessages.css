@@ -1,0 +1,8 @@
+.div-msg-counter {
+    background-color: red;
+    border-radius: 50px;
+    color: white;
+    font-size: smaller;
+    width: 30px;
+    text-align: center;
+}

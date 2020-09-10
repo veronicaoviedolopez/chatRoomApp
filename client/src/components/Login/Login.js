@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
+
 import { setCurrentUser } from "../../redux/actions/usersAction";
 import { constants } from "../../config/constants";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
-import { addUserSession, getJwt } from "../../helpers/userSessionInfo";
+import { addUserSession } from "../../helpers/userSessionInfo";
 import { Link } from "react-router-dom";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -19,32 +19,6 @@ class Login extends Component {
       username: "",
       password: "",
     };
-  }
-
-  componentDidMount() {
-    const token = getJwt();
-    if (token) {
-      var decoded = jwt_decode(token);
-      addUserSession(token);
-      axios
-        .post(`${constants.api}auth/token`, decoded)
-        .then((response) => {
-          const { chatRooms, ...other } = response.data.user;
-           this.props.setCurrentUser({
-              token,
-              chatRooms,
-              user: other,
-            });
-          toast.success("User Logged Succesfuly");
-          return this.props.history.push("/");
-        })
-        .catch((err) => toast.error(err.response?.data));
-      // decodear el token
-      // enviar el usuario al storage (redux) => Store.dispatch(setCurrentUser(decoded.user));
-
-      // enviar el TOKEN al endpoint nuevo para validarlo /api/token/validate
-      // si no es valido borrar el usuario actual del storage
-    }
   }
 
   // Bindea los inputs con el estado

@@ -15,6 +15,8 @@ import { setUsers, editCurrentUser, addNewRoom, setChatRoom, setMessages } from 
 class LeftSide extends Component { 
   currentChatRoom = e => {
     const that = this.props;
+    if(that.chatRoom._id === e.target.id)
+      return;
     axios.get(`${constants.api}chatroom/select/${e.target.id}`)
       .then(res =>  {
         that.setUsers(res.data.users);
@@ -35,7 +37,7 @@ class LeftSide extends Component {
       })
       .catch((err) => alertify.error(err.response?.data))
      },
-     () => {});
+     () => {}).set('type', 'text');
   }
 
 
@@ -43,19 +45,12 @@ class LeftSide extends Component {
     const that = this.props;
     alertify.prompt('Change Password', 'New Password:','',
     function(evt, password) {
-      console.log(password);
-      alertify.prompt('Confirm Password', 'Confirm Password:','',
-      function(evt, passwordConfirmed) {
-        if(password != passwordConfirmed) {
-          return alertify.error('Passwords are different');
-        }
           axios.patch(`${constants.api}user/edit/${that.user._id}`, { password })
           .then((resp) => {
             that.editCurrentUser(resp.data);
             alertify.success('Password Updated');
           })
           .catch((err) => alertify.error(err.response?.data))
-      }, () => {}).set('type', 'password');
     }, () => {}).set('type', 'password');
   }
 
@@ -76,7 +71,7 @@ class LeftSide extends Component {
       })
       .catch((err) => toast.error(err.response?.data))
      },
-    (err) =>  toast.error(err));
+    (err) =>  toast.error(err)).set('type', 'text');
   }
 
   redireccionar = () => this.props.history.push("/login");

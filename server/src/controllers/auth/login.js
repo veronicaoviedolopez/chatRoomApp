@@ -7,7 +7,7 @@ export default (req, res) => {
   User.findOne({ username: req.body.username }).populate('chatRooms')
       .then((user) => {
         if (!user) {
-          return res.status(404).send('User dont exist');
+          return res.status(404).send('Login -> User dont exist');
         }
         // Checking if the password is correct
         bcrypt.compare(req.body.password, user.password).then((result) => {

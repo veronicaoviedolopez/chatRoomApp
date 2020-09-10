@@ -5,7 +5,7 @@ export default (req, res) => {
   User.findOne({ username: req.body.username }).populate('chatRooms')
       .then((user) => {
         if (!user) {
-          return res.status(404).send('User dont exist');
+          return res.status(404).send('Session -> User dont exist');
         }
         user.password = null;
         return res.status(200).json({ user });

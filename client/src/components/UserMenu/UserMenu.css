@@ -10,6 +10,9 @@
   .userMenu li:before {
     content: ""; 
   }
+  .userMenu li:active {
+    color: yellow;
+  }
   
   .datosUser {
     display: flex;

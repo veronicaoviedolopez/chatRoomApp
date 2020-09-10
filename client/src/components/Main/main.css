@@ -13,13 +13,16 @@ body {
   overflow: hidden;
 }
 
-.linkHover {
-  opacity: 0.7;
-  cursor: pointer;
-}
 .linkHover:hover {
-  opacity: 1;
+ color: #49a09d
 }
+ .linkHover:active {
+	color: #49a09d;
+}
+.linkHover:visited {
+	color: #49a09d;
+}
+
 
 .text-capitalize {
   text-transform: capitalize;

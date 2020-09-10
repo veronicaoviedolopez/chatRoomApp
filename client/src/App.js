@@ -1,17 +1,60 @@
 import React, { Component } from "react";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
+import { Switch, Route, BrowserRouter, Redirect  } from "react-router-dom";
+import { connect } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Main from "./components/Main/Main";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import InviteUser from "./components/InviteUser/InviteUser";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
-import { Provider } from 'react-redux'
-import store from './redux/store';
+import { addUserSession, getJwt, removeUserSession } from "./helpers/userSessionInfo";
+import { setCurrentUser } from "./redux/actions/usersAction";
+import { constants } from "./config/constants";
+import store from "./redux/store";
 
-export default () => {
+class App extends Component {
+  constructor(props) {
+    super(props); 
+  }
+  componentDidMount() {
+    const token = getJwt();
+    if (token) {
+      var decoded = jwt_decode(token);
+      addUserSession(token);
+      
+      axios
+        .post(`${constants.api}auth/token`, decoded)
+        .then((response) => {
+          const { chatRooms, ...other } = response.data.user;
+          store.dispatch(setCurrentUser({
+            token,
+            chatRooms,
+            user: other,
+          }));
+        })
+        .catch((err) => {
+          removeUserSession();
+          toast.error(err.response?.data);
+        });
+      // decodear el token
+      // enviar el usuario al storage (redux) => Store.dispatch(setCurrentUser(decoded.user));
+
+      // enviar el TOKEN al endpoint nuevo para validarlo /api/token/validate
+      // si no es valido borrar el usuario actual del storage
+    }
+  }
+
+  render() {
+   /*  if (this.props.isAuth != true) {
+      return <Redirect to='/'/>
+    } */
     return (
-      <Provider store={store}>
         <BrowserRouter>
           <Switch>
             <PrivateRoute exact path="/" component={Main} />
@@ -21,8 +64,22 @@ export default () => {
               path="/invite/user/:iduser/chatroom/:roomid"
               component={InviteUser}
             />
-          </Switch>
+          </Switch>        
+          <ToastContainer autoClose={2000} />
         </BrowserRouter>
-      </Provider>
+
     );
+  }
 }
+
+const mapStateToProps = (state) => {
+    return {
+      isAuth: state.isAuth
+    };
+};
+
+const mapDispatchToProps = {
+  setCurrentUser,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
