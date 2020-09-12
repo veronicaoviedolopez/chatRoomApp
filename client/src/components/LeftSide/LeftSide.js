@@ -9,7 +9,6 @@ import { constants } from '../../config/constants';
 import RoomList from "../RoomList/RoomList";
 import UserMenu from "../UserMenu/UserMenu";
 import UserList from '../UserList/UserList';
-
 import { setUsers, editCurrentUser, addNewRoom, setChatRoom, setMessages } from "../../redux/actions/usersAction";
 
 class LeftSide extends Component { 

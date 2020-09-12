@@ -1,8 +1,22 @@
 .div-msg-counter {
-    background-color: red;
-    border-radius: 50px;
+    background-color: #ff00006b;
     color: white;
     font-size: smaller;
-    width: 30px;
+    width: 10px;
     text-align: center;
+    margin-left: 5px;
+    padding-bottom: 0px;
+    border: 1px solid red;
+    padding: 3px;
+    border-radius: 50px 10px;
+    animation-name: example;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
 }
+
+
+@keyframes example {
+    0%   {background-color: #ff00006b; width: 10px;}
+    25%  {background-color: red;  width: 13px;}
+    100% {background-color: #ff00006b;}
+  }

@@ -2,9 +2,7 @@ import React from "react";
 import "./CounterMessages.css";
 
 const CounterMessages = props => (
-    <div className="div-msg-counter">
-      <span> {props.count} </span>
-    </div>
+    <span className="div-msg-counter"> {props.count} </span>
 );
 
 export default CounterMessages;
