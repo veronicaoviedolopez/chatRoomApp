@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
+
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import { constants } from "../../config/constants";
@@ -12,10 +13,29 @@ import Header from "../Header/Header";
 import MessageArea from "../MessageArea/MessageArea";
 import WelcomeMessage from "../MessageArea/WelcomeMessage/WelcomeMessage";
 import LeftSide from "../LeftSide/LeftSide"
+ import {initSocket} from '../../helpers/sockets';
+
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      socket: null,
+      connected: false,
+      message: ''
+    };
+  }
+
+  componentWillMount() {
+    const socket = initSocket();
+    this.setState({socket});
+  }
 
   sendMessage = message => {
+    const {socket} = this.state;
+    if (message == "" && !socket.connected)
+      return;
+
     const msg = {
       message,
       user_id: this.props.user._id,
@@ -26,11 +46,14 @@ class Main extends Component {
       .then(() => {
         msg.user_id = this.props.user
         this.props.addNewMessage({...msg});
+        socket.emit("new message", {...msg});
       })
       .catch(err => toast.error(err.response?.data));
   }
 
   logOut = () => {
+    const {socket} = this.state;
+    socket.emit("disconnection");
     removeUserSession()
     this.props.logOut();
   }

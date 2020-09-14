@@ -33,10 +33,7 @@ io.on('connection', (socket) => {
   socket.on('new message', (data) => {
     // we tell the client to execute 'new message'
     console.log('new message', data);
-    socket.broadcast.emit('new message', {
-      username: socket.username,
-      message: data.message,
-    });
+    socket.broadcast.emit('new message', data);
   });
 
   // when the client emits 'add user', this listens and executes
@@ -73,17 +70,18 @@ io.on('connection', (socket) => {
   });
 
   // when the user disconnects.. perform this
-  socket.on('disconnect', () => {
-    console.log('disconected user', addedUser);
+  socket.on('disconnection', () => {
+    console.log('disconected user');
     if (addedUser) {
       --numUsers;
-      socket.emit('disconected');
+      socket.emit('disconected', socket.disconnected);
       // echo globally that this client has left
       socket.broadcast.emit('user left', {
         username: socket.username,
         numUsers: numUsers,
       });
     }
+    socket.disconnect();
   });
 
 /* io.on('connection', (socket) => {
