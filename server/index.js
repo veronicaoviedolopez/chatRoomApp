@@ -92,6 +92,14 @@ io.on('connection', (socket) => {
     socket.disconnect();
   });
 
+  socket.on('disconnect', () => {
+    // socket.rooms === {};
+    // socket.rooms == null;
+    // socket.rooms == {};
+    // delete socket.rooms;
+    // console.log(io.sockets);
+  });
+
 /* io.on('connection', (socket) => {
   socket.join('game');
   socket.to('game').emit('nice game');

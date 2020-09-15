@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-export const addUserSession = token =>
-{
+export const addUserSession = token => {
     // Agrega token al localStorage
     localStorage.setItem('chatRoomJWT', token);
 
@@ -9,8 +8,7 @@ export const addUserSession = token =>
     axios.defaults.headers.common['auth-token'] = token;
 }
 
-export const removeUserSession = () =>
-{
+export const removeUserSession = () => {
     // Remueve token al localStorage
     localStorage.removeItem('chatRoomJWT');
 

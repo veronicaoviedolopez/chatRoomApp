@@ -18,37 +18,34 @@ import { setCurrentUser } from "./redux/actions/usersAction";
 import { constants } from "./config/constants";
 import store from "./redux/store";
 
-class App extends Component {
-  constructor(props) {
-    super(props); 
-  }
-  componentDidMount() {
-    const token = getJwt();
-    if (token) {
-      var decoded = jwt_decode(token);
-      addUserSession(token);
-      
-      axios
-        .post(`${constants.api}auth/token`, decoded)
-        .then((response) => {
-          const { chatRooms, ...other } = response.data.user;
-          store.dispatch(setCurrentUser({
-            token,
-            chatRooms,
-            user: other,
-          }));
-        })
-        .catch((err) => {
-          removeUserSession();
-          toast.error(err.response?.data);
-        });
-      // decodear el token
-      // enviar el usuario al storage (redux) => Store.dispatch(setCurrentUser(decoded.user));
+const token = getJwt();
+if (token) {
+  var decoded = jwt_decode(token);
+  addUserSession(token);
+  store.dispatch(setCurrentUser(decoded));
 
-      // enviar el TOKEN al endpoint nuevo para validarlo /api/token/validate
-      // si no es valido borrar el usuario actual del storage
-    }
-  }
+  axios
+    .post(`${constants.api}auth/token`, decoded)
+    .then((response) => {
+      const { chatRooms, ...other } = response.data.user;
+      store.dispatch(setCurrentUser({
+        token,
+        chatRooms,
+        user: other,
+      }));
+    })
+    .catch((err) => {
+      removeUserSession();
+      toast.error(err.response?.data);
+    });
+  // decodear el token
+  // enviar el usuario al storage (redux) => Store.dispatch(setCurrentUser(decoded.user));
+
+  // enviar el TOKEN al endpoint nuevo para validarlo /api/token/validate
+  // si no es valido borrar el usuario actual del storage
+}
+
+class App extends Component {
 
   render() {
    /*  if (this.props.isAuth != true) {
