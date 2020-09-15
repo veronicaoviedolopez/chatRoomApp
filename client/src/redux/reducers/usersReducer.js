@@ -7,6 +7,7 @@ const initialState = {
   chatRoom: {},
   chatRooms: [],
   messages: [],
+  socket: {}
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -45,11 +46,16 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         messages: payload
       }
-      case userTypes.addNewMessage:
-        return {
-          ...state,
-          messages: [...state.messages, payload],
-        }
+    case userTypes.addNewMessage:
+      return {
+        ...state,
+        messages: [...state.messages, payload],
+      }
+    case userTypes.setSocket:
+      return {
+        ...state,
+         socket: payload,
+      };
     default:
       return state;
   }

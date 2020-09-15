@@ -4,16 +4,12 @@ import { addNewMessage } from '../redux/actions/usersAction';
 import { constants } from "../config/constants";
 
 export const initSocket = () => {
-  let yourID = null;
-  let messages = [];
   let connected = false;
   var newState = store.getState();
   let socket = io.connect(constants.IP_Server);
+  
   socket.on("your id", (id) => {
-    //setState({yourID: id});
-    yourID = id;
     console.log("User connected to socketID:", id);
-    socket.emit("add user", newState.user.username);
   });
 
   socket.on("new message", (message) => {
@@ -26,12 +22,12 @@ export const initSocket = () => {
   });
 
   socket.on("user joined", (data) => {
-    console.log(data.username + " joined");
+    console.log(data.username + " joined", socket);
     addParticipantsMessage(data);
   });
 
   socket.on("login", (data) => {
-    connected = true; // this.setState({ connected : true});
+    connected = true;
     // Display the welcome message
     var message = "Welcome to Socket.IO Chat – ";
     console.log(message, "NumUsers Conected:", data.numUsers);
@@ -55,7 +51,6 @@ export const initSocket = () => {
   socket.on("reconnect", () => {
     console.log("you have been reconnected");
     if (newState.user.username) {
-      //if (this.props.user.username) {
       socket.emit("add user", newState.user.username);
     }
   });
@@ -65,10 +60,8 @@ export const initSocket = () => {
   });
 
   socket.on("disconected", (status) => {
-    console.log(
-      "user has been disconnected to the socket, socket.connected = ",
-      status
-    );
+    connected = false;
+    console.log("user has been disconnected to the socket ", status);
   });
 
   const addParticipantsMessage = (data) => {
@@ -83,11 +76,7 @@ export const initSocket = () => {
 
   const receivedMessage = (msg) => {
     store.dispatch(addNewMessage(msg));
-    /*this.setState({
-      messages:  [...this.state.messages, message]
-    }) */
   };
 
   return socket;
 };
-//store.subscribe(initSocket);

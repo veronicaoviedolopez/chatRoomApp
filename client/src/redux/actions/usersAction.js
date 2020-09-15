@@ -7,6 +7,7 @@ export const types = {
   setMessages: "SET_MESSAGES",
   reset: "RESET_STORE",
   addNewMessage: "ADD_NEW_MESSAGE",
+  setSocket: "SET_SOCKET"
 };
 
 // Asigna el current User
@@ -55,3 +56,9 @@ export const addNewMessage = payload => ({
 export const logOut = () => ({
   type: types.reset
 });
+
+// Asigna el Socket de la sala de ChatRoom seleccionada
+export const setSocket = payload => ({
+  type: types.setSocket,
+  payload
+})

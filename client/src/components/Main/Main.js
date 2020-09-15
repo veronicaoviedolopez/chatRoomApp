@@ -5,7 +5,7 @@ import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import { constants } from "../../config/constants";
-import { addNewMessage, logOut } from '../../redux/actions/usersAction';
+import { addNewMessage, logOut, setSocket } from '../../redux/actions/usersAction';
 import { removeUserSession } from '../../helpers/userSessionInfo'
 import "./main.css";
 
@@ -13,26 +13,14 @@ import Header from "../Header/Header";
 import MessageArea from "../MessageArea/MessageArea";
 import WelcomeMessage from "../MessageArea/WelcomeMessage/WelcomeMessage";
 import LeftSide from "../LeftSide/LeftSide"
- import {initSocket} from '../../helpers/sockets';
-
+import {initSocket} from '../../helpers/sockets';
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      socket: null,
-      connected: false,
-      message: ''
-    };
-  }
-
   componentWillMount() {
-    const socket = initSocket();
-    this.setState({socket});
+    this.props.setSocket(initSocket());
   }
-
   sendMessage = message => {
-    const {socket} = this.state;
+    const {socket} = this.props;
     if (message == "" && !socket.connected)
       return;
 
@@ -43,17 +31,21 @@ class Main extends Component {
     };  
     
     axios.post(`${constants.api}chatroom/message/create`, msg)
-      .then(() => {
+      .then((res) => {
         msg.user_id = this.props.user
-        this.props.addNewMessage({...msg});
-        socket.emit("new message", {...msg});
+        console.log('nueo mensaje del server', res.data)
+        this.props.addNewMessage({...res.data});
+        socket.emit("new message", {...res.data});
       })
       .catch(err => toast.error(err.response?.data));
   }
 
   logOut = () => {
-    const {socket} = this.state;
-    socket.emit("disconnection");
+    const {socket} = this.props;
+    console.log(socket);
+    if(Object.entries(socket).length !== 0)
+      socket.emit("disconnection");
+    
     removeUserSession()
     this.props.logOut();
   }
@@ -88,6 +80,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addNewMessage,
-  logOut
+  logOut,
+  setSocket
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

@@ -25,34 +25,42 @@ ConnectionToDB()
 let numUsers = 0;
 
 io.on('connection', (socket) => {
-  console.log('se conectaron al socket');
+  console.log('se conectaron al socket', socket.id);
   let addedUser = false;
   socket.emit('your id', socket.id);
 
-  // when the client emits 'new message', this listens and executes
-  socket.on('new message', (data) => {
-    // we tell the client to execute 'new message'
-    console.log('new message', data);
-    socket.broadcast.emit('new message', data);
+  socket.on('enter to room', (data) => {
+    socket.leaveAll();
+    socket.join('room '+ data.chatroom, () => {
+      const rooms = Object.keys(socket.rooms);
+      console.log(data.username, rooms);
+      if (addedUser) return;
+      // we store the username in the socket session for this client
+      socket.username = data.username;
+      ++numUsers;
+      addedUser = true;
+      socket.emit('login', {
+        numUsers,
+      });
+      // echo globally (all clients) that a person has connected
+      io.to('room '+ data.chatroom).emit('user joined', {
+        username: data.username,
+        numUsers,
+      });
+    });
   });
 
-  // when the client emits 'add user', this listens and executes
-  socket.on('add user', (username) => {
-    console.log('add user', username);
-    if (addedUser) return;
+  socket.on('disconnecting', () => {
+    const rooms = Object.keys(socket.rooms);
+    // the rooms array contains at least the socket ID
+  });
 
-    // we store the username in the socket session for this client
-    socket.username = username;
-    ++numUsers;
-    addedUser = true;
-    socket.emit('login', {
-      numUsers: numUsers,
-    });
-    // echo globally (all clients) that a person has connected
-    socket.broadcast.emit('user joined', {
-      username: socket.username,
-      numUsers: numUsers,
-    });
+  // when the client emits 'new message', this listens and executes
+  socket.on('new message', (data) => {
+    console.log('new message', data);
+    // we tell the client to execute 'new message'
+    console.log('data.chatroom_id', data.chatroom_id);
+    socket.to('room '+ data.chatroom_id).emit('new message', data);
   });
 
   // when the client emits 'typing', we broadcast it to others

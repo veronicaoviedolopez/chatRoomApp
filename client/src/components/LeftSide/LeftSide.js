@@ -9,9 +9,10 @@ import { constants } from '../../config/constants';
 import RoomList from "../RoomList/RoomList";
 import UserMenu from "../UserMenu/UserMenu";
 import UserList from '../UserList/UserList';
-import { setUsers, editCurrentUser, addNewRoom, setChatRoom, setMessages } from "../../redux/actions/usersAction";
+import { setUsers, editCurrentUser, addNewRoom, 
+  setChatRoom, setMessages } from "../../redux/actions/usersAction";
 
-class LeftSide extends Component { 
+class LeftSide extends Component {
   currentChatRoom = e => {
     const that = this.props;
     if(that.chatRoom._id === e.target.id)
@@ -21,6 +22,9 @@ class LeftSide extends Component {
         that.setUsers(res.data.users);
         that.setChatRoom({_id:res.data._id, name:res.data.name});
         that.setMessages(res.data.messages);
+        that.socket.emit('enter to room', {
+          username: that.user.username, 
+          chatroom: res.data._id})
       })
       .catch(err => toast.error(err.response?.data))
   }
@@ -115,7 +119,8 @@ const mapStateToProps = (state) => {
     user: state.user,
     users: state.users,
     chatRooms: state.chatRooms,
-    chatRoom: state.chatRoom
+    chatRoom: state.chatRoom,
+    socket: state.socket
   };
 };
 
