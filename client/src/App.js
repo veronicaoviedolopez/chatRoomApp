@@ -14,15 +14,26 @@ import Register from "./components/Register/Register";
 import InviteUser from "./components/InviteUser/InviteUser";
 import PrivateRoute from "./PrivateRoute";
 import { addUserSession, getJwt, removeUserSession } from "./helpers/userSessionInfo";
-import { setCurrentUser } from "./redux/actions/usersAction";
+import { setCurrentUser, setUserToken } from "./redux/actions/usersAction";
 import { constants } from "./config/constants";
 import store from "./redux/store";
 
 const token = getJwt();
+let decoded = null;
 if (token) {
-  var decoded = jwt_decode(token);
+  try {
+    decoded = jwt_decode(token);
+  }
+  catch(err) {
+    removeUserSession();
+    toast.error(err.message);
+  }
+}
+  
+if (decoded) {
+  console.log(decoded);
   addUserSession(token);
-  store.dispatch(setCurrentUser(decoded));
+  store.dispatch(setUserToken(decoded));
 
   axios
     .post(`${constants.api}auth/token`, decoded)

@@ -7,13 +7,20 @@ export const types = {
   setMessages: "SET_MESSAGES",
   reset: "RESET_STORE",
   addNewMessage: "ADD_NEW_MESSAGE",
-  setSocket: "SET_SOCKET"
+  setSocket: "SET_SOCKET",
+  setUserToken: "SET_USER_TOKEN"
 };
 
 // Asigna el current User
 export const setCurrentUser = userLogged => ({
   type: types.set,
   payload: userLogged,
+});
+
+// Asigna el token User
+export const setUserToken = payload => ({
+  type: types.setUserToken,
+  payload,
 });
 
 // Editar el current User

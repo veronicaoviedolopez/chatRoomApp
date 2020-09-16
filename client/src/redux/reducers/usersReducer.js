@@ -56,6 +56,12 @@ export default (state = initialState, { type, payload }) => {
         ...state,
          socket: payload,
       };
+      case userTypes.setUserToken:
+        return {
+          ...state,
+          user: payload,
+          isAuth: true,
+        };
     default:
       return state;
   }
