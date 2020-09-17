@@ -10,7 +10,7 @@ import RoomList from "../RoomList/RoomList";
 import UserMenu from "../UserMenu/UserMenu";
 import UserList from '../UserList/UserList';
 import { setUsers, editCurrentUser, addNewRoom, 
-  setChatRoom, setMessages } from "../../redux/actions/usersAction";
+  setChatRoom, setMessages, resetCountNewMessages } from "../../redux/actions/usersAction";
 
 class LeftSide extends Component {
   currentChatRoom = e => {
@@ -22,9 +22,7 @@ class LeftSide extends Component {
         that.setUsers(res.data.users);
         that.setChatRoom({_id:res.data._id, name:res.data.name});
         that.setMessages(res.data.messages);
-        that.socket.emit('enter to room', {
-          username: that.user.username, 
-          chatroom: res.data._id})
+        that.resetCountNewMessages(res.data._id)
       })
       .catch(err => toast.error(err.response?.data))
   }
@@ -120,7 +118,6 @@ const mapStateToProps = (state) => {
     users: state.users,
     chatRooms: state.chatRooms,
     chatRoom: state.chatRoom,
-    socket: state.socket
   };
 };
 
@@ -129,6 +126,7 @@ const mapDispatchToProps = {
   setUsers,
   setChatRoom,
   setMessages,
-  editCurrentUser
+  editCurrentUser,
+  resetCountNewMessages
 }
 export default connect(mapStateToProps,mapDispatchToProps)(LeftSide);

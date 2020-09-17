@@ -24,7 +24,10 @@ const RoomList = (props) => (
           onClick={props.setCurrentChatRoom}
           id={sala._id}>
           {sala.name}
-          <sup key={index}><CounterMessages count={+99} /></sup>
+          <sup key={index}>
+            {sala.count !== undefined  &&
+            <CounterMessages count={sala.count} />}
+          </sup>
         </li>
       ))}
     </ul>

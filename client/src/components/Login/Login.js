@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
-import { setCurrentUser } from "../../redux/actions/usersAction";
+import { setCurrentUser, setSocket } from "../../redux/actions/usersAction";
 import { constants } from "../../config/constants";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import { addUserSession } from "../../helpers/userSessionInfo";
 import { Link } from "react-router-dom";
-
+import {initSocket} from '../../helpers/sockets'
 import "react-toastify/dist/ReactToastify.css";
 import "./LoginRegister.css";
 
@@ -16,8 +16,8 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: null,
-      password: null,
+      username: "",
+      password: "1234567",
     };
   }
 
@@ -41,6 +41,7 @@ class Login extends Component {
           user: other,
         });
         addUserSession(response.data.token);
+        this.props.setSocket(initSocket());
         toast.success("User Logged Succesfuly");
         return this.props.history.push("/");
       })
@@ -98,6 +99,7 @@ class Login extends Component {
 
 const mapDispatchToProps = {
   setCurrentUser,
+  setSocket
 };
 
 export default connect(null, mapDispatchToProps)(Login);

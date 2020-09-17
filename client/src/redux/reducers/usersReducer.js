@@ -62,6 +62,22 @@ export default (state = initialState, { type, payload }) => {
           user: payload,
           isAuth: true,
         };
+      case userTypes.setCountNewMessages:
+        const chatroom = state.chatRooms.find(chatroom => chatroom._id === payload)
+        return {
+          ...state,
+          chatRooms: [...state.chatRooms.filter(p => p!== chatroom), 
+            { ...chatroom, count: chatroom.count ? ++chatroom.count : 1}]
+        };
+        case userTypes.resetCountNewMessages:
+          const chat = state.chatRooms.find(chatroom => chatroom._id === payload)
+          console.log('chat', chat);
+          delete chat.count; 
+          return {
+            ...state,
+            chatRooms: [...state.chatRooms.filter(p => p!== chat), 
+              { ...chat}]
+          }
     default:
       return state;
   }

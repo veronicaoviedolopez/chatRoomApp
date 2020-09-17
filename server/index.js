@@ -26,28 +26,21 @@ let numUsers = 0;
 
 io.on('connection', (socket) => {
   console.log('se conectaron al socket', socket.id);
-  let addedUser = false;
-  socket.emit('your id', socket.id);
+  socket.emit('login', {
+    numUsers: ++numUsers,
+    id: socket.id,
+  });
+
+  socket.on('notifyAllThatIamConnected', (data) => {
+    socket.broadcast.emit('user joined', {
+      username: data,
+      numUsers,
+    });
+  });
 
   socket.on('enter to room', (data) => {
-    socket.leaveAll();
-    socket.join('room '+ data.chatroom, () => {
-      const rooms = Object.keys(socket.rooms);
-      console.log(data.username, rooms);
-      if (addedUser) return;
-      // we store the username in the socket session for this client
-      socket.username = data.username;
-      ++numUsers;
-      addedUser = true;
-      socket.emit('login', {
-        numUsers,
-      });
-      // echo globally (all clients) that a person has connected
-      io.to('room '+ data.chatroom).emit('user joined', {
-        username: data.username,
-        numUsers,
-      });
-    });
+    socket.username = data.username;
+    socket.join('room '+ data.chatroom);
   });
 
   socket.on('disconnecting', () => {
@@ -63,41 +56,18 @@ io.on('connection', (socket) => {
     socket.to('room '+ data.chatroom_id).emit('new message', data);
   });
 
-  // when the client emits 'typing', we broadcast it to others
-  socket.on('typing', () => {
-    socket.broadcast.emit('typing', {
-      username: socket.username,
-    });
-  });
-
-  // when the client emits 'stop typing', we broadcast it to others
-  socket.on('stop typing', () => {
-    socket.broadcast.emit('stop typing', {
-      username: socket.username,
-    });
-  });
-
   // when the user disconnects.. perform this
   socket.on('disconnection', () => {
-    console.log('disconected user');
-    if (addedUser) {
-      --numUsers;
-      socket.emit('disconected', socket.disconnected);
-      // echo globally that this client has left
-      socket.broadcast.emit('user left', {
-        username: socket.username,
-        numUsers: numUsers,
-      });
-    }
-    socket.disconnect();
-  });
-
-  socket.on('disconnect', () => {
-    // socket.rooms === {};
-    // socket.rooms == null;
-    // socket.rooms == {};
-    // delete socket.rooms;
-    // console.log(io.sockets);
+    console.log('disconnection');
+    --numUsers;
+    socket.leaveAll();
+    // echo globally that this client has left
+    socket.broadcast.emit('user left', {
+      username: socket.username,
+      numUsers: numUsers,
+    });
+    socket.disconnect(true);
+    console.log('disconnect', socket.disconnected);
   });
 
 /* io.on('connection', (socket) => {

@@ -4,4 +4,5 @@ export const constants = {
   numeroSalt: 10,
   IP_Server: 'http://localhost:3001',
   client: 'http://localhost:3000/',
+  newMessageSound: "/sound/piece-of-cake.mp3"
 };

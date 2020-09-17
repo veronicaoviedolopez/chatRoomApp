@@ -1,48 +1,54 @@
 import store from "../redux/store";
 import io from "socket.io-client";
-import { addNewMessage } from '../redux/actions/usersAction';
+import { addNewMessage, setCountNewMessages } from '../redux/actions/usersAction';
 import { constants } from "../config/constants";
 
 export const initSocket = () => {
   let connected = false;
-  var newState = store.getState();
-  let socket = io.connect(constants.IP_Server);
-  
-  socket.on("your id", (id) => {
-    console.log("User connected to socketID:", id);
+  let newState = store.getState();
+  let socket = io(constants.IP_Server);
+
+  const newMessageAudio = new Audio(constants.newMessageSound);
+
+  socket.emit("notifyAllThatIamConnected", newState.user.username);
+
+  socket.on("login", (data) => {
+    connected = true;
+    console.log("WELCOME to SOCKET.IO ", data.id);
+    console.log("NumUsers Conected ", data.numUsers);
+    newState.chatRooms.map(x => {
+      socket.emit('enter to room', {
+        username: newState.user.username, 
+        chatroom: x._id})
+    });
   });
 
-  socket.on("new message", (message) => {
-    console.log("new message", message);
-    receivedMessage(message);
+  socket.on("user joined", (data) => {
+    console.log(data.username + " joined");
+    addParticipantsMessage(data);
   });
 
   socket.on("user left", (data) => {
     console.log("user left", data);
   });
 
-  socket.on("user joined", (data) => {
-    console.log(data.username + " joined", socket);
-    addParticipantsMessage(data);
+  socket.on("new message", (message) => {
+    console.log("new message", message);
+    newState = store.getState();
+    console.log('newState.chatRoom', newState.chatRoom);
+    console.log('message.chatroom_id',message.chatroom_id);
+    console.log(newState.chatRoom._id === undefined ||  newState.chatRoom._id != message.chatroom_id);
+
+    if(newState.chatRoom._id === undefined ||  newState.chatRoom._id != message.chatroom_id){
+      store.dispatch(setCountNewMessages(message.chatroom_id));
+    }
+    else {
+      receivedMessage(message);
+      newMessageAudio.play();
+    }
   });
 
-  socket.on("login", (data) => {
-    connected = true;
-    // Display the welcome message
-    var message = "Welcome to Socket.IO Chat – ";
-    console.log(message, "NumUsers Conected:", data.numUsers);
-  });
 
-  // Whenever the server emits 'typing', show the typing message
-  socket.on("typing", (data) => {
-    console.log("typing", data.username);
-  });
-
-  socket.on("stop typing", (data) => {
-    console.log("stop typing", data.username);
-  });
-
-  // Whenever the server emits 'user left', log it in the chat body
   socket.on("user left", (data) => {
     console.log(data.username + " left");
     addParticipantsMessage(data);
@@ -50,19 +56,15 @@ export const initSocket = () => {
 
   socket.on("reconnect", () => {
     console.log("you have been reconnected");
-    if (newState.user.username) {
-      socket.emit("add user", newState.user.username);
-    }
   });
 
   socket.on("reconnect_error", () => {
     console.log("attempt to reconnect has failed");
   });
 
-  socket.on("disconected", (status) => {
-    connected = false;
-    console.log("user has been disconnected to the socket ", status);
-  });
+  socket.on("disconnect", () => {
+    console.log('disconnect')
+  })
 
   const addParticipantsMessage = (data) => {
     var message = "";
