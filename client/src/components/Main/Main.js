@@ -13,11 +13,10 @@ import Header from "../Header/Header";
 import MessageArea from "../MessageArea/MessageArea";
 import WelcomeMessage from "../MessageArea/WelcomeMessage/WelcomeMessage";
 import LeftSide from "../LeftSide/LeftSide"
-
+import {socket} from '../../helpers/sockets'
 
 class Main extends Component {
   sendMessage = message => {
-    const {socket} = this.props;
     if (message == "" && !socket.connected)
       return;
 
@@ -37,10 +36,8 @@ class Main extends Component {
   }
 
   logOut = () => {
-    const {socket} = this.props;
     if(Object.entries(socket).length !== 0)
       socket.emit("disconnection");
-    
     removeUserSession()
     this.props.logOut();
   }
@@ -70,7 +67,6 @@ const mapStateToProps = (state) => {
     user: state.user,
     chatRooms: state.chatRooms,
     messages: state.messages,
-    socket: state.socket
   };
 };
 

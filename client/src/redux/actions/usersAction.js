@@ -7,7 +7,6 @@ export const types = {
   setMessages: "SET_MESSAGES",
   reset: "RESET_STORE",
   addNewMessage: "ADD_NEW_MESSAGE",
-  setSocket: "SET_SOCKET",
   setUserToken: "SET_USER_TOKEN",
   setCountNewMessages: "SET_COUNT_NEW_MESSAGES",
   resetCountNewMessages: "RESET_COUNT_NEW_MESSAGES"
@@ -66,11 +65,6 @@ export const logOut = () => ({
   type: types.reset
 });
 
-// Asigna el Socket de la sala de ChatRoom seleccionada
-export const setSocket = payload => ({
-  type: types.setSocket,
-  payload
-})
 
 // Actualiza contador de mensajes sin visualizar por chatroom
 export const setCountNewMessages = payload => ({

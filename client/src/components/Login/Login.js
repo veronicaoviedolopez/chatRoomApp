@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
-import { setCurrentUser, setSocket } from "../../redux/actions/usersAction";
+import { setCurrentUser } from "../../redux/actions/usersAction";
 import { constants } from "../../config/constants";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
@@ -17,9 +17,11 @@ class Login extends Component {
     super(props);
     this.state = {
       username: "",
-      password: "1234567",
+      password: "123456",
     };
   }
+
+  addUserTochatRoom = (userid) => axios.get(`${constants.api}invite/user/${userid}/chatroom/${this.props.match.params.roomid}`)
 
   // Bindea los inputs con el estado
   handleChange = (event) => {
@@ -34,16 +36,34 @@ class Login extends Component {
     axios
       .post(`${constants.api}auth/login`, this.state)
       .then((response) => {
-        const { chatRooms, ...other } = response.data.user;
-        this.props.setCurrentUser({
-          token: response.data.token,
-          chatRooms,
-          user: other,
-        });
-        addUserSession(response.data.token);
-        this.props.setSocket(initSocket());
-        toast.success("User Logged Succesfuly");
-        return this.props.history.push("/");
+        let { chatRooms, ...other } = response.data.user;
+         addUserSession(response.data.token);
+
+        if(this.props.match.params?.iduser || this.props.match.params?.roomid){
+          this.addUserTochatRoom(other._id).then((res) => {
+            toast.success("User added to chatroom");
+            chatRooms.push(res.data);
+            this.props.setCurrentUser({
+              token: response.data.token,
+              chatRooms,
+              user: other,
+            });
+            initSocket();
+            toast.success("User Logged Succesfuly");
+            return this.props.history.push("/");
+          })
+          .catch(() => {}); 
+        }
+        else{
+          this.props.setCurrentUser({
+            token: response.data.token,
+            chatRooms,
+            user: other,
+          });
+          initSocket();
+          toast.success("User Logged Succesfuly");
+          return this.props.history.push("/");
+        }
       })
       .catch((err) => toast.error(err.response?.data));
   };
@@ -98,8 +118,7 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = {
-  setCurrentUser,
-  setSocket
+  setCurrentUser
 };
 
 export default connect(null, mapDispatchToProps)(Login);

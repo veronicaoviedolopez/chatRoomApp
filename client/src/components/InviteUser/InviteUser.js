@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import { connect } from "react-redux";
 import { constants } from "../../config/constants";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { addUserSession, getJwt } from "../../helpers/userSessionInfo";
+import { addNewRoom } from "../../redux/actions/usersAction";
 
 class InviteUser extends Component {
   constructor(props) {
@@ -15,52 +17,49 @@ class InviteUser extends Component {
       user: {},
       isLoading: false,
       chatRoom: {},
+      token: null,
     };
   }
   componentDidMount() {
-    this.setState({ isLoading: true, userAdded: false });
+    this.setState({ isLoading: true, userAdded: false, token: getJwt()});
     axios
       .get(
         `${constants.api}user/invite/${this.props.match.params.iduser}/chatroom/${this.props.match.params.roomid}`
       )
-      .then((res) =>
+      .then((res) => {
+        if (this.state.token !== null){
+          addUserSession(this.state.token);
+        }
         this.setState({
           user: res.data,
           isLoading: false,
           chatRoom: res.data.chatRooms[0],
-        })
+        }) 
+      }
       )
       .catch(() => {});
   }
 
   addUserTochatRoom = () => {
-    this.setState({ isLoading: true, userAdded: false });
-    const token = getJwt();
-    if (token) {
-      var decoded = jwt_decode(token);
-      console.log('decoded', decoded);
-      addUserSession(token);
+      this.setState({ isLoading: true, userAdded: false });
+      var decoded = jwt_decode(this.state.token);
       axios
         .get(
           `${constants.api}invite/user/${decoded._id}/chatroom/${this.props.match.params.roomid}`
         )
         .then((res) => {
           toast.success("User Added Succesfuly");
+          this.props.addNewRoom(res.data);
           this.setState({ isLoading: false, userAdded: true });
         })
-        .catch(() => {});
-    }
-    else {
-      console.log('sin token')
-      return toast.info("You need to login first");
-    }
-    
+        .catch(() => {}); 
   }
   render() {
-    const { user, isLoading, chatRoom, userAdded } = this.state;
+    const { user, isLoading, chatRoom, userAdded, token } = this.state;
     if (isLoading) {
       return <p>Loading ...</p>;
-    }
+    }  
+    
     if (userAdded) {
       return (
         <div className="wrapper">
@@ -90,23 +89,30 @@ class InviteUser extends Component {
           </span>
         </div>
         <br />
-        Do you want to be added to the chat room
+        Do you want to be added to the chat room 
         <div className="text-capitalize">{chatRoom.name}</div>
+        {token == null &&
+          <div>
+            <h4>NOTE: You need to login first, Would you like be redirected
+              to login page and set a session?
+            </h4>
+          </div>
+        }
+
         <br />
         <div className="divOkCancel">
-          <button
+          { token == null ?
+            <Link className="out_link linkHover" to={`/login/invite/user/${this.props.match.params.iduser}/chatroom/${this.props.match.params.roomid}`}>
+              Ok
+            </Link>
+            :
+            <button
             className="linkHover"
             style={{ width: "100px", opacity: "0.5", margin: "10px" }}
-            onClick={this.addUserTochatRoom}
-          >
+            onClick={this.addUserTochatRoom}>
             Ok
           </button>
-          <button
-            className="linkHover"
-            style={{ width: "100px", opacity: "0.5", margin: "10px" }}
-          >
-            Cancel
-          </button>
+          }
         </div>
         <ToastContainer autoClose={2000} />
       </div>
@@ -114,4 +120,9 @@ class InviteUser extends Component {
   }
 }
 
-export default InviteUser;
+
+const mapDispatchToProps = {
+  addNewRoom,
+}
+
+export default connect(null,mapDispatchToProps)(InviteUser);

@@ -3,11 +3,13 @@ import io from "socket.io-client";
 import { addNewMessage, setCountNewMessages } from '../redux/actions/usersAction';
 import { constants } from "../config/constants";
 
+export let socket = {}
+
 export const initSocket = () => {
   let connected = false;
   let newState = store.getState();
-  let socket = io(constants.IP_Server);
-
+  // socket = io(constants.IP_Server);
+  var socket = io(constants.IP_Server,{transports: ['websocket'], upgrade: false});
   const newMessageAudio = new Audio(constants.newMessageSound);
 
   socket.emit("notifyAllThatIamConnected", newState.user.username);
@@ -15,7 +17,6 @@ export const initSocket = () => {
   socket.on("login", (data) => {
     connected = true;
     console.log("WELCOME to SOCKET.IO ", data.id);
-    console.log("NumUsers Conected ", data.numUsers);
     newState.chatRooms.map(x => {
       socket.emit('enter to room', {
         username: newState.user.username, 
@@ -24,7 +25,7 @@ export const initSocket = () => {
   });
 
   socket.on("user joined", (data) => {
-    console.log(data.username + " joined");
+    console.log("user joined", data);
     addParticipantsMessage(data);
   });
 

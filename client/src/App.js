@@ -14,14 +14,15 @@ import Register from "./components/Register/Register";
 import InviteUser from "./components/InviteUser/InviteUser";
 import PrivateRoute from "./PrivateRoute";
 import { addUserSession, getJwt, removeUserSession } from "./helpers/userSessionInfo";
-import { setCurrentUser, setUserToken, setSocket } from "./redux/actions/usersAction";
+import { setCurrentUser, setUserToken } from "./redux/actions/usersAction";
 import { constants } from "./config/constants";
 import store from "./redux/store";
-import {initSocket} from './helpers/sockets';
+import {initSocket, socket} from './helpers/sockets';
 const token = getJwt();
 
 if (token) {
   try {
+    console.log('hay token')
     const decoded = jwt_decode(token);
     addUserSession(token);
     store.dispatch(setUserToken(decoded));
@@ -33,7 +34,7 @@ if (token) {
           chatRooms,
           user: other,
         }));
-        store.dispatch(setSocket(initSocket()));
+        initSocket();
     })
     .catch((err) => {
       removeUserSession();
@@ -54,6 +55,7 @@ class App extends Component {
           <Switch>
             <PrivateRoute exact path="/" component={Main} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/login/invite/user/:iduser/chatroom/:roomid" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route
               path="/invite/user/:iduser/chatroom/:roomid"
@@ -74,8 +76,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  setCurrentUser,
-  setSocket
+  setCurrentUser
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

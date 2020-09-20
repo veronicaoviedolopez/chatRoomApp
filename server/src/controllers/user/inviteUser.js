@@ -7,7 +7,7 @@ export default async (req, res) => {
     // Validate if user exists
     // Validate if user is already in the chatroom
 
-    await ChatRoom.findOneAndUpdate({
+    const chatroom = await ChatRoom.findOneAndUpdate({
       _id: req.params.chatroom_id,
       users: {
         '$ne': req.params.user_id,
@@ -18,6 +18,7 @@ export default async (req, res) => {
       },
     }, {
       new: true,
+      populate: 'user_id',
     });
     await User.findOneAndUpdate({
       _id: req.params.user_id,
@@ -29,7 +30,7 @@ export default async (req, res) => {
         chatRooms: req.params.chatroom_id,
       },
     });
-    return res.sendStatus(201);
+    return res.status(201).json(chatroom);
   } catch (err) {
     res.status(500).json(err);
   }
