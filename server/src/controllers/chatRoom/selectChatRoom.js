@@ -7,7 +7,7 @@ export default (req, res) => {
         path: 'messages',
         populate: {
           path: 'user_id',
-          select: 'username firstname lastname, avatar',
+          select: 'username firstname lastname avatar',
         },
       })
       .then((x) => res.json(x))

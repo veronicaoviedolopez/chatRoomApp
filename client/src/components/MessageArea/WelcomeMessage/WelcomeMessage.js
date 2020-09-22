@@ -11,6 +11,6 @@ export default (props) => {
         <h3> Select a ChatRoom  <br/> <br/>
          Send and receive messages in a chatRoom, you can share it with all user into the chatroom</h3>
         }
-        <img src="/img/human-chain.png" style={{width:"250px", height:"250px", opacity:"0.5"}}></img>
+        <img alt="logo" src="/img/human-chain.png" style={{width:"250px", height:"250px", opacity:"0.5"}}></img>
    </div>);
   }

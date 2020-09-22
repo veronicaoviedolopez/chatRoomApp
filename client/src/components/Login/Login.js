@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
+import { Redirect } from "react-router-dom";
+
 import { setCurrentUser } from "../../redux/actions/usersAction";
 import { constants } from "../../config/constants";
 import { ToastContainer } from "react-toastify";
@@ -11,6 +13,7 @@ import { Link } from "react-router-dom";
 import {initSocket} from '../../helpers/sockets'
 import "react-toastify/dist/ReactToastify.css";
 import "./LoginRegister.css";
+
 
 class Login extends Component {
   constructor(props) {
@@ -38,7 +41,6 @@ class Login extends Component {
       .then((response) => {
         let { chatRooms, ...other } = response.data.user;
          addUserSession(response.data.token);
-
         if(this.props.match.params?.iduser || this.props.match.params?.roomid){
           this.addUserTochatRoom(other._id).then((res) => {
             toast.success("User added to chatroom");
@@ -69,6 +71,10 @@ class Login extends Component {
   };
 
   render() {
+    if (this.props.isAuth === true) {
+      return <Redirect to='/' />
+    }
+
     return (
       <div className="wrapper">
         <form onSubmit={this.handleSubmit}>
@@ -117,8 +123,13 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.isAuth
+  };
+};
 const mapDispatchToProps = {
   setCurrentUser
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

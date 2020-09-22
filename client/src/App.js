@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import { Switch, Route, BrowserRouter, Redirect  } from "react-router-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
@@ -22,7 +22,6 @@ const token = getJwt();
 
 if (token) {
   try {
-    console.log('hay token')
     const decoded = jwt_decode(token);
     addUserSession(token);
     store.dispatch(setUserToken(decoded));
@@ -34,15 +33,16 @@ if (token) {
           chatRooms,
           user: other,
         }));
-        initSocket();
+        if(socket == null)
+          initSocket();
     })
     .catch((err) => {
-      removeUserSession();
       toast.error(err.response?.data);
-      console.log('error token')
+      console.log('error token', err)
     });
   }
   catch(err) {
+    console.log('error token2', err)
     removeUserSession();
     toast.error(err.message);
   }
@@ -53,7 +53,7 @@ class App extends Component {
     return (
         <BrowserRouter>
           <Switch>
-            <PrivateRoute exact path="/" component={Main} />
+            <PrivateRoute exact path="/" isAuth={this.props.isAuth} component={Main} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/login/invite/user/:iduser/chatroom/:roomid" component={Login} />
             <Route exact path="/register" component={Register} />
@@ -63,8 +63,8 @@ class App extends Component {
             />
           </Switch>        
           <ToastContainer autoClose={2000} />
-        </BrowserRouter>
 
+        </BrowserRouter>
     );
   }
 }

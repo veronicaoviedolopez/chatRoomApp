@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import axios from "axios";
 import alertify from 'alertifyjs';
 import { toast } from "react-toastify";
+import {Helmet} from "react-helmet";
+
 import "./LeftSide.css";
 import { constants } from '../../config/constants';
 
@@ -100,6 +102,7 @@ alertify.confirm()
   }
   render() {
     const {user, users, chatRooms, chatRoom } = this.props;
+    const tittle = ".:. ChatRoom App .:.";
     return (
       <div className="left-menu-container">
         <UserMenu user={user} editUsername= {this.editUsername} editPassword= {this.editPassword} />
@@ -107,6 +110,14 @@ alertify.confirm()
         { this.props.chatRoom._id !== undefined &&
           <UserList inviteUser={this.inviteUser} users = { users} />
         }
+        <Helmet>
+          <title>
+            {this.props.chatRoom._id !== undefined ?
+             `chatRoom ${chatRoom.name} ${chatRoom.count !== undefined ? '(' + this.props.count + ')' : ''}` : 
+             `${tittle} ${chatRooms.reduce((count, c) => count + (c.count !== undefined ? c.count : 0), 0)} messages`}
+          </title>
+          <meta name="title" content={chatRoom._id !== undefined ? chatRoom.name : tittle} />
+        </Helmet>
       </div>
     );
   }

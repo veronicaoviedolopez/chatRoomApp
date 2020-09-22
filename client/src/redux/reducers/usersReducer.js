@@ -65,7 +65,6 @@ export default (state = initialState, { type, payload }) => {
         };
         case userTypes.resetCountNewMessages:
           const chat = state.chatRooms.find(chatroom => chatroom._id === payload)
-          console.log('chat', chat);
           delete chat.count; 
           return {
             ...state,

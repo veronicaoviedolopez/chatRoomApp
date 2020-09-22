@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
+
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import { constants } from "../../config/constants";
@@ -17,7 +18,7 @@ import {socket} from '../../helpers/sockets'
 
 class Main extends Component {
   sendMessage = message => {
-    if (message == "" && !socket.connected)
+    if ((message === "" || message ==="\n") || !socket.connected)
       return;
 
     const msg = {
@@ -51,9 +52,11 @@ class Main extends Component {
           { this.props.chatRoom._id === undefined &&
               <WelcomeMessage WithchatRooms = {this.props.chatRooms.length === 0} />
           }
-          <MessageArea messages= {this.props.messages} 
-          onKeyPress={this.sendMessage} 
-          setReadonly = {this.props.chatRoom._id === undefined} />
+           { this.props.chatRoom._id !== undefined &&
+                <MessageArea messages= {this.props.messages} 
+              onKeyPress={this.sendMessage} 
+              setReadonly = {this.props.chatRoom._id === undefined} /> 
+           }
           <ToastContainer autoClose={2000} />
         </div>
       </div>
