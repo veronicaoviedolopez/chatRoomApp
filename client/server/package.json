@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "env-cmd -f ./.env.production nodemon index.js",
+    "start": "env-cmd -f ./.env.production babel-node index.js",
     "dev": "env-cmd -f ./.env.development babel-node index.js"
   },
   "keywords": [],
@@ -25,6 +25,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.27",
     "nodemon": "^2.0.4",
+    "path": "^0.12.7",
     "socket.io": "^2.3.0",
     "winston": "^3.3.3"
   },

@@ -60,16 +60,19 @@ export default (state = initialState, { type, payload }) => {
         const chatroom = state.chatRooms.find(chatroom => chatroom._id === payload)
         return {
           ...state,
-          chatRooms: [...state.chatRooms.filter(p => p!== chatroom), 
-            { ...chatroom, count: chatroom.count ? ++chatroom.count : 1}]
+          chatRooms: [
+            { ...chatroom, count: chatroom.count ? ++chatroom.count : 1},
+            ...state.chatRooms.filter(p => p!== chatroom), 
+           ]
         };
         case userTypes.resetCountNewMessages:
           const chat = state.chatRooms.find(chatroom => chatroom._id === payload)
           delete chat.count; 
           return {
             ...state,
-            chatRooms: [...state.chatRooms.filter(p => p!== chat), 
-              { ...chat}]
+            chatRooms: [ 
+              { ...chat}, 
+              ...state.chatRooms.filter(p => p!== chat)]
           }
     default:
       return state;

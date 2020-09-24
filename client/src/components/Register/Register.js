@@ -1,11 +1,10 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../Login/LoginRegister.css";
 import { constants } from "../../config/constants";
-import axios from 'axios';
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { toast } from "react-toastify";
 
 class Register extends Component {
   constructor(props) {
@@ -28,18 +27,19 @@ class Register extends Component {
   // Hace el Submit del Form
   handleSubmit = (event) => {
     event.preventDefault();
-    axios.post(`${constants.api}user/create`, this.state)
-    .then(() => {
-      toast.success("User Created Succesfuly");
-      this.props.history.push("/login");
-    })
-    .catch(err => toast.error(err.response?.data));
-};
+    axios
+      .post(`${constants.api}user/create`, this.state)
+      .then(() => {
+        toast.success("User Created Succesfuly");
+        this.props.history.push("/login");
+      })
+      .catch((err) => toast.error(err.response?.data));
+  };
 
   render() {
     return (
       <div className="wrapper">
-        <form  onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <div className="form-tittle">Sign Up</div>
           <div className="form-row">
             <label htmlFor="name"> User name </label>
@@ -56,7 +56,7 @@ class Register extends Component {
           </div>
 
           <div className="form-row">
-          <label htmlFor="firstname"> First name </label>
+            <label htmlFor="firstname"> First name </label>
             <input
               autoFocus
               type="text"
@@ -70,7 +70,9 @@ class Register extends Component {
           </div>
 
           <div className="form-row">
-          <label htmlFor="lastname"> Last name </label>
+            <label htmlFor="lastname"> 
+              Last name 
+            </label>
             <input
               autoFocus
               type="text"
@@ -96,11 +98,15 @@ class Register extends Component {
             />
           </div>
           <div className="form-row">
-            <button className="linkHover" type="submit"> Sign Up </button>
+            <button className="linkHover" type="submit">
+              Sign Up
+            </button>
           </div>
         </form>
         <div>
-          <label> Do you already have an account? </label>
+          <label> 
+            Do you already have an account? 
+          </label>
           <Link className="out_link linkHover" to="/login">
             Log In
           </Link>

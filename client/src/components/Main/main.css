@@ -17,13 +17,6 @@ body {
  color: #49a09d;
  cursor: pointer;
 }
- .linkHover:active {
-	color: #49a09d;
-}
-.linkHover:visited {
-	color: #49a09d;
-}
-
 
 .text-capitalize {
   text-transform: capitalize;

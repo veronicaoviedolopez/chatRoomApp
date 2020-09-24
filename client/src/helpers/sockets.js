@@ -20,7 +20,7 @@ export const initSocket = () => {
   });
 
   socket.on("new message", (message) => {
-    console.log("new message", message);
+    console.log("new message");
     newState = store.getState();
     if(newState.chatRoom._id === undefined ||  newState.chatRoom._id !== message.chatroom_id){
       store.dispatch(setCountNewMessages(message.chatroom_id));

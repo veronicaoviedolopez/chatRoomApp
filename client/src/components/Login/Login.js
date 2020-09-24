@@ -1,30 +1,28 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import axios from "axios";
-
-import { Redirect } from "react-router-dom";
-
-import { setCurrentUser } from "../../redux/actions/usersAction";
-import { constants } from "../../config/constants";
-import { ToastContainer } from "react-toastify";
-import { toast } from "react-toastify";
-import { addUserSession } from "../../helpers/userSessionInfo";
-import { Link } from "react-router-dom";
-import {initSocket} from '../../helpers/sockets'
+import { connect } from "react-redux";
+import { Redirect, Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./LoginRegister.css";
-
+import { setCurrentUser } from "../../redux/actions/usersAction";
+import { constants } from "../../config/constants";
+import { addUserSession } from "../../helpers/userSessionInfo";
+import { initSocket } from "../../helpers/sockets";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "123456",
+      username: null,
+      password: null,
     };
   }
 
-  addUserTochatRoom = (userid) => axios.get(`${constants.api}invite/user/${userid}/chatroom/${this.props.match.params.roomid}`)
+  addUserTochatRoom = (userid) =>
+    axios.get(
+      `${constants.api}invite/user/${userid}/chatroom/${this.props.match.params.roomid}`
+    );
 
   // Bindea los inputs con el estado
   handleChange = (event) => {
@@ -40,23 +38,26 @@ class Login extends Component {
       .post(`${constants.api}auth/login`, this.state)
       .then((response) => {
         let { chatRooms, ...other } = response.data.user;
-         addUserSession(response.data.token);
-        if(this.props.match.params?.iduser || this.props.match.params?.roomid){
-          this.addUserTochatRoom(other._id).then((res) => {
-            toast.success("User added to chatroom");
-            chatRooms.push(res.data);
-            this.props.setCurrentUser({
-              token: response.data.token,
-              chatRooms,
-              user: other,
-            });
-            initSocket();
-            toast.success("User Logged Succesfuly");
-            return this.props.history.push("/");
-          })
-          .catch(() => {}); 
-        }
-        else{
+        addUserSession(response.data.token);
+        if (
+          this.props.match.params?.iduser ||
+          this.props.match.params?.roomid
+        ) {
+          this.addUserTochatRoom(other._id)
+            .then((res) => {
+              toast.success("User added to chatroom");
+              chatRooms.push(res.data);
+              this.props.setCurrentUser({
+                token: response.data.token,
+                chatRooms,
+                user: other,
+              });
+              initSocket();
+              toast.success("User Logged Succesfuly");
+              return this.props.history.push("/");
+            })
+            .catch(() => {});
+        } else {
           this.props.setCurrentUser({
             token: response.data.token,
             chatRooms,
@@ -72,7 +73,7 @@ class Login extends Component {
 
   render() {
     if (this.props.isAuth === true) {
-      return <Redirect to='/' />
+      return <Redirect to="/" />;
     }
 
     return (
@@ -125,11 +126,11 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isAuth: state.isAuth
+    isAuth: state.isAuth,
   };
 };
 const mapDispatchToProps = {
-  setCurrentUser
+  setCurrentUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

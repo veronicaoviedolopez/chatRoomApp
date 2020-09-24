@@ -10,6 +10,8 @@
     padding: .3em;
     margin: 0, 2em;
   }
-  .navSalas li:active {
-   color: yellow
+
+  .linkSelected {
+    color: skyblue;
+    font-weight: bold;
   }

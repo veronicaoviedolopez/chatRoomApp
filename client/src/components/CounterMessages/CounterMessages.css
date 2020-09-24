@@ -13,10 +13,3 @@
   animation-duration: 4s;
   animation-iteration-count: infinite;
 }
-
-
-@keyframes example {
-    0%   {background-color: #ff00006b; width: 10px;}
-    25%  {background-color: red;  width: 13px;}
-    100% {background-color: #ff00006b;}
-  }

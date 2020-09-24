@@ -7,7 +7,7 @@ const Header = props => (
       <li>{props.chatRoom_name}</li>
     </ul>
     <div>
-      <button onClick={props.logOut}>LogOut</button>
+      <button onClick={props.logOut}>Log Out</button>
     </div>
   </nav>
 );
