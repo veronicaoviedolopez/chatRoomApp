@@ -1,11 +1,14 @@
 {
-  "name": "chatRoomAuth",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "client": "npm run start --prefix client",
     "start": "env-cmd -f ./.env.production babel-node index.js",
-    "dev": "env-cmd -f ./.env.development babel-node index.js"
+    "server": "env-cmd -f ./.env.development babel-node index.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +21,7 @@
     "app-root-path": "^3.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "env-cmd": "^10.1.0",
@@ -28,9 +32,5 @@
     "path": "^0.12.7",
     "socket.io": "^2.3.0",
     "winston": "^3.3.3"
-  },
-  "devDependencies": {
-    "eslint": "^7.6.0",
-    "eslint-config-google": "^0.14.0"
   }
 }

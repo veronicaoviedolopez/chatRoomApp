@@ -20,9 +20,9 @@ const clientPath = path.join(
     'client',
     'build',
 );
-console.log('El path del client:', clientPath);
+
 // expressApp.use(express.static(clientPath));
-expressApp.use(express.static(path.join(__dirname, '..', 'build')));
+expressApp.use(express.static('client/build'));
 
 expressApp.use(express.static(__dirname + '/assets'));
 server.listen(process.env.port, () =>
@@ -36,7 +36,9 @@ ConnectionToDB()
 // Connect Socket
 ConnectionToSocket(server);
 
-expressApp.use((req, res, next) => {
+/* expressApp.use((req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
+}); */
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
 });
-
