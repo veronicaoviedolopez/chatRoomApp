@@ -26,7 +26,10 @@ const RoomList = (props) => (
         >
           {sala.name}
           <sup key={index}>
-            {!sala.count && <CounterMessages count={sala.count} />}
+            {
+              sala.count !== undefined &&
+                <CounterMessages count={sala.count} />
+            }
           </sup>
         </li>
       ))}

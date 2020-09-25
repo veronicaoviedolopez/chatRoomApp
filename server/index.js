@@ -23,7 +23,7 @@ const clientPath = path.join(
 
 // expressApp.use(express.static(clientPath));
 expressApp.use(express.static('client/build'));
-
+console.log('__dirname', __dirname);
 expressApp.use(express.static(__dirname + '/assets'));
 server.listen(process.env.port, () =>
   logger.info('Server up and running on port' + process.env.port));
