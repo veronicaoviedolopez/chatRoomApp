@@ -1,14 +1,16 @@
 {
-  "name": "server",
+  "name": "chatroomapp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client": "npm run start --prefix client",
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
     "start": "env-cmd -f ./.env.production babel-node index.js",
-    "server": "env-cmd -f ./.env.development babel-node index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && babel-build --prefix client && npm install && npm run build --prefix client"
+    "start-dev": "env-cmd -f ./.env.development babel-node index.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently -n 'server,client' -c 'red,green'  \"npm run start-dev\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
