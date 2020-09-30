@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "12.18.2",
+    "npm" : "6.14.5"
+  },
   "scripts": {
-    "client": "npm run start --prefix client",
-    "start": "env-cmd -f ./.env.production babel-node index.js",
-    "server": "env-cmd -f ./.env.development babel-node index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm start && cd client && npm install && npm run build cd client"
+    "start": "env-cmd -f ./.env.production babel-node index.js"
   },
   "keywords": [],
   "author": "",
