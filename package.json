@@ -7,6 +7,7 @@
     "node": "12.18.2",
     "npm" : "6.14.5"
   },
+  "type": "module",
   "scripts": {
     "start": "env-cmd -f ./.env.production babel-node index.js"
   },
