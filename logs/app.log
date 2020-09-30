@@ -8,3 +8,60 @@
 2020-09-30T17:15:50.924Z - info: App connected to DB
 2020-09-30T17:40:57.232Z - info: Server up and running on portundefined
 2020-09-30T17:40:58.021Z - info: App connected to DB
+2020-09-30T18:08:59.398Z - info: Server up and running on portundefined
+2020-09-30T18:09:00.529Z - info: App connected to DB
+2020-09-30T18:47:43.968Z - info: Server up and running on portundefined
+2020-09-30T18:47:45.461Z - info: App connected to DB
+2020-09-30T18:49:19.284Z - info: Server up and running on portundefined
+2020-09-30T18:49:19.929Z - info: App connected to DB
+2020-09-30T18:49:41.651Z - info: Server up and running on portundefined
+2020-09-30T18:49:42.708Z - info: App connected to DB
+2020-09-30T18:52:01.333Z - info: Server up and running on portundefined
+2020-09-30T18:52:02.278Z - info: App connected to DB
+2020-09-30T18:58:11.451Z - error: uncaughtException: Cannot access 'app' before initialization
+C:\Users\verap\Documents\GitHub\chatRoomApp\app.js:1
+ReferenceError: Cannot access 'app' before initialization
+    at Object.<anonymous> (C:\Users\verap\Documents\GitHub\chatRoomApp\app.js:24:24)
+    at Generator.next (<anonymous>)
+2020-09-30T18:59:58.537Z - error: uncaughtException: Cannot access 'app' before initialization
+C:\Users\verap\Documents\GitHub\chatRoomApp\app.js:1
+ReferenceError: Cannot access 'app' before initialization
+    at Object.<anonymous> (C:\Users\verap\Documents\GitHub\chatRoomApp\app.js:24:24)
+    at Generator.next (<anonymous>)
+2020-09-30T19:01:32.055Z - info: Server up and running on portundefined
+2020-09-30T19:01:32.061Z - info: Server up and running on portundefined
+2020-09-30T19:01:32.083Z - error: uncaughtException: listen EADDRINUSE: address already in use :::5000
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (net.js:1317:16)
+    at listenInCluster (net.js:1365:12)
+    at Server.listen (net.js:1451:7)
+    at Function.listen (C:\Users\verap\Documents\GitHub\chatRoomApp\node_modules\express\lib\application.js:618:24)
+    at Object.<anonymous> (C:\Users\verap\Documents\GitHub\chatRoomApp\app.js:67:5)
+    at Generator.next (<anonymous>)
+2020-09-30T19:01:32.090Z - info: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+2020-09-30T19:02:19.084Z - info: Server up and running on portundefined
+2020-09-30T19:02:19.091Z - info: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+2020-09-30T19:02:45.358Z - info: Server up and running on portundefined
+2020-09-30T19:02:46.594Z - info: App connected to DB
+2020-09-30T19:03:38.952Z - info: Server up and running on portundefined
+2020-09-30T19:03:40.049Z - info: App connected to DB
+2020-09-30T19:04:18.640Z - info: Server up and running on portundefined
+2020-09-30T19:04:18.659Z - error: uncaughtException: The value "{ port: true }" is invalid for option "options"
+C:\Users\verap\Documents\GitHub\chatRoomApp\node_modules\express\lib\application.js:1
+TypeError [ERR_INVALID_OPT_VALUE]: The value "{ port: true }" is invalid for option "options"
+    at Server.listen (net.js:1492:9)
+    at Function.listen (C:\Users\verap\Documents\GitHub\chatRoomApp\node_modules\express\lib\application.js:618:24)
+    at Object.<anonymous> (C:\Users\verap\Documents\GitHub\chatRoomApp\app.js:67:5)
+    at Generator.next (<anonymous>)
+2020-09-30T19:05:06.004Z - info: Server up and running on portundefined
+2020-09-30T19:05:07.190Z - info: App connected to DB
+2020-09-30T19:05:52.476Z - info: Server up and running on portundefined
+2020-09-30T19:05:53.346Z - info: App connected to DB
+2020-09-30T19:07:23.645Z - info: Server up and running on portundefined
+2020-09-30T19:07:24.275Z - info: App connected to DB
+2020-09-30T19:10:44.151Z - info: Server up and running on portundefined
+2020-09-30T19:10:45.269Z - info: App connected to DB
+2020-09-30T19:13:33.951Z - info: Server up and running on portundefined
+2020-09-30T19:13:34.909Z - info: App connected to DB
+2020-09-30T19:16:24.238Z - info: Server up and running on portundefined
+2020-09-30T19:16:25.597Z - info: App connected to DB

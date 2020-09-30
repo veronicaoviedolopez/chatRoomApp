@@ -1,0 +1,25 @@
+2020-09-30T18:58:11.451Z - error: uncaughtException: Cannot access 'app' before initialization
+C:\Users\verap\Documents\GitHub\chatRoomApp\app.js:1
+ReferenceError: Cannot access 'app' before initialization
+    at Object.<anonymous> (C:\Users\verap\Documents\GitHub\chatRoomApp\app.js:24:24)
+    at Generator.next (<anonymous>)
+2020-09-30T18:59:58.537Z - error: uncaughtException: Cannot access 'app' before initialization
+C:\Users\verap\Documents\GitHub\chatRoomApp\app.js:1
+ReferenceError: Cannot access 'app' before initialization
+    at Object.<anonymous> (C:\Users\verap\Documents\GitHub\chatRoomApp\app.js:24:24)
+    at Generator.next (<anonymous>)
+2020-09-30T19:01:32.083Z - error: uncaughtException: listen EADDRINUSE: address already in use :::5000
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (net.js:1317:16)
+    at listenInCluster (net.js:1365:12)
+    at Server.listen (net.js:1451:7)
+    at Function.listen (C:\Users\verap\Documents\GitHub\chatRoomApp\node_modules\express\lib\application.js:618:24)
+    at Object.<anonymous> (C:\Users\verap\Documents\GitHub\chatRoomApp\app.js:67:5)
+    at Generator.next (<anonymous>)
+2020-09-30T19:04:18.659Z - error: uncaughtException: The value "{ port: true }" is invalid for option "options"
+C:\Users\verap\Documents\GitHub\chatRoomApp\node_modules\express\lib\application.js:1
+TypeError [ERR_INVALID_OPT_VALUE]: The value "{ port: true }" is invalid for option "options"
+    at Server.listen (net.js:1492:9)
+    at Function.listen (C:\Users\verap\Documents\GitHub\chatRoomApp\node_modules\express\lib\application.js:618:24)
+    at Object.<anonymous> (C:\Users\verap\Documents\GitHub\chatRoomApp\app.js:67:5)
+    at Generator.next (<anonymous>)
