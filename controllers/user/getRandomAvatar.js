@@ -1,6 +1,12 @@
 const fs = require('fs');
-const folder = process.cwd()+'\\assets\\avatars';
+import path from 'path';
 
+// const folder = process.cwd()+'\\assets\\avatars';
+const folder = path.join(
+  path.dirname(__dirname),
+  'assets',
+  'avatars',
+);
 const getRandomInt = (min, max) =>
   Math.floor(Math.random() * (max - min)) + min;
 
