@@ -11,9 +11,9 @@ const getRandomInt = (min, max) =>
 
 export const getRandomAvatar = () => {
   const avatarNames =  [ 
-    "https://cryptic-harbor-61839.herokuapp.com/avatars/bee.png",
-    "https://cryptic-harbor-61839.herokuapp.com/avatars/giraffe.png",
-    "https://cryptic-harbor-61839.herokuapp.com/avatars/lion.png"
+    "bee.png",
+    "giraffe.png",
+    "lion.png"
   ];
   return avatarNames[getRandomInt(0, avatarNames.length-1)];
 };
