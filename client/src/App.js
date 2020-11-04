@@ -29,7 +29,7 @@ if (token) {
     addUserSession(token);
     store.dispatch(setUserToken(decoded));
     axios
-      .post(`${constants.api}auth/token`, decoded)
+      .post(`/api/auth/token`, decoded)
       .then((response) => {
         const { chatRooms, ...other } = response.data.user;
         store.dispatch(

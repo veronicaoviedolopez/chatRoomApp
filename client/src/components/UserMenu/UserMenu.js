@@ -7,7 +7,7 @@ const UserMenu = (props) => (
   <div>
     <div className="datosUser">
       <img
-        src={`${constants.IP_Server}/avatars/${props.user.avatar}`}
+        src={`/avatars/${props.user.avatar}`}
         alt=""
         className="photo"
       />

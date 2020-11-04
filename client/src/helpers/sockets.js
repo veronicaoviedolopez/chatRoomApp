@@ -8,7 +8,7 @@ export let socket = null;
 export const initSocket = () => {
   const newMessageAudio = new Audio(constants.newMessageSound);
   let newState = store.getState();
-  socket = io(constants.IP_Server);
+  socket = io(window.location.origin);
   
   socket.on("login", (data) => {
     console.log("WELCOME to SOCKET.IO ", data.id);

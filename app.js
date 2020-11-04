@@ -13,21 +13,17 @@ import authRoutes from './routes/authRoutes';
 import usersRoutes from './routes/usersRoutes';
 import chatRoomsRoutes from './routes/chatRoomsRoutes';
 import express from 'express';
+import { env } from 'process';
 
 const expressApp = express();
 const server = http.createServer(expressApp);
 dotenv.config();
 
 
-const clientPath = path.join(
-    path.dirname(__dirname),
-    'client',
-    'build',
-);
+if(process.env.NODE_ENV === 'production') {
+  expressApp.use(express.static('client/build'));
+}
 
-// expressApp.use(express.static(clientPath));
-expressApp.use(express.static('client/build'));
-console.log('__dirname', __dirname);
 expressApp.use(express.static(__dirname + '/assets'));
 
 // Connect Database
@@ -38,9 +34,6 @@ ConnectionToDB()
 // Connect Socket
 ConnectionToSocket(server);
 
-/* expressApp.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
-}); */
 
 const app = express();
 // Middlewares
@@ -63,6 +56,6 @@ app.get('*', (req, res) => {
 // Start the server
 expressApp.use('/api', app);
 
-const PORT = process.env.PORT || 3001;
-server.listen(PORT, logger.info('Server up and running on port' + process.env.port) );
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, logger.info('Server up and running on port' + PORT) );
 export default app;

@@ -9,7 +9,7 @@ const MessageList = (props) => (
     {props.messages.map((msg) => (
       <div key={msg._id} className="FlexRow">
         <img
-          src={`${constants.IP_Server}/avatars/${msg.user_id.avatar}`}
+          src={`/avatars/${msg.user_id.avatar}`}
           alt=""
           className="photoMsg"
         />

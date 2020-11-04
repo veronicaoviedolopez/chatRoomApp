@@ -24,7 +24,7 @@ class Main extends Component {
     };
 
     axios
-      .post(`${constants.api}chatroom/message/create`, msg)
+      .post(`/api/chatroom/message/create`, msg)
       .then((res) => {
         msg.user_id = this.props.user;
         this.props.addNewMessage({ ...res.data });

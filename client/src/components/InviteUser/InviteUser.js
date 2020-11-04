@@ -23,7 +23,7 @@ class InviteUser extends Component {
     this.setState({ isLoading: true, userAdded: false, token: getJwt() });
     axios
       .get(
-        `${constants.api}user/invite/${this.props.match.params.iduser}/chatroom/${this.props.match.params.roomid}`
+        `/api/user/invite/${this.props.match.params.iduser}/chatroom/${this.props.match.params.roomid}`
       )
       .then((res) => {
         if (this.state.token !== null) {
@@ -43,7 +43,7 @@ class InviteUser extends Component {
     var decoded = jwt_decode(this.state.token);
     axios
       .get(
-        `${constants.api}invite/user/${decoded._id}/chatroom/${this.props.match.params.roomid}`
+        `/api/invite/user/${decoded._id}/chatroom/${this.props.match.params.roomid}`
       )
       .then((res) => {
         toast.success("User Added Succesfuly");
@@ -77,7 +77,7 @@ class InviteUser extends Component {
         Hello, You have a pending request from the user
         <div className="datosUser">
           <img
-            src={`${constants.IP_Server}/avatars/${user.avatar}`}
+            src={`/avatars/${user.avatar}`}
             alt=""
             className="photo"
           />

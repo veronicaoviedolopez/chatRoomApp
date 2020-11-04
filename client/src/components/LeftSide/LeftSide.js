@@ -24,7 +24,7 @@ class LeftSide extends Component {
     if (that.chatRoom._id === e.target.id) 
       return;
     axios
-      .get(`${constants.api}chatroom/select/${e.target.id}`)
+      .get(`/api/chatroom/select/${e.target.id}`)
       .then((res) => {
         that.setUsers(res.data.users);
         that.setChatRoom({ _id: res.data._id, name: res.data.name });
@@ -43,7 +43,7 @@ class LeftSide extends Component {
         that.user.username,
         function (evt, username) {
           axios
-            .patch(`${constants.api}user/edit/${that.user._id}`, { username })
+            .patch(`/api/user/edit/${that.user._id}`, { username })
             .then((resp) => {
               that.editCurrentUser(resp.data);
               alertify.success("Username Updated");
@@ -64,7 +64,7 @@ class LeftSide extends Component {
         "",
         function (evt, password) {
           axios
-            .patch(`${constants.api}user/edit/${that.user._id}`, { password })
+            .patch(`/api/user/edit/${that.user._id}`, { password })
             .then((resp) => {
               that.editCurrentUser(resp.data);
               alertify.success("Password Updated");
@@ -85,7 +85,7 @@ class LeftSide extends Component {
         "",
         function (evt, name) {
           axios
-            .post(`${constants.api}chatroom/create`, {
+            .post(`/api/chatroom/create`, {
               name,
               users: [that.user._id],
             })
@@ -117,7 +117,7 @@ class LeftSide extends Component {
       .setting({
         message: `Are you want to generate a link for invite users to chatroom <em> ${that.chatRoom.name}?</em> `,
         onok: function () {
-          const link = `${constants.client}invite/user/${that.user._id}/chatroom/${that.chatRoom._id}`;
+          const link = `${window.location.origin}/invite/user/${that.user._id}/chatroom/${that.chatRoom._id}`;
           navigator.clipboard.writeText(link);
           alertify.success("link Copied, now Paste & Share it");
         },

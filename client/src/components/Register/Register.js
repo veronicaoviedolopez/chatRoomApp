@@ -28,7 +28,7 @@ class Register extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post(`${constants.api}user/create`, this.state)
+      .post(`/api/user/create`, this.state)
       .then(() => {
         toast.success("User Created Succesfuly");
         this.props.history.push("/login");

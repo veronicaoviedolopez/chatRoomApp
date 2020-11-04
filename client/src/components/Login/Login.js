@@ -21,7 +21,7 @@ class Login extends Component {
 
   addUserTochatRoom = (userid) =>
     axios.get(
-      `${constants.api}invite/user/${userid}/chatroom/${this.props.match.params.roomid}`
+      `/api/invite/user/${userid}/chatroom/${this.props.match.params.roomid}`
     );
 
   // Bindea los inputs con el estado
@@ -35,7 +35,7 @@ class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${constants.api}auth/login`, this.state)
+      .post(`/api/auth/login`, this.state)
       .then((response) => {
         let { chatRooms, ...other } = response.data.user;
         addUserSession(response.data.token);
