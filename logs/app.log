@@ -71,3 +71,5 @@ TypeError [ERR_INVALID_OPT_VALUE]: The value "{ port: true }" is invalid for opt
 2020-10-08T19:39:59.848Z - info: App connected to DB
 2020-10-08T19:42:30.785Z - info: Server up and running on port5000
 2020-10-08T19:42:31.981Z - info: App connected to DB
+2020-11-04T20:30:32.997Z - info: Server up and running on port5000
+2020-11-04T20:30:33.895Z - info: App connected to DB
