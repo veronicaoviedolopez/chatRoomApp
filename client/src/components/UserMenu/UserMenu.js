@@ -7,7 +7,7 @@ const UserMenu = (props) => (
   <div>
     <div className="datosUser">
       <img
-        src={`/avatars/${props.user.avatar}`}
+        src={`${window.location.origin}/avatars/${props.user.avatar}`}
         alt=""
         className="photo"
       />
