@@ -23,7 +23,7 @@ class InviteUser extends Component {
     this.setState({ isLoading: true, userAdded: false, token: getJwt() });
     axios
       .get(
-        `/api/user/invite/${this.props.match.params.iduser}/chatroom/${this.props.match.params.roomid}`
+        `${window.location.origin}/api/user/invite/${this.props.match.params.iduser}/chatroom/${this.props.match.params.roomid}`
       )
       .then((res) => {
         if (this.state.token !== null) {
@@ -41,9 +41,10 @@ class InviteUser extends Component {
   addUserTochatRoom = () => {
     this.setState({ isLoading: true, userAdded: false });
     var decoded = jwt_decode(this.state.token);
+    
     axios
       .get(
-        `/api/invite/user/${decoded._id}/chatroom/${this.props.match.params.roomid}`
+        `${window.location.origin}/api/invite/user/${decoded._id}/chatroom/${this.props.match.params.roomid}`
       )
       .then((res) => {
         toast.success("User Added Succesfuly");
