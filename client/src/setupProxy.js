@@ -10,7 +10,7 @@ module.exports = function (app) {
     "/avatars/"
   ],
     createProxyMiddleware({
-      target: "http://localhost:5000",
+      target: "https://cryptic-harbor-61839.herokuapp.com",
     })
   );
 };
