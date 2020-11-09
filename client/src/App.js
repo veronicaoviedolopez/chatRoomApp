@@ -63,16 +63,9 @@ class App extends Component {
             component={Main}
           />
           <Route exact path="/login" component={Login} />
-          <Route
-            exact
-            path="/login/invite/user/:iduser/chatroom/:roomid"
-            component={Login}
-          />
           <Route exact path="/register" component={Register} />
-          <Route
-            path="/invite/user/:iduser/chatroom/:roomid"
-            component={InviteUser}
-          />
+          <Route exact path="/login/invite/user/:iduser/chatroom/:roomid" component={Login}/>
+          <Route exact path="/invite/user/:iduser/chatroom/:roomid" component={InviteUser}/>
         </Switch>
         <ToastContainer autoClose={2000} />
       </BrowserRouter>
