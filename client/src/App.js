@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
@@ -51,21 +51,23 @@ if (token) {
   }
 }
 
+const My404Component = () => {
+  return(<img src="https://saedx.com/blog/wp-content/uploads/2019/01/saedx-blog-featured-70.jpg" alt="..." />)
+}
+
+
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <Switch>
-          <PrivateRoute
-            exact
-            path="/"
-            isAuth={this.props.isAuth}
-            component={Main}
-          />
-          <Route exact path="/login" component={Login} />
+        <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/login/invite/user/:iduser/chatroom/:roomid" component={Login}/>
-          <Route exact path="/invite/user/:iduser/chatroom/:roomid" component={InviteUser}/>
+          <Route exact path="/login/invite/user/:iduser/chatroom/:roomid" component={Login} />
+          <Route exact path="/invite/user/:iduser/chatroom/:roomid" component={InviteUser} />
+          <PrivateRoute exact path="/" isAuth={this.props.isAuth} component={Main} />
+          <Route path='/404' component={My404Component} />
+          <Redirect from='*' to='/404' />
         </Switch>
         <ToastContainer autoClose={2000} />
       </BrowserRouter>
