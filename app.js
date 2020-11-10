@@ -43,17 +43,17 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Routes Middleware
-app.use('/', homeRoutes);
-app.use('/auth', authRoutes);
-app.use('/user', usersRoutes);
-app.use('/chatroom', chatRoomsRoutes);
+app.use('/api/', homeRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/user', usersRoutes);
+app.use('/api/chatroom', chatRoomsRoutes);
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client', 'build', 'index.html'));
 });
 
 // Start the server
-expressApp.use('/api', app);
+expressApp.use(app);
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, logger.info('Server up and running on port' + PORT) );
