@@ -61,11 +61,11 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-        <Route exact path="/login" component={Login} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login/invite/user/:iduser/chatroom/:roomid" component={Login} />
           <Route exact path="/invite/user/:iduser/chatroom/:roomid" component={InviteUser} />
-          <PrivateRoute exact path="/" isAuth={this.props.isAuth} component={Main} />
+          {/* <PrivateRoute exact path="/" isAuth={this.props.isAuth} component={Main} /> */}
           <Route path='/404' component={My404Component} />
           <Redirect from='*' to='/404' />
         </Switch>
