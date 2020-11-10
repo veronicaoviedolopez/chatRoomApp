@@ -23,9 +23,6 @@ dotenv.config();
 if(process.env.NODE_ENV === 'production') {
   //expressApp.use(express.static('client/build'));
   expressApp.use(express.static(__dirname + '/client/build'));
-  expressApp.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, './client', 'build', 'index.html'));
-  });
 }
 
 expressApp.use(express.static(__dirname + '/assets'));
@@ -51,9 +48,9 @@ app.use('/auth', authRoutes);
 app.use('/user', usersRoutes);
 app.use('/chatroom', chatRoomsRoutes);
 
-/* app.get('*', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client', 'build', 'index.html'));
-}); */
+});
 
 // Start the server
 expressApp.use('/api', app);
